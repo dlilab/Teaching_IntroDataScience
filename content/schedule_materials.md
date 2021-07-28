@@ -8,13 +8,13 @@ title: Schedule & Materials
 
 <style>
 table th:first-of-type {
-    width: 10%;
+    width: 11%;
 }
 table th:nth-of-type(2) {
     width: 45%;
 }
 table th:nth-of-type(3) {
-    width: 10%;
+    width: 9%;
 }
 table th:nth-of-type(4) {
     width: 10%;
@@ -49,7 +49,7 @@ td, th {
 | Oct 19 | Data visualization with R                               |       |     |         |
 | Oct 21 | Fall holiday, no class                                  |       |     |         |
 | Oct 26 | Data visualization with R                               |       |     |         |
-| Oct 28 | Spatail data visualization                              |       |     |         |
+| Oct 28 | Spatial data visualization                              |       |     |         |
 | Nov 2  | Exploratory data analysis                               |       |     |         |
 | Nov 4  | Regression methods                                      |       |     |         |
 | Nov 9  | More on Regression methods                              |       |     |         |
