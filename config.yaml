@@ -1,0 +1,93 @@
+baseURL: "/" 
+languageCode: en-us
+defaultContentLanguage: en
+title: Intro to Data Science 
+theme: "cupper-hugo-theme"
+googleAnalytics: UA-123456789-1
+disqusShortname: yourdiscussshortname
+enableGitInfo: true
+
+taxonomies:
+  tag: tags
+
+permalinks:
+  post: /:filename/
+
+imaging:
+  quality: 99
+
+params:
+  description: Course (BIOL7800) at LSU.
+  homeMetaContent: Introduction to Data Science Course.
+  footer: 
+  # For more date formats see https://gohugo.io/functions/format/
+  dateFormat: Jan 2, 2006
+  codePenUser: someUser
+  katex: true
+  hideHeaderLinks: false
+  search: true
+  showThemeSwitcher: true
+  moveFooterToHeader: true
+  logoAlt: "A logo for the Introduction to Data Science course"
+  customCss:
+    - css/custom_01.css
+    - css/custom_02.css
+  customJs:
+    - js/custom_01.js
+    - js/custom_02.js
+
+menu:
+  nav:
+    - name: Home 
+      url: /
+      weight: 1
+    - name: Syllabus 
+      url: /syllabus/
+      weight: 2
+    - name: Schedule & Materials
+      url: /schedule_materials/
+      weight: 3
+    - name: Assignments
+      url: /assignments/
+      weight: 4
+    - name: Final project
+      url: /project/
+      weight: 5
+    - name: References
+      url: /references/
+      weight: 6
+    - name: Blogs 
+      url: /post/
+      weight: 7
+
+
+markup:
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: true
+    parser:
+      attribute: true
+      autoHeadingID: true
+    renderer:
+      hardWraps: false
+      unsafe: true
+      xHTML: false
+  highlight:
+    codeFences: false
+    hl_Lines: ""
+    lineNoStart: 1
+    lineNos: true
+    lineNumbersInTable: true
+    noClasses: true
+    style: monokai
+    tabWidth: 4
+  tableOfContents:
+    endLevel: 6
+    startLevel: 2

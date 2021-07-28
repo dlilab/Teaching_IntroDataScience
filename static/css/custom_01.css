@@ -1,0 +1,37 @@
+.your-custom-class-01 {
+  display: block;
+}
+
+code {
+    color: rgba(218, 11, 11, 1);
+}
+
+td, th {
+   border:none;
+}
+
+table {
+  min-width: 50%;
+  max-width: 100%;
+  margin: auto;
+  border-top: 2px solid #666;
+  border-bottom: 2px solid #666;
+}
+
+table thead th {
+  border-bottom: 2px solid #666;
+}
+
+thead, tfoot, tr:nth-child(even) {
+  background: #f8f8f8;
+}
+
+tr:hover {
+  background-color: #edeeef;
+}
+
+
+
+
+
+
