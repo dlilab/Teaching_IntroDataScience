@@ -94,7 +94,7 @@ Examples of unacceptable behavior include:
 
 ## Evaluation 
 
-Students will be evaluated on their knowledge of course content and ability to communicate their results via individual homework assignments (60%), their attendance and active participation in class (15%), and a final project (25%). T
+Students will be evaluated on their knowledge of course content and ability to communicate their results via individual homework assignments (60%), their attendance and active participation in class (15%), and a final project (25%). 
 
 ### Homework (60%)
 

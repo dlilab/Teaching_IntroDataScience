@@ -6,7 +6,7 @@ title: Introduction to Data Science
 
 ***LSU strongly encourages all students, faculty and staff to get vaccinated for COVID-19. Visit www.lsu.edu/roadmap/vaccines/ to learn how to get vaccinated on campus. Vaccination helps keep our campus community safe, helps protect those among us who are most vulnerable to COVID-19, and is our path back to more normal operations and the full college experience that our students deserve.***
 
->**Through lectures, computer laboratories, homework assignments, and a final project, student learn practical techniques and tools to produce sound and reproducible answers to scientific questions and communicate results with others. Course emphasizes version control, testing, code review, and collaborative programming. Software tools include Bash, Git, Markdown, R Markdown, Makefile, R.**
+>**Through lectures, computer laboratories, homework assignments, and a final project, students will learn practical techniques and tools to produce sound and reproducible answers to scientific questions and communicate results with others. Course emphasizes version control, project management, data manipulation and visualization, code review, and collaborative programming. Software tools include Bash, Git, Markdown, Makefile, R, and R Markdown.**
 
 
 **Instructor**: [Daijiang Li](https://dlilab.com)  
