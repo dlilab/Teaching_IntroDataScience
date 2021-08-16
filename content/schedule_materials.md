@@ -30,7 +30,7 @@ td, th {
 
 |  Date  | Topic                                                   | Notes | HW  | Reading |
 | :----: | :------------------------------------------------------ | :---: | :-: | :-----: |
-| Aug 24 | About the course                                        |       |  -  |         |
+| Aug 24 | About the course                                        |  <a href="../lectures/01_about/presentation.html" target="_blank">📙</a> |  -  |  <a href="../lectures/01_about/Leek_Peng_2015_what_is_the_Q.pdf" target="_blank">Leek & Peng 2015</a>  |
 | Aug 26 | Introduction and install tools                          |       |     |         |
 | Aug 31 | Version control with Git                                |       |     |         |
 | Sep 2  | Introduction to GitHub                                  |       |     |         |
