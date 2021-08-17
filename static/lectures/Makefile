@@ -1,4 +1,4 @@
-ALL: 01_about/presentation.html
+ALL: 01_about/presentation.html 02_tools/presentation.html
 
 OStype := $(shell uname -s)
 
