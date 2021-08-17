@@ -1,5 +1,6 @@
 ---
 title: "Tools"
+subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
 author: "Daijiang Li"
 institute: "LSU"
 date: "2021/08/26"
@@ -131,9 +132,13 @@ tinytex::install_tinytex()
 
 .font200[
 - [Happy Git and GitHub for the useR](https://happygitwithr.com)
+
 - [R related Cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+
 - [Software carpentry](http://software-carpentry.org/)
+
 - [Data capentry](https://datacarpentry.org)
+
 - [Minimal Make tutorial](https://kbroman.org/minimal_make/)
 ]
 

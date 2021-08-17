@@ -32,8 +32,8 @@ td, th {
 | :----: | :------------------------------------------------------ | :---: | :-: | :-----: |
 | Aug 24 | About the course                                        |  <a href="../lectures/01_about/presentation.html" target="_blank">📙</a> |  -  |  <a href="../lectures/01_about/Leek_Peng_2015_what_is_the_Q.pdf" target="_blank">Leek & Peng 2015</a>  |
 | Aug 26 | Introduction and install tools                          | <a href="../lectures/02_tools/presentation.html" target="_blank">📙</a> |     |         |
-| Aug 31 | Version control with Git                                |       |     |         |
-| Sep 2  | Introduction to GitHub                                  |       |     |         |
+| Aug 31 | Version control with Git                                | <a href="../lectures/03_git/presentation.html" target="_blank">📙</a>  |     |    <a href="https://shorturl.at/tCFR6" target="_blank">Blischak et al. 2016</a>  |
+| Sep 2  | Introduction to GitHub                                  | <a href="../lectures/04_github/presentation.html" target="_blank">📙</a> |     |         |
 | Sep 7  | RStudio project and dynamic documents with R Markdown   |       |     |         |
 | Aug 9  | The file system and basic unix shell                    |       |     |         |
 | Sep 14 | Data science project cycle                              |       |     |         |

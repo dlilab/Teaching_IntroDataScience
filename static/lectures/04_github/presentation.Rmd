@@ -1,0 +1,25 @@
+---
+title: "GitHub"
+subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
+author: "Daijiang Li"
+institute: "LSU"
+date: "2021/09/02"
+output:
+  xaringan::moon_reader:
+    css: ["default", "default-fonts"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.align='center', out.width = '95%')
+```
+
+class: middle
+
+# We will continue to use [this excellent workshop material](https://carpentries-incubator.github.io/git-novice-branch-pr/) developed by Software Carpentry for today's lecture.

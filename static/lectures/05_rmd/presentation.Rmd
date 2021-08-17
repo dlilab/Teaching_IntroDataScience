@@ -1,0 +1,54 @@
+---
+title: "Literature programming and RMarkdown"
+subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
+author: "Daijiang Li"
+institute: "LSU"
+date: "2021/09/02"
+output:
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "style.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.align='center', out.width = '95%')
+```
+
+# Literature programming
+
+.font200[
+> Let us change our traditional attitude to the construction of programs:
+> Instead of imagining that our main task is to instruct a computer what to do,
+> let us concentrate rather on explaining to humans what we want the computer to
+> do.
+>
+> .right[--- Donald E. Knuth, Literate Programming, 1984]
+
+]
+
+.font150[
+
+Literature programming weaves text (e.g., documentation, explanation, comments, etc.) in between machine executable code.
+
+Need to _compile_ it to get a final report, not What You See Is What You Get (WYSIWYG, e.g., MS Word)
+]
+
+---
+
+class: center, middle
+
+# Open RStudio for demonstration
+
+### https://github.com/daijiang/phyr_ms
+
+
+
+
+
+
