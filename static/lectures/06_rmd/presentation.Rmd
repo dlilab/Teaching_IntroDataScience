@@ -3,7 +3,7 @@ title: "Literature programming and RMarkdown"
 subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
 author: "Daijiang Li"
 institute: "LSU"
-date: "2021/09/07"
+date: "2021/09/09"
 output:
   xaringan::moon_reader:
     css: ["default", "default-fonts", "../style.css"]
