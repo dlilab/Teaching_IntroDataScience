@@ -15,5 +15,5 @@ title: Introduction to Data Science
 
 **Class**: Tu/Th 9:00-10:20 AM in A245  
 
-**Office hours**: Wed 12-1pm in LSB 125 or by appointment
+**Office hours**: Thursday 12-1pm in LSB 125 or by appointment
 

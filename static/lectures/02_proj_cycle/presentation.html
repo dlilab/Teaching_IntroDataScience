@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data science project cycle</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Daijiang Li" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Data science project cycle
+## Introduction to Data Science (BIOL7800) <a href="https://introdatasci.dlilab.com/" class="uri">https://introdatasci.dlilab.com/</a>
+### Daijiang Li
+### LSU
+### 2021/09/02
+
+---
+
+
+
+
+# Data Science Processes
+
+.font200[
+1. Define the question of interest
+
+2. Get the data
+
+3. Clean and prepare the data
+
+4. Explore the data
+
+5. Fit models to extract insights
+
+6. Tell, explain, and illustrate results
+]
+
+---
+
+# The OSEMN&lt;sup&gt;1&lt;/sup&gt; framework
+
+.footnote[1: Pronounced as 'awesome']
+
+![OSEMN](https://miro.medium.com/max/1400/1*eE8DP4biqtaIK3aIy1S2zA.png)
+
+---
+
+# The OSEMN framework
+
+.font200[
+1. Obtaining data
+
+2. Scrubbing data
+
+3. Exploring data
+
+4. Modeling data
+
+5. iNterpreting data
+]
+
+
+.right[[Mason and Wiggins 2010](http://www.dataists.com/2010/09/a-taxonomy-of-data-science/)]
+
+---
+
+# Obtaining data
+
+.font200[After defining your question, the first step is to obtain data]
+
+.pull-left[
+### Common sources
+
+.font150[
+- Query data from a database or API (e.g., MySQL, Twitter, GBIF)
+
+- Download data from another location (e.g., a server, ftp)
+
+- Extract data from other files (e.g., html webpage, spreadsheet)
+
+- Generate your own data (e.g., simulation, experiment)
+]
+
+]
+
+.pull-right[
+.font150[
+### Tools and skills
+
+- Relational database (e.g., SQLite, PostgreSQL, Spark), use API (e.g., R packages `dbplyr`, `DBI`)
+
+- Downloading data programmingly (web scrapping, `curl`, R packages `httr`, `rvest`)
+
+- Understanding of file system; decompress and manage files, etc.
+
+]
+
+]
+
+???
+
+API: application programming interface
+
+---
+
+# Scrubbing (cleaning) data
+
+.font200[The world is a messy place]
+
+.pull-left[
+### Common operations
+
+.font150[
+- Filtering errors
+
+- Replacing values (e.g., 9999)
+
+- Handling missing values and inconsistent labels
+
+- Parse into a useable format
+
+- .red[80% of your time?!]
+]
+
+]
+
+.pull-right[
+.font150[
+### Tools and skills
+
+- `awk`, `sed`, `grep`
+
+- Data import &amp; output (with R)
+
+- Data manipulation (with R)
+
+]
+
+]
+
+---
+
+# Exploring data
+
+.font200[Get to know your data better through visualization, clustering, dimensionality reducing, etc.]
+
+.pull-left[
+### Common inspections
+
+.font150[
+- What are the different variables?
+
+- Their types, distributions, and range?
+
+- Relationships among them? Correlations?
+
+- Descriptive statistics?
+]
+
+]
+
+.pull-right[
+.font150[
+### Tools and skills
+
+- `head`, `less`, `tail`, etc.
+
+- Data visualization (with R, `plot`, `lattice`, `ggplot2`)
+
+- Data description (with R, basic functions `mean`, `min`, `max`, etc.)
+
+]
+
+]
+
+---
+
+# Modeling data
+
+.font200[All models are wrong, but some are useful.]
+
+.pull-left[
+### Common tasks
+
+.font150[
+- To create an abstract or higher-level description of your data
+
+- To test hypotheses
+
+- To predict 
+
+- With uncertainty
+]
+
+]
+
+.pull-right[
+.font150[
+### Tools and skills
+
+- Dimension reducing, clustering, regression, classification
+
+- Statistical modeling (with R, `lm`, `glm`, `lmer`, etc.)
+
+- Machine learning (with R, random forest, deep learning, etc.)
+
+]
+
+]
+
+---
+
+# iNterpreting data
+
+.font200[The purpose is to gain insights from numbers]
+
+.pull-left[
+### Common tasks
+
+.font150[
+- What have we learned?
+
+- What should we do next?
+
+- Disseminate results and communicate with others 
+
+- Produce useful products
+]
+
+]
+
+.pull-right[
+.font150[
+### Tools and skills
+
+- Domain expertises and intuition
+
+- Being skeptical (double check)
+
+- Communication skills (presentation, writing)
+
+- Reproducible reports (with Rmarkdown and other tools)
+
+]
+
+]
+
+---
+
+class: center, middle, inverse
+
+# Doing data science is an .red[iterative and non-linear] process!
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

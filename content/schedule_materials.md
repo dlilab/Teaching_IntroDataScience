@@ -31,34 +31,33 @@ td, th {
 |  Date  | Topic                                                   | Notes | HW  | Reading |
 | :----: | :------------------------------------------------------ | :---: | :-: | :-----: |
 | Aug 24 | About the course                                        |  <a href="../lectures/01_about/presentation.html" target="_blank">📙</a> |  -  |  <a href="../lectures/01_about/Leek_Peng_2015_what_is_the_Q.pdf" target="_blank">Leek & Peng 2015</a>  |
-| Aug 26 | Introduction and install tools                          | <a href="../lectures/02_tools/presentation.html" target="_blank">📙</a> |     |         |
-| Aug 31 | Version control with Git                                | <a href="../lectures/03_git/presentation.html" target="_blank">📙</a>  |     |    <a href="https://shorturl.at/tCFR6" target="_blank">Blischak et al. 2016</a>  |
-| Sep 2  | Introduction to GitHub                                  | <a href="../lectures/04_github/presentation.html" target="_blank">📙</a> |     |         |
-| Sep 7  | RStudio project and dynamic documents with R Markdown   |       |     |         |
-| Aug 9  | The file system and basic unix shell                    |       |     |         |
-| Sep 14 | Data science project cycle                              |       |     |         |
-| Sep 16 | Typical (reproducible) workflow                         |       |     |         |
-| Sep 21 | R basics: data types, vectors, matrix, data frame, etc. |       |     |         |
-| Sep 23 | More R basics: lists, dates, etc.                       |       |     |         |
-| Sep 28 | R programming basics: conditional statements            |       |     |         |
-| Sep 30 | R programming basics: loops, apply                      |       |     |         |
-| Oct 5  | Regular expressions                                     |       |     |         |
-| Oct 7  | API and data scraping                                   |       |     |         |
-| Oct 12 | Data input and output in R                              |       |     |         |
-| Oct 14 | Data manipulation with R                                |       |     |         |
-| Oct 19 | More data manipulation with R                           |       |     |         |
-| Oct 21 | Data visualization with R                               |       |     |         |
-| Oct 26 | Fall holiday, no class                                  |       |     |         |
-| Oct 28 | Data visualization with R                               |       |     |         |
-| Nov 2  | Spatial data visualization                              |       |     |         |
-| Nov 4  | Exploratory data analysis                               |       |     |         |
-| Nov 9  | Regression methods                                      |       |     |         |
-| Nov 11 | More on Regression methods                              |       |     |         |
-| Nov 16 | Writing your own functions                              |       |     |         |
-| Nov 18 | Write your own R package                                |       |     |         |
-| Nov 23 | Open Science and automating things with Makefile        |       |     |         |
-| Nov 25 | Thanksgiving, no class                                  |       |     |         |
+| Aug 26 | Data science project cycle                              | <a href="../lectures/02_proj_cycle/presentation.html" target="_blank">📙</a> |     |         |
+| Aug 31 | Introduction and install tools                          | <a href="../lectures/03_tools/presentation.html" target="_blank">📙</a>  |     |    <a href="https://shorturl.at/tCFR6" target="_blank">Blischak et al. 2016</a>  |
+| Sep 2  | Version control with Git                                | <a href="../lectures/04_git/presentation.html" target="_blank">📙</a> |     |         |
+| Sep 7  | Introduction to GitHub                                  | <a href="../lectures/05_github/presentation.html" target="_blank">📙</a>      |     |         |
+| Sep 9  | RStudio project and dynamic documents with R Markdown   | <a href="../lectures/06_rmd/presentation.html" target="_blank">📙</a>      |     |         |
+| Sep 14 | The file system and basic unix shell                    | <a href="../lectures/07_bash/presentation.html" target="_blank">📙</a>      |     |         |
+| Sep 16 | R basics: data types, vectors, matrix, data frame, etc. |       |     |         |
+| Sep 21 | More R basics: lists, dates, etc.                       |       |     |         |
+| Sep 23 | R programming basics: conditional statements            |       |     |         |
+| Sep 28 | R programming basics: loops, apply                      |       |     |         |
+| Sep 30 | Strings and Regular expressions                         |       |     |         |
+| Oct 5  | API and data scraping                                   |       |     |         |
+| Oct 7  | Data input and output in R                              |       |     |         |
+| Oct 12 | Data manipulation with R                                |       |     |         |
+| Oct 14 | More data manipulation with R                           |       |     |         |
+| Oct 19 | Data visualization with R                               |       |     |         |
+| Oct 21 | Fall holiday, _no class_                                |       |     |         |
+| Oct 26 | Data visualization with R                               |       |     |         |
+| Oct 28 | Spatial data visualization                              |       |     |         |
+| Nov 2  | Exploratory data analysis                               |       |     |         |
+| Nov 4  | Regression methods                                      |       |     |         |
+| Nov 9  | More on Regression methods                              |       |     |         |
+| Nov 11 | Write your own functions                                |       |     |         |
+| Nov 16 | Write your own R package                                |       |     |         |
+| Nov 18 | Open Science and automating things with Makefile        |       |     |         |
+| Nov 23 | Ethics in data science                                  |       |     |         |
+| Nov 25 | Thanksgiving, _no class_                                |       |     |         |
 | Nov 30 | Final project presentation                              |       |     |         |
 | Dec 2  | Final project presentation and wrap up                  |       |     |         |
 | Dec 14 | Final grades due                                        |       |     |         |
-

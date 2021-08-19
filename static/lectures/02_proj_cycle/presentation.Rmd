@@ -1,0 +1,255 @@
+---
+title: "Data science project cycle"
+subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
+author: "Daijiang Li"
+institute: "LSU"
+date: "2021/09/02"
+output:
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "../style.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.align='center', out.width = '95%')
+```
+
+# Data Science Processes
+
+.font200[
+1. Define the question of interest
+
+2. Get the data
+
+3. Clean and prepare the data
+
+4. Explore the data
+
+5. Fit models to extract insights
+
+6. Tell, explain, and illustrate results
+]
+
+---
+
+# The OSEMN<sup>1</sup> framework
+
+.footnote[1: Pronounced as 'awesome']
+
+![OSEMN](https://miro.medium.com/max/1400/1*eE8DP4biqtaIK3aIy1S2zA.png)
+
+---
+
+# The OSEMN framework
+
+.font200[
+1. Obtaining data
+
+2. Scrubbing data
+
+3. Exploring data
+
+4. Modeling data
+
+5. iNterpreting data
+]
+
+
+.right[[Mason and Wiggins 2010](http://www.dataists.com/2010/09/a-taxonomy-of-data-science/)]
+
+---
+
+# Obtaining data
+
+.font200[After defining your question, the first step is to obtain data]
+
+.pull-left[
+### Common sources
+
+.font150[
+- Query data from a database or API (e.g., MySQL, Twitter, GBIF)
+
+- Download data from another location (e.g., a server, ftp)
+
+- Extract data from other files (e.g., html webpage, spreadsheet)
+
+- Generate your own data (e.g., simulation, experiment)
+]
+
+]
+
+.pull-right[
+.font150[
+### Tools and skills
+
+- Relational database (e.g., SQLite, PostgreSQL, Spark), use API (e.g., R packages `dbplyr`, `DBI`)
+
+- Downloading data programmingly (web scrapping, `curl`, R packages `httr`, `rvest`)
+
+- Understanding of file system; decompress and manage files, etc.
+
+]
+
+]
+
+???
+
+API: application programming interface
+
+---
+
+# Scrubbing (cleaning) data
+
+.font200[The world is a messy place]
+
+.pull-left[
+### Common operations
+
+.font150[
+- Filtering errors
+
+- Replacing values (e.g., 9999)
+
+- Handling missing values and inconsistent labels
+
+- Parse into a useable format
+
+- .red[80% of your time?!]
+]
+
+]
+
+.pull-right[
+.font150[
+### Tools and skills
+
+- `awk`, `sed`, `grep`
+
+- Data import & output (with R)
+
+- Data manipulation (with R)
+
+]
+
+]
+
+---
+
+# Exploring data
+
+.font200[Get to know your data better through visualization, clustering, dimensionality reducing, etc.]
+
+.pull-left[
+### Common inspections
+
+.font150[
+- What are the different variables?
+
+- Their types, distributions, and range?
+
+- Relationships among them? Correlations?
+
+- Descriptive statistics?
+]
+
+]
+
+.pull-right[
+.font150[
+### Tools and skills
+
+- `head`, `less`, `tail`, etc.
+
+- Data visualization (with R, `plot`, `lattice`, `ggplot2`)
+
+- Data description (with R, basic functions `mean`, `min`, `max`, etc.)
+
+]
+
+]
+
+---
+
+# Modeling data
+
+.font200[All models are wrong, but some are useful.]
+
+.pull-left[
+### Common tasks
+
+.font150[
+- To create an abstract or higher-level description of your data
+
+- To test hypotheses
+
+- To predict 
+
+- With uncertainty
+]
+
+]
+
+.pull-right[
+.font150[
+### Tools and skills
+
+- Dimension reducing, clustering, regression, classification
+
+- Statistical modeling (with R, `lm`, `glm`, `lmer`, etc.)
+
+- Machine learning (with R, random forest, deep learning, etc.)
+
+]
+
+]
+
+---
+
+# iNterpreting data
+
+.font200[The purpose is to gain insights from numbers]
+
+.pull-left[
+### Common tasks
+
+.font150[
+- What have we learned?
+
+- What should we do next?
+
+- Disseminate results and communicate with others 
+
+- Produce useful products
+]
+
+]
+
+.pull-right[
+.font150[
+### Tools and skills
+
+- Domain expertises and intuition
+
+- Being skeptical (double check)
+
+- Communication skills (presentation, writing)
+
+- Reproducible reports (with Rmarkdown and other tools)
+
+]
+
+]
+
+---
+
+class: center, middle, inverse
+
+# Doing data science is an .red[iterative and non-linear] process!
+
+

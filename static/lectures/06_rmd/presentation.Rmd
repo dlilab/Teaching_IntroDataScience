@@ -3,10 +3,10 @@ title: "Literature programming and RMarkdown"
 subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
 author: "Daijiang Li"
 institute: "LSU"
-date: "2021/09/02"
+date: "2021/09/07"
 output:
   xaringan::moon_reader:
-    css: ["default", "default-fonts", "style.css"]
+    css: ["default", "default-fonts", "../style.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -41,6 +41,33 @@ Need to _compile_ it to get a final report, not What You See Is What You Get (WY
 
 ---
 
+# R Markdown (https://rmarkdown.rstudio.com/)
+
+### A powerful tool for combining analysis (in R, Python, Julia, or other programming languages) and reporting into the same document
+
+![rmarkdown workflow](https://d33wubrfki0l68.cloudfront.net/61d189fd9cdf955058415d3e1b28dd60e1bd7c9b/9791d/images/rmarkdownflow.png)
+
+.font150[[YAML](https://en.wikipedia.org/wiki/YAML)]
+
+```yaml
+---
+title: "Untitled"
+author: "Daijiang Li"
+date: "8/17/2021"
+output: html_document
+---
+```
+
+---
+
+class: middle, center, inverse
+
+
+[.font300[Rmarkdown reference]](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
+
+
+---
+
 class: center, middle
 
 # Open RStudio for demonstration
@@ -48,7 +75,12 @@ class: center, middle
 ### https://github.com/daijiang/phyr_ms
 
 
+---
 
+# Reference books
 
+## [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
+## [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)
 
 

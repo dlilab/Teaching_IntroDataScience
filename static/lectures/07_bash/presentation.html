@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>The file system and basic unix shell</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Daijiang Li" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# The file system and basic unix shell
+## Introduction to Data Science (BIOL7800) <a href="https://introdatasci.dlilab.com/" class="uri">https://introdatasci.dlilab.com/</a>
+### Daijiang Li
+### LSU
+### 2021/09/09
+
+---
+
+
+
+
+class: middle
+
+### A file system is a logical collection of files on a partition or disk
+
+#### Unix filesystem (common folders):
+
+|     Directory    |                                Description                               |
+|:----------------:|:------------------------------------------------------------------------:|
+|        `/`       | Root directory                                                           |
+|      `/bin`      | Executable files for all users                                           |
+|      `/dev`      | Device drivers                                                           |
+|      `/home`     | Home directory for users                                                 |
+|      `/tmp`      | Temporary files used between system boots                                |
+|      `/usr`      | Used for miscellaneous purposes, e.g. admin commands, shared files, etc. |
+| `/Users` (macOS) | Files of different users                                                 |
+
+
+???
+
+a disk can have multiple partitions
+
+---
+
+# File tree
+
+```bash
+# Debian / mint / Ubuntu
+sudo apt-get install tree
+# macOS &amp; linux (with homebrew installed)
+brew install tree
+```
+
+.pull-left[
+
+```bash
+tree -L 3 .
+```
+
+```
+.
+├── libs
+│   ├── header-attrs
+│   │   └── header-attrs.js
+│   └── remark-css
+│       ├── default-fonts.css
+│       └── default.css
+├── presentation.Rmd
+└── presentation.html
+
+3 directories, 5 files
+```
+]
+
+.pull-right[
+
+
+```r
+fs::dir_tree(path = ".") #R
+```
+
+```
+## .
+## ├── libs
+## │   ├── header-attrs
+## │   │   └── header-attrs.js
+## │   └── remark-css
+## │       ├── default-fonts.css
+## │       └── default.css
+## ├── presentation.Rmd
+## └── presentation.html
+```
+
+]
+
+---
+
+# Naming files and directories
+
+.font150[
+- All names are case sensitive
+- You can use pretty much any character except `/`
+    + **Better to avoid space in names!** (looking at you, `Box Sync`!)
+    + Also try to avoid special characters such as `&gt;`, `|`, `:`, `&amp;`, `!`
+    + `\` backslash-escaping the character (i.e. quote it). `ls ~/Box\ Sync`
+    + files and directories start with `.` will be hidden
+- Names are generally limited to 255 characters
+- Use date format ISO: YYYYMMDD or YYYY-MM-DD
+]
+
+---
+
+# Naming files and directories
+
+.font150[
+- Name should be consistent (machine friendly) and descriptive (human readable)
+    + `data.csv` (not meaningful) 
+    + `Li_plant_diversity_WI_2020-06-08.csv` (better)
+- Name files so they can ordered 
+    + `00_pkg_functions.R`
+    + `01_data.R`
+- Have a file extension that matches the file format
+]
+
+## .blue[Take time to practice and adopt these styles and strategies can save you a lot of time in the future]
+
+---
+
+# Absolute vs. relative paths
+
+`pwd` to check where you are right now. Let's assume we are at `/Users/dli/IntroDataScience/lectures/06_bash`
+
+.pull-left[
+### Absolute path
+
+```bash
+# list files within the current folder
+ls /Users/dli/IntroDataScience/lectures/06_bash
+
+# move one level up?
+cd /Users/dli/IntroDataScience/lectures 
+
+# move two levels up?
+cd /Users/dli/IntroDataScience 
+
+# move to the home folder?
+cd /Users/dli # /home/user
+```
+]
+
+
+.pull-right[
+### .blue[Relative path]
+
+```bash
+# list files within the current folder
+ls .
+
+# move one level up?
+cd ..
+
+# move two levels up?
+cd ../..
+
+# move to the home folder?
+cd ~
+```
+]
+
+
+---
+
+
+# Some basic commands
+
+.font150[
+- `man` to read the manual! Press `q` to quit, `space` to read next page (`--help` of no `man`)
+- `Tab` for auto-completence
+- Creating, removing, changing directories
+    + `mkdir`
+    + `rmdir`
+    + `cd`
+- Moving, coping, removing files
+    + `touch` to create empty files
+    + `mv`
+    + `cp`
+    + `rm`: notable options: `-r`, `-f` (dangerous `rm -rf`)
+]
+
+---
+
+class: center, middle, inverse
+
+.font200[.red[Warning:] no undo button on the command line, so be extremely careful with deleting files/directories! I recommend to use `mv` to move files to the Trash Bin instead. (`~/.Trash` on Mac, `~/.local/share/Trash` on Ubuntu)]
+
+---
+
+# Some basic commands
+
+.font150[
+- List files with `ls`: `-a`, `-l`
+- Wildcard to work with multiple files and folders
+    + `ls /bin/*sh`
+    + `ls /bin/*[ab]*`
+    + `mv /path/to/*.jpeg /new/path`
+- Check history of used command `history`
+    + `!200` to rerun the 200th command from history
+- `open` (macOS) or `start`
+]
+
+---
+
+# The Unix Philosophy
+
+### Each program should **do one thing well**
+
+### Programs can be linked with the pipe operator `|` to do more complex tasks
+
+```bash
+ls -l | head -n 3
+
+head -100 file.csv | tail -20 | &gt; file_81_100.csv
+```
+
+---
+
+## Moving cursor inside bash
+
+.font200[
++ `^` means `Ctrl` key, e.g. `^A` means `Ctrl+A`.
++ `^A` move to the beginning of a line in the shell.
++ `^E` move to the end of a line.
++ `^C` cancel what you are doing. If it does not work, try `^\`.
++ `^D` end of a line. This normally will kill the job too.
++ `^L` clean the screen of your shell.
++ `^h` delete back one character (backspace).
++ `^w` delete back one word.
++ `^u` delete back to the start of line.
+]
+
+---
+
+class: middle, inverse
+
+## More common commands see [course webpage](https://introdatasci.dlilab.com/2021-08-18-shell-commands/)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
