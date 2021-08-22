@@ -5,7 +5,7 @@ title: Intro to Data Science
 theme: "cupper-hugo-theme"
 googleAnalytics: UA-123456789-1
 disqusShortname: yourdiscussshortname
-enableGitInfo: true
+enableGitInfo: false
 
 taxonomies:
   tag: tags
