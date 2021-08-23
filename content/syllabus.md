@@ -35,9 +35,10 @@ Email address: dli30@lsu.edu
 ## Meeting times & locations
 
 Tu/Th 9:00-10:20 AM  
-Class location: A245  
+Class location: Life Science A245  
+Zoom link: https://lsu.zoom.us/j/92192729296  
 Office room: LSB125  
-Office hours: by appointment
+Office hours: Thursday 12-1pm in LSB 125 or by appointment
 
 ## Pre-requisites
 
