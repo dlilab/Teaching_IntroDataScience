@@ -92,6 +92,19 @@ class: center, middle, inverse
 
 ---
 
+# How are we going to go through this course?
+
+### Learning by doing (through trials and errors)
+
+### Use lots of online resources
+
+### Peer-teaching and learning; collaborative coding
+
+### Google and Stack Overflow
+
+
+---
+
 class: center, middle
 
 # What is _data science_ ?
@@ -225,17 +238,6 @@ background-size: contain
 | Causal                    | *Average* risk of COVID vs non-vaccination                                       |
 | Mechanistic               | Impacts of wing design on air flow over a wing; rare outside of engineering      |
 
----
-
-# How are we going to go through this course?
-
-### Learning by doing (through trials and errors)
-
-### Use lots of online resources
-
-### Peer-teaching and learning; collaborative coding
-
-### Google and Stack Overflow
 
 
 

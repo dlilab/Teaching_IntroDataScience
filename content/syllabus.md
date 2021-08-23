@@ -98,7 +98,7 @@ Students will be evaluated on their knowledge of course content and ability to c
 
 ### Homework (60%)
 
-There will be 7 homework assignments, with 10 points for each assignment. All assignments should be finished as _Rmarkdown_ files and I need to be able to reproduce all results by running it on my own computer. I expect that each student will complete the assignment independently (discussing about some questions is fine). The assignments are due by Sunday at midnight.  _No late assignment will be accepted_, for any reason. So don’t wait until the last hour to do an assignment. Plan ahead and pace yourself. Instead of late assignment, I will drop your lowest score and use the other 6 scores for your final grade.  _At least 5 assignments must be turned in to achieve a passing grade._ 
+There will be 7 homework assignments, with 10 points for each assignment. All assignments should be finished as _Rmarkdown_ files and I need to be able to reproduce all results by running it on my own computer. I expect that each student will complete the assignment independently (discussing about some questions is fine). The assignments are due by next Thursday before class.  _No late assignment will be accepted_, for any reason. So don’t wait until the last hour to do an assignment. Plan ahead and pace yourself. Instead of late assignment, I will drop your lowest score and use the other 6 scores for your final grade.  _At least 5 assignments must be turned in to achieve a passing grade._ 
 
 ### Participation (15%)
 
