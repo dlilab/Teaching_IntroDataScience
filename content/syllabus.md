@@ -109,6 +109,25 @@ A key component of data science is communicating your results with others. It is
 
 The final project will demonstrate your knowledge of the course content and beyond. It will be a full report in an _R Makrdown_ format, mixed text with code, results, figures, tables, citations, etc. The final report should be in high quality and publishable with some additional effort later. The final project should be hosted on Github, organized as we discussed in class and should be fully reproducible. This means that I can clone your repository and re-run your files on my computer and get the same results. **The final project deadline is December 3rd.** More information about it can be found [here](/).
 
+### Grading
+
+LSU has a plus-minus grading scale. There will be no curve. 
+
+|grade| percent |
+| -- |  --    |
+| A+ |  > 97  |
+| A  |  93-97 |
+| A- |  90-92 |
+| B+ |  87-89 |
+| B  |  83-86 |
+| B- |  80-82 |
+| C+ |  77-79 |
+| C  |  73-76 |
+| C- |  70-72 |
+| D  |  65-69 |
+| F  |  < 64  |
+
+
 ## Academic integrity
 
 Louisiana State University adopted the Commitment to Community in 1995 to set forth guidelines for student behavior both inside and outside of the classroom.  The Commitment to Community charges students to maintain high standards of academic and personal integrity.  All students are expected to read and be familiar with the LSU Code of Student Conduct and Commitment to Community, found online at <https://www.lsu.edu/saa/>.  It is your responsibility as a student at LSU to know and understand the academic standards for our community. 
