@@ -13,7 +13,9 @@ title: Introduction to Data Science
 
 **Email**: dli30@lsu.edu
 
-**Class**: Tu/Th 9:00-10:20 AM in A245  
+**Class time**: Tu/Th 9:00-10:20 AM
+
+**Classroom**: [William's 206](https://www.google.com/maps/place/Williams+Hall/@30.4124295,-91.179734,17.11z/data=!4m5!3m4!1s0x8626a7217676d7ad:0xcf801c0f1a3d0ab8!8m2!3d30.4104184!4d-91.1777712)
 
 **Office hours**: Thursday 12-1pm in LSB 125 or by appointment
 
