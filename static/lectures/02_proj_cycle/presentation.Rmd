@@ -104,6 +104,98 @@ API: application programming interface
 
 ---
 
+# Example
+
+## Q: How many viewers does each video have in [this playlist](https://www.youtube.com/playlist?list=PLE7DDD91010BC51F8) (MIT Linear Algebra Spring 2005)? Do the view counts decline over time?
+
+## Data provided by Youtube
+
+---
+
+# Get lecture names and links
+
+```{r eval=FALSE}
+library(rvest, warn.conflicts = FALSE)
+library(RSelenium)
+# to set up a server to run javascript
+rs = RSelenium::rsDriver(browser = "firefox")
+rsc = rs$client
+rsc$navigate("https://www.youtube.com/playlist?list=PLE7DDD91010BC51F8")
+# now get the page source
+ht = rsc$getPageSource()
+url = rvest::read_html(ht[[1]])
+lectures = html_elements(url, css = '#video-title') # show how to get this
+lec_names = html_text2(lectures)
+lec_links = html_attr(lectures, "href")
+lec_links_full = paste0("https://www.youtube.com", lec_links)
+```
+
+---
+
+# Try to get view count of one link
+
+
+```{r eval=FALSE}
+# try one link
+# does not work
+url2 = read_html(lec_links_full[1])
+x = html_elements(url2, css = "#info")
+html_elements(url2, css = ".watch-view-count")
+
+# need this
+rsc$navigate(lec_links_full[1])
+ht2 = rsc$getPageSource()
+  
+ok2 <- rvest::read_html(ht2[[1]])
+# show how to get this
+view = html_elements(ok2, css = ".ytd-video-view-count-renderer")
+view_count = html_text(view[1])
+view_count
+as.numeric(gsub(",| views", "", view_count))
+```
+
+---
+
+# Convert it to a function
+
+```{r eval=FALSE}
+# put it as a function
+get_view = function(link){
+  rsc$navigate(link)
+  url2 = rsc$getPageSource()
+  Sys.sleep(1) 
+  url2 <- rvest::read_html(url2[[1]])
+  view = html_elements(url2, css = ".ytd-video-view-count-renderer")
+  view_count = html_text(view[1])
+  view_count = as.integer(gsub(",| views", "", view_count))
+  return(view_count)
+}
+```
+
+---
+
+# Get all view counts
+
+```{r eval=FALSE}
+# run it
+view_counts = data.frame(names = lec_names, views = NA_integer_)
+for(i in 1:length(lec_links_full)){
+  cat(lec_links_full[i], "\t")
+  view_count = get_view(lec_links_full[i])
+  # for some reason, sometimes it takes multiple tries
+  while(length(view_count) == 0)
+    view_count = get_view(lec_links_full[i])
+  view_counts$views[i] = view_count
+}
+
+# save results
+write.csv(view_counts, "view.csv")
+rs$server$stop() # close the server
+```
+
+
+---
+
 # Scrubbing (cleaning) data
 
 .font200[The world is a messy place]
@@ -138,6 +230,39 @@ API: application programming interface
 ]
 
 ]
+
+---
+
+# Example continue
+
+```{r}
+view_counts = read.csv("view.csv", row.names = 1)
+DT::datatable(view_counts, options = list(pageLength = 6))
+```
+
+---
+
+# Extract lecture numbers?
+
+```{r}
+(a = stringr::str_extract(string = view_counts$names,
+                          pattern = "^[b0-9]*"))
+a[a == "24b"] = 24.5
+a = as.numeric(a)
+view_counts$idx = a
+view_counts$names = stringr::str_replace(string = view_counts$names, 
+                                         pattern = "^[b0-9]*[.] ", 
+                                         replacement = "")
+head(view_counts$names)
+```
+
+---
+
+# Data are ready?
+
+```{r}
+DT::datatable(view_counts, options = list(pageLength = 6))
+```
 
 ---
 
@@ -176,6 +301,26 @@ API: application programming interface
 
 ---
 
+# Example continue
+
+
+```{r, fig.width=7, fig.height=5, out.width='80%'}
+plot(view_counts$idx, view_counts$views, type = "b",
+     xlab = "Lecture number", ylab = "View counts")
+```
+
+---
+
+# Example continue
+
+
+```{r, fig.width=7, fig.height=5, out.width='80%'}
+plot(view_counts$idx, log10(view_counts$views), type = "b",
+     xlab = "Lecture number", ylab = "View counts (log 10)")
+```
+
+---
+
 # Modeling data
 
 .font200[All models are wrong, but some are useful.]
@@ -208,6 +353,46 @@ API: application programming interface
 ]
 
 ]
+
+---
+
+# Example continue
+
+
+```{r}
+model_1 = lm(views ~ idx, data = view_counts)
+summary(model_1)
+```
+
+---
+
+# Example continue
+
+```{r, fig.width=7, fig.height=5, out.width='80%'}
+plot(view_counts$idx, view_counts$views, type = "b",
+     xlab = "Lecture number", ylab = "View counts")
+abline(model_1)
+```
+
+---
+
+# Example continue
+
+
+```{r}
+model_2 = lm(log10(views) ~ idx, data = view_counts)
+summary(model_2)
+```
+
+---
+
+# Example continue
+
+```{r, fig.width=7, fig.height=5, out.width='80%'}
+plot(view_counts$idx, log10(view_counts$views), type = "b",
+     xlab = "Lecture number", ylab = "View counts")
+abline(model_2)
+```
 
 ---
 
@@ -245,6 +430,12 @@ API: application programming interface
 ]
 
 ]
+
+---
+
+# Example continue
+
+## ?? 
 
 ---
 

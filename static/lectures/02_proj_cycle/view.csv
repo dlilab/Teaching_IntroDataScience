@@ -1,0 +1,37 @@
+"","names","views"
+"1","An Interview with Gilbert Strang on Teaching Linear Algebra",531657
+"2","1. The Geometry of Linear Equations",749756
+"3","2. Elimination with Matrices.",1651140
+"4","3. Multiplication and Inverse Matrices",1149974
+"5","4. Factorization into A = LU",431759
+"6","5. Transposes, Permutations, Spaces R^n",669672
+"7","6. Column Space and Nullspace",633672
+"8","7. Solving Ax = 0: Pivot Variables, Special Solutions",512615
+"9","8. Solving Ax = b: Row Reduced Form R",463494
+"10","9. Independence, Basis, and Dimension",486194
+"11","10. The Four Fundamental Subspaces",450159
+"12","11. Matrix Spaces; Rank 1; Small World Graphs",339305
+"13","12. Graphs, Networks, Incidence Matrices",283376
+"14","13. Quiz 1 Review",246720
+"15","14. Orthogonal Vectors and Subspaces",368634
+"16","15. Projections onto Subspaces",361465
+"17","16. Projection Matrices and Least Squares",328095
+"18","17. Orthogonal Matrices and Gram-Schmidt",87774
+"19","18. Properties of Determinants",290485
+"20","19. Determinant Formulas and Cofactors",261363
+"21","20. Cramer's Rule, Inverse Matrix, and Volume",253171
+"22","21. Eigenvalues and Eigenvectors",269982
+"23","22. Diagonalization and Powers of A",351739
+"24","23. Differential Equations and exp(At)",261975
+"25","24. Markov Matrices; Fourier Series",49059
+"26","24b. Quiz 2 Review",17764
+"27","25. Symmetric Matrices and Positive Definiteness",56173
+"28","26. Complex Matrices; Fast Fourier Transform",189655
+"29","27. Positive Definite Matrices and Minima",184409
+"30","28. Similar Matrices and Jordan Form",50385
+"31","29. Singular Value Decomposition",58854
+"32","30. Linear Transformations and Their Matrices",291459
+"33","31. Change of Basis; Image Compression",37131
+"34","32. Quiz 3 Review",113571
+"35","33. Left and Right Inverses; Pseudoinverse",164589
+"36","34. Final Course Review",150043

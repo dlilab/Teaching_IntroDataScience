@@ -7,6 +7,15 @@
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
     <link rel="stylesheet" href="../style.css" type="text/css" />
   </head>
   <body>
@@ -108,6 +117,102 @@ API: application programming interface
 
 ---
 
+# Example
+
+## Q: How many viewers does each video have in [this playlist](https://www.youtube.com/playlist?list=PLE7DDD91010BC51F8) (MIT Linear Algebra Spring 2005)? Do the view counts decline over time?
+
+## Data provided by Youtube
+
+---
+
+# Get lecture names and links
+
+
+```r
+library(rvest, warn.conflicts = FALSE)
+library(RSelenium)
+# to set up a server to run javascript
+rs = RSelenium::rsDriver(browser = "firefox")
+rsc = rs$client
+rsc$navigate("https://www.youtube.com/playlist?list=PLE7DDD91010BC51F8")
+# now get the page source
+ht = rsc$getPageSource()
+url = rvest::read_html(ht[[1]])
+lectures = html_elements(url, css = '#video-title') # show how to get this
+lec_names = html_text2(lectures)
+lec_links = html_attr(lectures, "href")
+lec_links_full = paste0("https://www.youtube.com", lec_links)
+```
+
+---
+
+# Try to get view count of one link
+
+
+
+```r
+# try one link
+# does not work
+url2 = read_html(lec_links_full[1])
+x = html_elements(url2, css = "#info")
+html_elements(url2, css = ".watch-view-count")
+
+# need this
+rsc$navigate(lec_links_full[1])
+ht2 = rsc$getPageSource()
+  
+ok2 &lt;- rvest::read_html(ht2[[1]])
+# show how to get this
+view = html_elements(ok2, css = ".ytd-video-view-count-renderer")
+view_count = html_text(view[1])
+view_count
+as.numeric(gsub(",| views", "", view_count))
+```
+
+---
+
+# Convert it to a function
+
+
+```r
+# put it as a function
+get_view = function(link){
+  rsc$navigate(link)
+  url2 = rsc$getPageSource()
+  Sys.sleep(1) 
+  url2 &lt;- rvest::read_html(url2[[1]])
+  view = html_elements(url2, css = ".ytd-video-view-count-renderer")
+  view_count = html_text(view[1])
+  view_count = as.integer(gsub(",| views", "", view_count))
+  return(view_count)
+}
+```
+
+---
+
+# Get all view counts
+
+
+```r
+# run it
+view_counts = data.frame(names = lec_names, views = NA_integer_)
+for(i in 1:length(lec_links_full)){
+  cat(lec_links_full[i], "\t")
+  view_count = get_view(lec_links_full[i])
+  # for some reason, sometimes it takes multiple tries
+  while(length(view_count) == 0)
+    view_count = get_view(lec_links_full[i])
+  view_counts$views[i] = view_count
+}
+
+# save results
+write.csv(view_counts, "view.csv")
+rs$server$stop() # close the server
+```
+
+
+---
+
 # Scrubbing (cleaning) data
 
 .font200[The world is a messy place]
@@ -142,6 +247,66 @@ API: application programming interface
 ]
 
 ]
+
+---
+
+# Example continue
+
+
+```r
+view_counts = read.csv("view.csv", row.names = 1)
+DT::datatable(view_counts, options = list(pageLength = 6))
+```
+
+<div id="htmlwidget-74882a18380adb6b7bb9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-74882a18380adb6b7bb9">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36"],["An Interview with Gilbert Strang on Teaching Linear Algebra","1. The Geometry of Linear Equations","2. Elimination with Matrices.","3. Multiplication and Inverse Matrices","4. Factorization into A = LU","5. Transposes, Permutations, Spaces R^n","6. Column Space and Nullspace","7. Solving Ax = 0: Pivot Variables, Special Solutions","8. Solving Ax = b: Row Reduced Form R","9. Independence, Basis, and Dimension","10. The Four Fundamental Subspaces","11. Matrix Spaces; Rank 1; Small World Graphs","12. Graphs, Networks, Incidence Matrices","13. Quiz 1 Review","14. Orthogonal Vectors and Subspaces","15. Projections onto Subspaces","16. Projection Matrices and Least Squares","17. Orthogonal Matrices and Gram-Schmidt","18. Properties of Determinants","19. Determinant Formulas and Cofactors","20. Cramer's Rule, Inverse Matrix, and Volume","21. Eigenvalues and Eigenvectors","22. Diagonalization and Powers of A","23. Differential Equations and exp(At)","24. Markov Matrices; Fourier Series","24b. Quiz 2 Review","25. Symmetric Matrices and Positive Definiteness","26. Complex Matrices; Fast Fourier Transform","27. Positive Definite Matrices and Minima","28. Similar Matrices and Jordan Form","29. Singular Value Decomposition","30. Linear Transformations and Their Matrices","31. Change of Basis; Image Compression","32. Quiz 3 Review","33. Left and Right Inverses; Pseudoinverse","34. Final Course Review"],[531657,749756,1651140,1149974,431759,669672,633672,512615,463494,486194,450159,339305,283376,246720,368634,361465,328095,87774,290485,261363,253171,269982,351739,261975,49059,17764,56173,189655,184409,50385,58854,291459,37131,113571,164589,150043]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>names<\/th>\n      <th>views<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+# Extract lecture numbers?
+
+
+```r
+(a = stringr::str_extract(string = view_counts$names,
+                          pattern = "^[b0-9]*"))
+```
+
+```
+##  [1] ""    "1"   "2"   "3"   "4"   "5"   "6"   "7"   "8"   "9"   "10"  "11" 
+## [13] "12"  "13"  "14"  "15"  "16"  "17"  "18"  "19"  "20"  "21"  "22"  "23" 
+## [25] "24"  "24b" "25"  "26"  "27"  "28"  "29"  "30"  "31"  "32"  "33"  "34"
+```
+
+```r
+a[a == "24b"] = 24.5
+a = as.numeric(a)
+view_counts$idx = a
+view_counts$names = stringr::str_replace(string = view_counts$names, 
+                                         pattern = "^[b0-9]*[.] ", 
+                                         replacement = "")
+head(view_counts$names)
+```
+
+```
+## [1] "An Interview with Gilbert Strang on Teaching Linear Algebra"
+## [2] "The Geometry of Linear Equations"                           
+## [3] "Elimination with Matrices."                                 
+## [4] "Multiplication and Inverse Matrices"                        
+## [5] "Factorization into A = LU"                                  
+## [6] "Transposes, Permutations, Spaces R^n"
+```
+
+---
+
+# Data are ready?
+
+
+```r
+DT::datatable(view_counts, options = list(pageLength = 6))
+```
+
+<div id="htmlwidget-efa87f95b1931d6564fd" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-efa87f95b1931d6564fd">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36"],["An Interview with Gilbert Strang on Teaching Linear Algebra","The Geometry of Linear Equations","Elimination with Matrices.","Multiplication and Inverse Matrices","Factorization into A = LU","Transposes, Permutations, Spaces R^n","Column Space and Nullspace","Solving Ax = 0: Pivot Variables, Special Solutions","Solving Ax = b: Row Reduced Form R","Independence, Basis, and Dimension","The Four Fundamental Subspaces","Matrix Spaces; Rank 1; Small World Graphs","Graphs, Networks, Incidence Matrices","Quiz 1 Review","Orthogonal Vectors and Subspaces","Projections onto Subspaces","Projection Matrices and Least Squares","Orthogonal Matrices and Gram-Schmidt","Properties of Determinants","Determinant Formulas and Cofactors","Cramer's Rule, Inverse Matrix, and Volume","Eigenvalues and Eigenvectors","Diagonalization and Powers of A","Differential Equations and exp(At)","Markov Matrices; Fourier Series","Quiz 2 Review","Symmetric Matrices and Positive Definiteness","Complex Matrices; Fast Fourier Transform","Positive Definite Matrices and Minima","Similar Matrices and Jordan Form","Singular Value Decomposition","Linear Transformations and Their Matrices","Change of Basis; Image Compression","Quiz 3 Review","Left and Right Inverses; Pseudoinverse","Final Course Review"],[531657,749756,1651140,1149974,431759,669672,633672,512615,463494,486194,450159,339305,283376,246720,368634,361465,328095,87774,290485,261363,253171,269982,351739,261975,49059,17764,56173,189655,184409,50385,58854,291459,37131,113571,164589,150043],[null,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,24.5,25,26,27,28,29,30,31,32,33,34]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>names<\/th>\n      <th>views<\/th>\n      <th>idx<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -180,6 +345,32 @@ API: application programming interface
 
 ---
 
+# Example continue
+
+
+
+```r
+plot(view_counts$idx, view_counts$views, type = "b",
+     xlab = "Lecture number", ylab = "View counts")
+```
+
+&lt;img src="presentation_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Example continue
+
+
+
+```r
+plot(view_counts$idx, log10(view_counts$views), type = "b",
+     xlab = "Lecture number", ylab = "View counts (log 10)")
+```
+
+&lt;img src="presentation_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
 # Modeling data
 
 .font200[All models are wrong, but some are useful.]
@@ -212,6 +403,98 @@ API: application programming interface
 ]
 
 ]
+
+---
+
+# Example continue
+
+
+
+```r
+model_1 = lm(views ~ idx, data = view_counts)
+summary(model_1)
+```
+
+```
+## 
+## Call:
+## lm(formula = views ~ idx, data = view_counts)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -279979 -108083  -45405   43491  912530 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   788058      76886  10.250 8.70e-12 ***
+## idx           -24724       3806  -6.496 2.25e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 219300 on 33 degrees of freedom
+##   (1 observation deleted due to missingness)
+## Multiple R-squared:  0.5612,	Adjusted R-squared:  0.5479 
+## F-statistic:  42.2 on 1 and 33 DF,  p-value: 2.255e-07
+```
+
+---
+
+# Example continue
+
+
+```r
+plot(view_counts$idx, view_counts$views, type = "b",
+     xlab = "Lecture number", ylab = "View counts")
+abline(model_1)
+```
+
+&lt;img src="presentation_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Example continue
+
+
+
+```r
+model_2 = lm(log10(views) ~ idx, data = view_counts)
+summary(model_2)
+```
+
+```
+## 
+## Call:
+## lm(formula = log10(views) ~ idx, data = view_counts)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.89423 -0.12116  0.04193  0.17757  0.50399 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  5.959777   0.100523  59.287  &lt; 2e-16 ***
+## idx         -0.033306   0.004976  -6.694 1.27e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.2867 on 33 degrees of freedom
+##   (1 observation deleted due to missingness)
+## Multiple R-squared:  0.5759,	Adjusted R-squared:  0.563 
+## F-statistic: 44.81 on 1 and 33 DF,  p-value: 1.271e-07
+```
+
+---
+
+# Example continue
+
+
+```r
+plot(view_counts$idx, log10(view_counts$views), type = "b",
+     xlab = "Lecture number", ylab = "View counts")
+abline(model_2)
+```
+
+&lt;img src="presentation_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -249,6 +532,12 @@ API: application programming interface
 ]
 
 ]
+
+---
+
+# Example continue
+
+## ?? 
 
 ---
 
