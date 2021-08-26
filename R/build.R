@@ -15,10 +15,10 @@ if(length(hfiles)){
       # system("cd static/lectures; make")
       rmarkdown::render(files[i, 1])
     }
-      xfun::gsub_files(files[i, 2], pattern = "/Users/dli/Box Sync/Teaching/Teaching-IntroDataScience/static/lectures", 
-                       replacement = "..")
-      xfun::gsub_files(files[i, 2], pattern = "/Users/dli30/Box Sync/Teaching/Teaching-IntroDataScience/static/lectures", 
-                       replacement = "..")
+      # xfun::gsub_files(files[i, 2], pattern = "/Users/dli/Box Sync/Teaching/Teaching-IntroDataScience/static/lectures", 
+      #                  replacement = "..")
+      # xfun::gsub_files(files[i, 2], pattern = "/Users/dli30/Box Sync/Teaching/Teaching-IntroDataScience/static/lectures", 
+      #                  replacement = "..")
   }
 }
 

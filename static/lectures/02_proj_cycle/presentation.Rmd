@@ -140,7 +140,6 @@ lec_links_full = paste0("https://www.youtube.com", lec_links)
 # does not work
 url2 = read_html(lec_links_full[1])
 x = html_elements(url2, css = "#info")
-html_elements(url2, css = ".watch-view-count")
 
 # need this
 rsc$navigate(lec_links_full[1])
@@ -304,7 +303,7 @@ DT::datatable(view_counts, options = list(pageLength = 6))
 # Example continue
 
 
-```{r, fig.width=7, fig.height=5, out.width='80%'}
+```{r, fig.width=7, fig.height=5, out.width='80%', dpi = 300}
 plot(view_counts$idx, view_counts$views, type = "b",
      xlab = "Lecture number", ylab = "View counts")
 ```
@@ -314,7 +313,7 @@ plot(view_counts$idx, view_counts$views, type = "b",
 # Example continue
 
 
-```{r, fig.width=7, fig.height=5, out.width='80%'}
+```{r, fig.width=7, fig.height=5, out.width='80%', dpi = 300}
 plot(view_counts$idx, log10(view_counts$views), type = "b",
      xlab = "Lecture number", ylab = "View counts (log 10)")
 ```
@@ -368,7 +367,7 @@ summary(model_1)
 
 # Example continue
 
-```{r, fig.width=7, fig.height=5, out.width='80%'}
+```{r, fig.width=7, fig.height=5, out.width='80%', dpi = 300}
 plot(view_counts$idx, view_counts$views, type = "b",
      xlab = "Lecture number", ylab = "View counts")
 abline(model_1)
@@ -388,7 +387,7 @@ summary(model_2)
 
 # Example continue
 
-```{r, fig.width=7, fig.height=5, out.width='80%'}
+```{r, fig.width=7, fig.height=5, out.width='80%', dpi = 300}
 plot(view_counts$idx, log10(view_counts$views), type = "b",
      xlab = "Lecture number", ylab = "View counts")
 abline(model_2)
