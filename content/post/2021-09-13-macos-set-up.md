@@ -23,7 +23,7 @@ This post documents the very basic set up I have made with a brand new account i
     - Use `Alt + Space` then type the App you want to open, then press `enter` or move down to the one you want to open and then press `enter`.
 3. `brew install --cask iterm2` to install [iTerm2](https://iterm2.com): a better option than Apple's Terminal app.
     - `Cmd + ,` to open preferences, `Profiles` -> `Colors` --> set `Background` color to `300a24` (I like the Ubuntu terminal background color).
-4. `brew tap homebrew/cask-fonts` then `brew install --cask font-iosevka` to install the `Iosevka` font, which I really like to be my coding font.
+4. `brew tap homebrew/cask-fonts` then `brew install --cask font-iosevka` to install the [Iosevka](https://typeof.net/Iosevka/) font, which I really like to be my coding font.
     - back to iTerm2 and set Iosevka as the font `Profiles` -> `text` 
 5. `brew install --cask r` to install [R](https://www.r-project.org/).
 6. `brew install --cask rstudio` to install [RStudio](https://www.rstudio.com/)
