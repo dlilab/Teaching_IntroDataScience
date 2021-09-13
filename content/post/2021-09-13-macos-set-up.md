@@ -28,6 +28,7 @@ This post documents the very basic set up I have made with a brand new account i
 5. `brew install --cask r` to install [R](https://www.r-project.org/).
 6. `brew install --cask rstudio` to install [RStudio](https://www.rstudio.com/)
     - I also set the font to be Iosevka: `Cmd + ,` -> `Apperance` -> `Editor font` and select `Iosevka-Term`.
+    - `Cmd + ,` -> in the `General` and `Basic`, select Save workspace to .RData on exit to be `never`. I think this is a good choice for the sake of reproducibility; we should just save the important results separately instead of the whole workspace.
     - Open `Alfred`, then `Cmd + ,`, in the `Features` panel and the `Default Results`, select `Advanced`, then drag and drop an RStudio project file to here. This will allow Alfred to search all RStudio projects later, which is very handy.
     - Install R package `usethis` with `install.packages("usethis")`; after then, in RStudio, run `usethis::edit_r_environ()`; in the opened file, add `R_LIBS_USER="~/R"`. This will make sure all R packages later will be installed in one folder no matter which version of R you use. The default behavior of R will install packages in different folders (with version number) when you use different versions of R (i.e., update R to a new version and then packages will be installed in another folder named as something like this `/Library/Framework/R.framework/Version/4.1/Resources/library [Default]`)
     - In Terminal, run `mkdir ~/R` to create the folder to host R packages.
