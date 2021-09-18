@@ -3,7 +3,7 @@ title: "Tools"
 subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
 author: "Daijiang Li"
 institute: "LSU"
-date: "2021/08/31"
+date: "2021/09/07"
 output:
   xaringan::moon_reader:
     css: ["default", "default-fonts", "../style.css"]
@@ -20,146 +20,7 @@ options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(fig.align='center', out.width = '95%')
 ```
 
-# Tools going to use
+# Data types
 
-.font200[
-- R
-- git 
-- bash (terminal)
-- RStudio
-- GitHub
-- Make
-- TinyTex (generate pdf using Rmarkdown)
-]
-
----
-
-# R (https://www.r-project.org)
-
-.font200[
-- A programming language
-
-- First appeared: August 1993; 28 years ago
-
-- \> 18,000 packages and counting
-
-- Download and Installation (https://mirrors.nics.utk.edu/cran/)
-]
-
---
-
-# Tour of R
-
----
-
-class: middle, inverse
-
-## If you are using Windows 10, you should [enable and install Bash on Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
-
----
-
-# Git (https://git-scm.com)
-
-.pull-left[
-.font200[
-- Version control system
-    - `which git` (Mac, Linux) or `where git` (Windows)
-
-- [Download and Installation](https://carpentries-incubator.github.io/git-novice-branch-pr/setup/)
-
-- [Setting up Git](https://carpentries-incubator.github.io/git-novice-branch-pr/02-setup/)
-]
-]
-
-.pull-right[
-![final doc](https://carpentries-incubator.github.io/git-novice-branch-pr/fig/phd101212s.png)
-]
-
-
----
-
-# RStudio (https://www.rstudio.com)
-
-
-.font200[
-- Integrated Development Environment (IDE)
-
-- Public Benefit Co.
-
-- [Download](https://www.rstudio.com/products/rstudio/download/#download) and Installation
-]
-
---
-
-# Tour of RStudio
-
-.font150[
-- Check Terminal in RStudio
-- Check git panel
-- `Alt + Shift + k` to show all shortcuts
-- [Cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf)
-]
-
-
----
-
-# GitHub (https://github.com)
-
-.font200[
-- Online platform to share code
-
-- Collaborative coding
-]
-
----
-
-# Make (https://www.gnu.org/software/make/)
-
-.font200[
-- `make --version` to check whether you have it already
-- [Windows version](http://gnuwin32.sourceforge.net/packages/make.htm)
-]
-
----
-
-# LaTex and TinyTex (https://yihui.org/tinytex/)
-
-
-```{r eval=FALSE, echo=TRUE}
-# Open RStudio
-install.packages('tinytex')
-tinytex::install_tinytex()
-```
-
-### Create an Rmarkdown file and give it a try to generate a PDF file.
-
----
-
-# macOS & linux (optional but highly recommended)
-
-```bash
-# macOS only
-xcode-select --install
-# Installing Homebrew for pkg management
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-### [Homebrew: The Missing Package Manager for macOS (or Linux)](https://brew.sh/)
-
----
-
-# Useful links
-
-.font200[
-- [Happy Git and GitHub for the useR](https://happygitwithr.com)
-
-- [R related Cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
-
-- [Software carpentry](http://software-carpentry.org/)
-
-- [Data capentry](https://datacarpentry.org)
-
-- [Minimal Make tutorial](https://kbroman.org/minimal_make/)
-]
-
+### The first step in any data analysis is to choose the structure and to create a dataset to hold the data
 
