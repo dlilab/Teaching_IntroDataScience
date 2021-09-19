@@ -1,0 +1,80 @@
+---
+title: "R Basics"
+subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
+author: "Daijiang Li"
+institute: "LSU"
+date: "2021/09/28"
+output:
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "../style.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.align='center', out.width = '95%')
+```
+
+---
+
+# Subsetting: Vector
+
+```{r}
+(v_int = c(1:6))
+# get the second element 
+v_int[2]
+# get the 2nd and 4th elements
+v_int[c(2, 4)]
+# get the 2nd, 3rd, and 4th elements
+v_int[2:4]
+```
+
+---
+
+# Subsetting: Matrix
+
+```{r}
+mat_a <- matrix(data = 1:9, nrow = 3, ncol = 3)
+mat_a
+rownames(mat_a) <- c("row1", "row2", "row3")
+colnames(mat_a) <- c("col1", "col2", "col3")
+mat_a
+```
+
+---
+
+.pull-left[
+```{r}
+mat_a[2, 3]
+mat_a[2, 3, drop = FALSE]
+mat_a["row2", "col3"] 
+mat_a["row2", "col3", drop = FALSE] 
+```
+]
+
+--
+
+.pull-right[
+```{r}
+mat_a[c(1, 2), c(2, 3)]
+mat_a[c("row1", "row2"), c("col2", "col3")] 
+# more examples in class 3
+```
+]
+
+---
+
+# Subsetting: array
+
+```{r}
+a[1, 2, 1]
+a[1, 2, 1, drop = F]
+a["R1", "C2", "A"]
+a[c(1:2), c(2:3), "B"]
+```
+
