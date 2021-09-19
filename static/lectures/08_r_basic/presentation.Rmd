@@ -174,5 +174,87 @@ as.numeric(v_chr)
 ```
 
 
+---
+layout: true
+
+# Matrix
+
+---
+
+# Matrix
+
+.pull-left[
+```{r}
+matrix(data = 0, 
+       nrow = 3, ncol = 3)
+matrix(data = 1:9, 
+       nrow = 3, ncol = 3)
+```
+]
+
+--
+
+.pull-right[
+```{r}
+matrix(data = letters[1:9], 
+       nrow = 3, ncol = 3)
+matrix(data = LETTERS[1:9], 
+       nrow = 3, ncol = 3)
+```
+]
+
+???
+
+matrix also has type conversion
+
+---
+
+# Matrix
+
+
+```{r}
+mat_a <- matrix(data = 1:9, nrow = 3, ncol = 3)
+mat_a
+rownames(mat_a) <- c("row1", "row2", "row3")
+colnames(mat_a) <- c("col1", "col2", "col3")
+mat_a
+```
+
+---
+
+# Matrix
+
+.pull-left[
+```{r}
+mat_a[2, 3]
+mat_a[2, 3, drop = FALSE]
+mat_a["row2", "col3"] 
+mat_a["row2", "col3", drop = FALSE] 
+```
+]
+
+--
+
+.pull-right[
+```{r}
+mat_a[c(1, 2), c(2, 3)]
+mat_a[c("row1", "row2"), c("col2", "col3")] 
+# more examples in class 3
+```
+]
+
+
+---
+
+# Matrix
+
+Type Conversion
+
+```{r}
+(mat_b <- matrix(c(1:8, "a"), nrow = 3, ncol = 3))
+class(mat_b)
+typeof(mat_b)
+```
+
 
 
