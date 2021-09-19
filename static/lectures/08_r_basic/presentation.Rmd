@@ -1,0 +1,178 @@
+---
+title: "The file system and basic unix shell"
+subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
+author: "Daijiang Li"
+institute: "LSU"
+date: "2021/09/23"
+output:
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "../style.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.align='center', out.width = '95%')
+```
+
+# Data types
+
+### The first step in any data analysis is to choose the structure and to create a dataset to hold the data
+
+### R has a wide variety of structures for holding data, including scalars, vectors, arrays, data frames, and lists.
+
+
+---
+class:  middle
+
+# Data structures
+
+.pull-left[
+.font160[
+|Dimensions |Homogeneous           |Heterogeneous   |
+|:----------|:---------------------|:---------------|
+|1d         |.cyan[Vector (atomic)] |List (generic)  |
+|2d         |.cyan[Matrix] |.cyan[Data frame] |
+|nd         |Array                 |NA              |
+]
+
+#### Almost all other objects are build upon these foundations.
+
+#### `str()` to understand data structure
+]
+
+.pull-right[
+![data structure in R](figs/data_structure.png)
+]
+
+---
+
+# Vector
+
+Vector types: .cyan[logical], .cyan[double], .cyan[integer]<sup>1</sup> , .cyan[character],  complex (imaginary numbers), and raw (bytes)
+
+Go-to function for making vectors: `c()`
+
+```{r}
+(a <- c(1:3)) # equal to: a <- c(1:3); a
+(b <- c(4:6))
+(C <- c(a, b)) # don't name it as c!
+```
+
+.footnote[
+[1] `double` and `integer` are both `numeric` 
+]
+
+---
+
+# Vector
+
+.font200[
+Vectors have three common properties:
+
+- Type (what it is), `typeof()`
+- Length (how many elements), `length()`
+- Attributes (additional arbitrary metadata) `attributes()`
+]
+
+```{r}
+typeof(a)
+length(a)
+attributes(a)
+```
+
+---
+
+# Vector
+
+.pull-left[
+```{r}
+(v_dbl = c(1, 3.1))
+(v_int = c(0L:3L)) # colon operator
+(v_log = c(TRUE, FALSE)) # T, F
+(v_chr = c("a", "word"))
+```
+]
+
+--
+
+.pull-right[
+```{r}
+typeof(v_dbl)
+is.double(v_dbl)
+is.numeric(v_int)
+is.integer(v_int)
+is.atomic(v_log)
+```
+]
+
+---
+
+# Vector subset
+
+```{r}
+# get the second element 
+v_int[2]
+# get the 2nd and 4th elements
+v_int[c(2, 4)]
+# get the 2nd, 3rd, and 4th elements
+v_int[2:4]
+```
+
+---
+
+# Coercion
+
+Vector only allow **one** type of elements; so when mix different types of elements, they will be coerced to the most flexible type (**least to most flexible: logical, integer, double, character**)
+
+.pull-left[
+```{r}
+c(v_log, v_int)
+c(v_log, v_chr)
+c(v_dbl, v_int)
+c(v_dbl, v_chr)
+```
+]
+
+.pull-right[
+```{r}
+typeof(c(v_log, v_int))
+typeof(c(v_log, v_chr))
+typeof(c(v_dbl, v_int))
+typeof(c(v_dbl, v_chr))
+```
+]
+
+---
+
+# Coercion and math functions
+
+### Coercion often happens automatically
+
+```{r}
+v_log2 = c(TRUE, FALSE, TRUE, TRUE, FALSE)
+sum(v_log2)
+mean(v_log2)
+```
+
+
+---
+
+## Coercion on purpose
+
+```{r}
+as.integer(v_log2)
+as.character(v_dbl)
+as.logical(v_int)
+as.numeric(v_log2)
+as.numeric(v_chr)
+```
+
+
+
+
