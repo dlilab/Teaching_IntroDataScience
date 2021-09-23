@@ -39,7 +39,7 @@ td, th {
 | Sep 14  | Introduction to GitHub                                  | <a href="../lectures/05_github/presentation.html" target="_blank">📙</a>      |     |         |
 | Sep 16  | RStudio project and dynamic documents with R Markdown   | <a href="../lectures/06_rmd/presentation.html" target="_blank">📙</a>      |  <a href="../assignments/#homework-1" target="_blank">01</a>   |   <a href="https://bookdown.org/yihui/rmarkdown/basics.html" target="_blank">Xie et al, Chapter 2</a> |
 | Sep 21 | The file system and basic unix shell                    | <a href="../lectures/07_bash/presentation.html" target="_blank">📙</a>      |   | <a href="http://computingskillsforbiologists.com/wp-content/uploads/2018/12/ComputingSkillsforBiologists_Chapter1.pdf" target="_blank">Allesina & Wilmes, Chapter 1</a>    |
-| Sep 23 | R basics: data types, vectors, matrix, data frame, etc. |       |     |         |
+| Sep 23 | R basics: data types, vectors, matrix, data frame, etc. |  <a href="../lectures/08_r_basic/presentation.html" target="_blank">📙</a>   |     |         |
 | Sep 28 | More R basics: lists, dates, etc.                       |       |     |         |
 | Sep 30 | R programming basics: conditional statements            |       | <a href="../assignments/#homework-2" target="_blank">02</a>  |         |
 | Oct 5  | R programming basics: loops, apply                      |       |     |         |
