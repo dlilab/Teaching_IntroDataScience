@@ -1,0 +1,471 @@
+---
+title: "R Basics"
+subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
+author: "Daijiang Li"
+institute: "LSU"
+date: "2021/09/23"
+output:
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "../style.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.align='center', out.width = '95%')
+```
+
+# Data types
+
+### The first step in any data analysis is to choose the structure and to create a dataset to hold the data
+
+### R has a wide variety of structures for holding data, including scalars, vectors, arrays, data frames, and lists.
+
+
+---
+class:  middle
+
+# Data structures
+
+.pull-left[
+.font160[
+|Dimensions |Homogeneous           |Heterogeneous   |
+|:----------|:---------------------|:---------------|
+|1d         |.cyan[Vector (atomic)] |List (generic)  |
+|2d         |.cyan[Matrix] |.cyan[Data frame] |
+|nd         |Array                 |NA              |
+]
+
+#### Almost all other objects are build upon these foundations.
+
+#### `str()` to understand data structure
+]
+
+.pull-right[
+![data structure in R](figs/data_structure.png)
+]
+
+---
+
+# Vector
+
+Vector types: .cyan[logical], .cyan[double], .cyan[integer]<sup>1</sup> , .cyan[character],  complex (imaginary numbers), and raw (bytes)
+
+Go-to function for making vectors: `c()`
+
+```{r}
+(a <- c(1:3)) # equal to: a <- c(1:3); a
+(b <- c(4:6))
+(C <- c(a, b)) # don't name it as c!
+```
+
+.footnote[
+[1] `double` and `integer` are both `numeric` 
+]
+
+---
+
+# Vector
+
+.font200[
+Vectors have three common properties:
+
+- Type (what it is), `typeof()`
+- Length (how many elements), `length()`
+- Attributes (additional arbitrary metadata) `attributes()`
+]
+
+```{r}
+typeof(a)
+length(a)
+attributes(a)
+```
+
+---
+
+# Vector
+
+.pull-left[
+```{r}
+(v_dbl = c(1, 3.1))
+(v_int = c(0L:3L)) # colon operator
+(v_log = c(TRUE, FALSE)) # T, F
+(v_chr = c("a", "word"))
+```
+]
+
+--
+
+.pull-right[
+```{r}
+typeof(v_dbl)
+is.double(v_dbl)
+is.numeric(v_int)
+is.integer(v_int)
+is.atomic(v_log)
+```
+]
+
+---
+
+# Coercion
+
+Vector only allow **one** type of elements; so when mix different types of elements, they will be coerced to the most flexible type (**least to most flexible: logical, integer, double, character**)
+
+.pull-left[
+```{r}
+c(v_log, v_int)
+c(v_log, v_chr)
+c(v_dbl, v_int)
+c(v_dbl, v_chr)
+```
+]
+
+.pull-right[
+```{r}
+typeof(c(v_log, v_int))
+typeof(c(v_log, v_chr))
+typeof(c(v_dbl, v_int))
+typeof(c(v_dbl, v_chr))
+```
+]
+
+---
+
+# Coercion and math functions
+
+### Coercion often happens automatically
+
+```{r}
+v_log2 = c(TRUE, FALSE, TRUE, TRUE, FALSE)
+sum(v_log2)
+mean(v_log2)
+```
+
+---
+class: inverse, middle
+
+## How do you get the number of positive values in the vector below using the coercion example in the previous slide?
+
+```{r}
+v_norm = rnorm(n = 1000, mean = 0, sd = 2)
+head(v_norm, n = 10)
+```
+
+???
+
+take a minute to discuss with others
+
+---
+
+## Coercion on purpose
+
+```{r}
+as.integer(v_log2)
+as.character(v_dbl)
+as.logical(v_int)
+as.numeric(v_log2)
+as.numeric(v_chr)
+```
+
+---
+
+# Vector names
+
+.pull-left[
+### Three ways to add names
+
+```{r}
+(v1 = c(a = 1, b = 2)) # 1
+v2 = 1:2
+names(v2) = c("a", "b") # 2
+v2
+setNames(1:2, c("a", "b")) # 3
+```
+]
+
+--
+
+.pull-right[
+### Remove names
+```{r}
+unname(v1)
+names(v2) = NULL
+v2
+```
+]
+
+---
+
+# Lists
+
+### Lists are different from atomic vectors above because their elements can be of any type, including lists (thus they are **recursive** vectors)
+
+```{r}
+x = list(1:3, "a", c(TRUE, FALSE), list(2:1, "b"))
+str(x)
+is.recursive(x)
+```
+
+---
+
+# Lists
+
+.pull-left[
+```{r}
+l1 = list(list(1, 2), c(3, 4))
+str(l1)
+```
+]
+
+.pull-right[
+```{r}
+l2 = c(list(1, 2), c(3, 4))
+str(l2)
+```
+]
+
+--
+
+```{r}
+typeof(l1)
+unlist(l1) # back to atomic vector
+```
+
+
+---
+
+# List names
+
+```{r}
+names(l2)
+names(l2) = c("name_1", "name_2")
+str(l2)
+l3 = list(lst_a = c(1:5), lst_b = letters[1:3], LETTERS[1:3])
+str(l3)
+names(l3)
+```
+
+---
+layout: true
+
+# Matrix
+
+---
+
+.pull-left[
+```{r}
+matrix(data = 0, 
+       nrow = 3, ncol = 3)
+matrix(data = 1:9, 
+       nrow = 3, ncol = 3)
+```
+]
+
+--
+
+.pull-right[
+```{r}
+matrix(data = letters[1:9], 
+       nrow = 3, ncol = 3)
+matrix(data = LETTERS[1:9], 
+       nrow = 3, ncol = 3)
+```
+]
+
+
+---
+
+```{r}
+mat_a <- matrix(data = 1:9, nrow = 3, ncol = 3,
+                {{ byrow = TRUE }}
+                )
+mat_a
+rownames(mat_a) <- c("row1", "row2", "row3")
+colnames(mat_a) <- c("col1", "col2", "col3")
+mat_a
+```
+
+---
+
+### Coercion
+
+```{r}
+mat_b <- mat_a
+mat_b[9] = "n9"
+mat_b
+class(mat_b)
+typeof(mat_b)
+```
+
+???
+
+matrix also has type conversion
+
+
+---
+
+.pull-left[
+```{r}
+upper.tri(mat_a, diag = FALSE)
+
+mat_a
+```
+]
+
+.pull-right[
+```{r}
+(idx = lower.tri(mat_a, 
+                 diag = TRUE))
+
+mat_a[idx]
+
+```
+]
+
+---
+layout: false
+
+# Arrays
+
+.pull-left[
+```{r}
+a = array(data = 1:12, 
+          dim = c(2, 3, 2))
+a
+```
+]
+
+.pull-right[
+```{r}
+length(a)
+dim(a)
+str(a)
+class(a)
+typeof(a)
+```
+]
+
+---
+
+# Arrays: dimension names
+
+.pull-left[
+```{r}
+dimnames(a) = list(c("R1", "R2"), 
+                   c("C1", "C2", "C3"), 
+                   c("A", "B"))
+a
+```
+]
+
+--
+
+.pull-right[
+```{r}
+a2 = array(data = 1:12, 
+          dim = c(2, 3, 2),
+          dimnames = 
+            list(c("R1", "R2"), 
+                   c("C1", "C2", "C3"), 
+                   c("A", "B")))
+a2
+```
+]
+
+---
+class: inverse, middle
+
+# How the three objects below are different from vector 1:5?
+
+```{r}
+x1 = array(1:5, c(1, 1, 5))
+x2 = array(1:5, c(1, 5, 1))
+x3 = array(1:5, c(5, 1, 1))
+```
+
+---
+
+# Data frames
+
+### A data frame is more general than a matrix in that different columns can be different modes of data; **it will be the most common data structure we'll deal with in R**.
+
+.pull-left[
+```{r}
+d = data.frame(v_dbl, v_log, v_chr)
+d
+```
+]
+
+.pull-right[
+```{r}
+str(d)
+length(d)
+```
+]
+
+---
+
+# Data frames
+
+### A data frame is just **a list of equal-length vectors**; therefore it shares properties of both matrix and list
+
+.pull-left[
+```{r}
+d
+# a list of equal length vector
+typeof(d) 
+class(d)
+is.data.frame(d)
+```
+]
+
+.pull-right[
+```{r}
+names(d)
+colnames(d)
+rownames(d)
+```
+]
+
+---
+
+# as.data.frame()
+
+```{r}
+as.data.frame(c(1:2))
+as.data.frame(mat_a)
+as.data.frame(l2)
+```
+
+
+---
+
+# Combine data frames
+
+.pull-left[
+### stack data frames
+
+```{r}
+d_row = data.frame(1, 2, "3")
+names(d_row) = names(d)
+rbind(d, d_row)
+dplyr::bind_rows(d, d_row)
+```
+]
+
+.pull-right[
+### data frames side by side
+
+```{r}
+d_col = data.frame(x1 = 1:2)
+cbind(d, d_col)
+dplyr::bind_cols(d, d_col)
+```
+]
+
