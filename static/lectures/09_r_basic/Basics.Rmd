@@ -218,7 +218,7 @@ x_l$B
 x = list(1:3, "a", 4:6)
 ```
 
-```{r out.width='40%'}
+```{r out.width='60%', echo=FALSE}
 knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/1f648d451974f0ed313347b78ba653891cf59b21/8185b/diagrams/subsetting/train.png")
 knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/aea9600956ff6fbbc29d8bd49124cca46c5cb95c/28eaa/diagrams/subsetting/train-single.png")
 knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/ef5798a60926462b9fc080afb0145977eca70b83/039f5/diagrams/subsetting/train-multiple.png")
@@ -320,7 +320,10 @@ str(df[3, 3, drop = FALSE])
 The default `drop = TRUE` behaviour is a common source of bugs in functions; try to use `drop = FALSE` when subsetting a 2-D object. Or try the `tibble` package, which uses `tibble` class to represent data frame and will always use `drop = FALSE`.
 
 
-# S4 object and `@` and `slot()`
+## S4 object and `@` and `slot()`
 
 For S4 objects, we can use two operators to subset: `@` (equivalent to `$`) and `slot()` (equivalent to `[[`). We won't talk more about it in this course.
 
+# Reference
+
+Most of this lecture's materials is from [Advanced R](https://adv-r.hadley.nz/subsetting.html)
