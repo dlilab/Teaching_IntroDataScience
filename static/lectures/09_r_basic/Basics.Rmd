@@ -1,0 +1,326 @@
+---
+title: "R basics"
+author: "Daijiang Li"
+date: "9/28/2021"
+output: 
+  html_document: 
+    toc: yes
+    highlight: zenburn
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In today's lecture, we will continue to talk about R basics. Specifically, we will cover missing values, factors, date times, and subsetting.
+
+# Missing values `NA`
+
+In R, missing values are represented with `NA` (not applicable). One main feature of `NA` is that it is infectious: **most computations involving a missing value will return another missing value.**
+
+```{r}
+NA * 10
+NA + 5
+```
+
+**Exceptions exist when some identity holds for all possible inputs**
+
+```{r}
+NA ^ 0
+TRUE | NA
+FALSE & NA
+```
+
+Because of these propagation, we need to be very careful when dealing with values including `NA`. For example
+
+```{r}
+v_na = c(1, 2, 3, NA)
+mean(v_na)
+mean(v_na, na.rm = TRUE) # most math function has `na.rm` option
+v_na == NA
+is.na(v_na)
+```
+
+Four types of missing values: `NA` (logical), `NA_integer_` (integer), `NA_real_` (double), and `NA_character_` (character). But in most cases, we don't need to worry about it because `NA` will be automatically coerced to the correct type.
+
+# S3 objects
+
+An S3 object is a base type with at least a `class` attribute. A generic function can do different things to different S3 objects. An example is the `str()` function, it returns different outputs when the inputs are different (e.g., a vector vs. a data.frame)
+
+```{r out.width='50%', echo=FALSE}
+knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/baa19d0ebf9b97949a7ad259b29a1c4ae031c8e2/8e9b8/diagrams/vectors/summary-tree-s3-1.png")
+```
+
+## Factor
+
+A factor is a vector that can contain only predefined values. This is normalyl used to store categorical data (e.g., spring, summer, fall, winter). A factor is an integer vector with two attributes: a `class` (factor) that makes it behave differently from an integer vector, and a `levels` that defines allowed values.
+
+```{r}
+v_f = factor(v_seasons <- c("spring", "summer", "fall", "winter"))
+v_f
+typeof(v_f)
+attributes(v_f)
+
+v_f2 = factor(c("spring", "fall"), levels = v_seasons)
+v_f2
+table(v_f2) # it will count all levels
+
+v_f3 = ordered(c("spring", "winter", "fall"), levels = v_seasons)
+v_f3
+```
+
+**Note: factors are build on integer vectors, even though they look like characters**. So it is usually best to convert factors to character vectors if you need to deal with strings.
+
+
+```{r}
+as.integer(v_f)
+as.integer(v_f3)
+as.character(v_f)
+```
+
+## Dates
+
+Date vectors are built on top of double vectors, with a `Date` class. 
+
+```{r}
+today <- Sys.Date()
+typeof(today)
+attributes(today)
+```
+
+The value represents the number of days since 1970-01-01.
+
+```{r}
+(date <- as.Date("1970-01-02"))
+unclass(date)
+```
+
+## Date-times
+
+Date-time information is saved in base R as two ways: POSIXct and POSIXlt. “POSIX” is short for Portable Operating System Interface, which is a family of cross-platform standards. “ct” stands for calendar time, and “lt” for local time.
+
+POSIXct vectors are built on top of double vectors, where the value represents the number of seconds since 1970-01-01.
+
+```{r}
+now_ct <- as.POSIXct("2021-09-28 09:20", tz = "US/Central")
+now_ct
+typeof(now_ct)
+attributes(now_ct)
+unclass(now_ct)
+structure(now_ct, tzone = "Asia/Shanghai")
+```
+
+**[The R package `lubridate` can make dealing with most date-time data easy.](https://lubridate.tidyverse.org/))** Make sure to install it and check it out.
+
+
+# Subsetting
+
+Till now, we have covered most data structures (`str()`) in R. Now we are moving on to learn how to access specified elements of each common data structures.
+
+- Six ways to subset atomic vectors
+- Three subsetting operators: `[`, `[[`, and `$`; they interact differently with different vector types
+- Subsetting can be combined with assignment, making it powerful to edit data
+
+## Atomic vectors
+
+We can use `[` to select any number of elements from a vector. There are six ways to do so.
+
+### Positive integers
+
+```{r}
+x = c(1, 2, 3, 4, 5)
+```
+
+```{r}
+x[c(1, 5)]
+# Duplicate indices will duplicate values
+x[c(1, 1)]
+# Real numbers are silently truncated to integers
+x[c(2.1, 3.9)]
+```
+
+### Negative integers _exclude_ elements at the specified positions
+
+```{r}
+x[-c(3, 1)]
+x[c(-1, -3)]
+```
+
+
+```{r eval=FALSE}
+x[c(-1, 3)]
+# Error in x[c(-1, 3)] : only 0's may be mixed with negative subscripts
+```
+
+### Logical vectors select elements where the corresponding logical value is `TRUE`.
+
+```{r}
+x[c(TRUE, FALSE, TRUE, FALSE, TRUE)]
+x[c(TRUE, FALSE)] # recycle
+# NA in, NA out
+x[c(TRUE, FALSE, TRUE, NA, TRUE)]
+x[c(TRUE, NA)] 
+x[x %% 2 != 0]
+```
+
+### Nothing returns the original vector
+
+```{r}
+x[]
+```
+
+### Zero returns a zero-length vector
+
+```{r}
+x[0]
+```
+
+### Character vector if the vector is named
+
+```{r}
+names(x) = letters[1:5]
+x
+x[c("c", "a", "b")]
+x[c("a", "a", "a")]
+```
+
+```{r eval=FALSE}
+x[factor("b")] # get what??
+x[factor("e")] # get what??
+```
+
+## Lists
+
+Use `[` to select elements of a list will always return results as a list. `[[` and `$` will extract the elements of a list. `[[` is used for extracting single items, while `x$y` is a useful shorthand for `x[["y"]]`.
+
+```{r}
+x_l = list(c(1:5), letters[1:3], c(TRUE, FALSE))
+x_l[c(1, 3)]
+x_l[2]
+
+x_l[[2]]
+x_l[[c(2, 3)]]
+```
+
+When a list is named, we can use `$`.
+
+```{r}
+names(x_l) = c("A", "B", "C")
+x_l
+x_l[["B"]]
+x_l$B
+```
+
+>If list `x` is a train carrying objects, then `x[[5]]` is the object in car 5; `x[4:6]` is a train of cars 4-6.
+>               — @RLangTip, https://twitter.com/RLangTip/status/268375867468681216
+
+```{r eval=FALSE}
+x = list(1:3, "a", 4:6)
+```
+
+```{r out.width='40%'}
+knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/1f648d451974f0ed313347b78ba653891cf59b21/8185b/diagrams/subsetting/train.png")
+knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/aea9600956ff6fbbc29d8bd49124cca46c5cb95c/28eaa/diagrams/subsetting/train-single.png")
+knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/ef5798a60926462b9fc080afb0145977eca70b83/039f5/diagrams/subsetting/train-multiple.png")
+
+```
+
+
+
+## Matrix and arrary
+
+
+You can subset higher-dimensional structures in three ways:
+
+- With multiple vectors.
+- With a single vector.
+- With a matrix.
+
+The most common way of subsetting matrices (2D) and arrays (>2D) is a simple generalisation of 1D subsetting: **supply a 1D index for each dimension, separated by a comma**. 
+
+Blank subsetting is now useful because it lets you keep all rows or all columns.
+
+
+```{r}
+a <- matrix(1:9, nrow = 3)
+colnames(a) <- c("col_1", "col_2", "col_3")
+rownames(a) <- c("row_1", "row_2", "row_3")
+a
+a[1:2, ]
+a[c(TRUE, FALSE, TRUE), c("col_3", "col_1")]
+a[0, -2]
+```
+
+By default, `[` will simplify results to the lowest possible dimensionality. For example, if we only select a row or a column of a matrix, then the results will be a vector instead of a matrix.
+
+```{r}
+a[1,]
+class(a[1,])
+class(a)
+a[1, , drop = FALSE]
+class(a[1, , drop = FALSE])
+a[2, 2]
+a[2, 2, drop = FALSE]
+```
+
+Because both matrices and arrays are just vectors with special attributes, you can **subset them with a single vector**, as if they were a 1D vector.
+
+```{r}
+a[]
+a[c(1, 5, 9)]
+a[a %% 2 == 0]
+a2 = a
+a2[a2 %% 2 == 0] = -1
+a2
+```
+
+It is also possible to **subset with a matrix**. Each row in the matrix specifies the location of one value, with each column corresponds to a dimension in the matrix or array.
+
+```{r}
+select_mat <- matrix(ncol = 2, byrow = TRUE, c(
+  1, 1,
+  2, 2,
+  3, 3
+))
+select_mat
+a[select_mat]
+
+a
+upper.tri(a)
+a[upper.tri(a)]
+```
+
+## Data frame
+
+Recall that data frame has properties of both list and matrix. So when subset a data frame with one vector, it will act as a list and return the elements (columns) of the list.
+
+```{r}
+(df = data.frame(x = 1:5, y = rnorm(5), z = letters[1:5]))
+df[c(1, 3)]
+df[c("x", "z")]
+```
+
+When subset with two indices, it will act as a matrix.
+
+```{r}
+df[1:2, 2:3]
+df[1:3,]
+df[, 1:2]
+df[df$x == 3,]
+df[df$x %% 2 == 0,]
+df[df$x %% 2 == 0 | df$x == 3,]
+df[3,]
+str(df[3,])
+df[3, 3]
+str(df[3, 3])
+df[3, 3, drop = FALSE]
+str(df[3, 3, drop = FALSE])
+```
+
+The default `drop = TRUE` behaviour is a common source of bugs in functions; try to use `drop = FALSE` when subsetting a 2-D object. Or try the `tibble` package, which uses `tibble` class to represent data frame and will always use `drop = FALSE`.
+
+
+# S4 object and `@` and `slot()`
+
+For S4 objects, we can use two operators to subset: `@` (equivalent to `$`) and `slot()` (equivalent to `[[`). We won't talk more about it in this course.
+
