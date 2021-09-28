@@ -67,6 +67,8 @@ table(v_f2) # it will count all levels
 
 v_f3 = ordered(c("spring", "winter", "fall"), levels = v_seasons)
 v_f3
+v_f3[4] = "weather" # only predefined values allowed
+v_f3
 ```
 
 **Note: factors are build on integer vectors, even though they look like characters**. So it is usually best to convert factors to character vectors if you need to deal with strings.
@@ -160,7 +162,7 @@ x[c(TRUE, FALSE)] # recycle
 # NA in, NA out
 x[c(TRUE, FALSE, TRUE, NA, TRUE)]
 x[c(TRUE, NA)] 
-x[x %% 2 != 0]
+x[x %% 2 != 0] # Modulus (x mod 2)
 ```
 
 ### Nothing returns the original vector
