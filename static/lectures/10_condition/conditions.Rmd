@@ -1,0 +1,53 @@
+---
+title: "if...else..."
+author: "Daijiang Li"
+date: "9/30/2021"
+output: 
+  html_document: 
+    toc: yes
+    highlight: zenburn
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Control flow
+
+Sometimes, we only want to execute some statements if certain conditions are met; sometimes, we want to execute some statement repetitively for each elements of a dataset or until certain conditions/values reached. This is where control-flow constructs come in. In this week's lectures, we will largely focus on this topic.
+
+For the syntax examples throughout this lecture, keep the following in mind:
+
+- *statement* is a single R statement or a compound statement (a group of R statements enclosed in curly braces `{ }` and separated by semicolons).
+- `cond` is an expression that resolves to `TRUE` or `FALSE`.
+- `expr` is a statement that evaluates to a number or character string.
+- `seq` is a sequence of numbers or character strings.
+
+## Conditional execution
+
+In conditional execution, a statement or statements are only executed if a specified condition is met. These constructs include `if-else`, `ifelse`, and `switch`.
+
+Before we talk about these functions, it is necessary to talk about R's logical operators.
+
+|   Operator |             Description |
+| ---------: | ----------------------: |
+|        `<` |               less than |
+|       `<=` |   less than or equal to |
+|        `>` |             larger than |
+|       `>=` | larger than or equal to |
+|       `==` |        exactly equal to |
+|        `!` |             opposite of |
+|       `!=` |            not equal to |
+|        `|` |                      or |
+|        `&` |                     and |
+|     `%in%` |                      in |
+| `isTRUE()` |             is it true? |
+
+[**Surprise surprise!**](https://stackoverflow.com/questions/9508518/why-are-these-numbers-not-equal)
+
+```{r eval=FALSE}
+i = 0.1
+i = i + 0.05
+i == 0.15 # ? what do you say?
+```
+
