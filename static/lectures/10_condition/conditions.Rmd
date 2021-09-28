@@ -5,7 +5,7 @@ date: "9/30/2021"
 output: 
   html_document: 
     toc: yes
-    highlight: zenburn
+    highlight: kate
 ---
 
 ```{r setup, include=FALSE}
@@ -50,4 +50,121 @@ i = 0.1
 i = i + 0.05
 i == 0.15 # ? what do you say?
 ```
+
+# `if ... else ...`
+
+How does an if else statement work in R?
+
+- Two steps: evaluation and execution (which are not necessarily repeated)
+- Two outcomes in evaluation
+    - Condition satisfied (i.e., outcome is TRUE) -> execute commands of "if"
+    - Condition not satisfied (i.e., outcome is FALSE) -> execute commands of "else" (if any)
+- if else statements can be nested
+
+
+```{r eval=FALSE}
+# General form
+if(cond){
+  statement for TRUE
+}
+
+# else is optional
+if(cond){
+  statement for TRUE
+} else {
+  statement for FALSE
+} 
+# bracket can be ignored too; 
+# but I find it is easy to read with it
+
+if(cond){
+  statement for TRUE
+} else {
+  another if ... else ...
+} 
+```
+
+```{r}
+a <- 4
+if (a %% 2 == 0) {
+  b1 <- a * -1
+}
+a
+b1
+```
+
+```{r}
+a <- 5
+if (a %% 2 == 0) {
+  b <- a * -1
+} else {
+  b <- a ^ 2
+}
+b
+```
+
+```{r}
+# nested if else
+a <- 0.33
+if (a %% 2 == 0) {
+  b <- a * -1
+} else {
+  if (a %% 2 == 1) {
+    b <- a ^ 2
+  } else {
+    b <- a * 10
+  }
+}
+b
+```
+
+Why use if else statement?
+
+- Useful for situations with multiple scenarios
+- Define your own categories
+- Case-by-case manipulation of data
+
+```{r}
+# Define your own categories
+small <- 1:5
+medium <- 6:10
+large <- 11:15
+
+a <- 2
+if (a %in% small) {
+  b <- 'Small number'
+} else if (a %in% medium) {
+  b <- 'Medium Number'
+} else if (a %in% large) {
+  b <- 'Large number'
+} else {
+  b <- 'Number out of range'
+}
+b
+
+a <- 12
+if (a %in% small) {
+  b <- 'Small number'
+} else {
+  if (a %in% medium) {
+    b <- 'Medium Number'
+  } else {
+    if (a %in% large) {
+      b <- 'Large number'
+    } else {
+      b <- 'Number out of range'
+    }
+  }
+} 
+b
+```
+
+So if else is useful to work with one value/situation/condition/evaluation at each time.  What if we have multiple values/cases need to evaluate? 
+
+- `ifelse()`
+- combine with loops such as `for()` (next lecture)
+
+# `ifelse()`
+
+
 
