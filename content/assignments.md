@@ -46,3 +46,7 @@ This homework will be due at **September 23th, 9am**.
     | Low_intermediate  | 16 <= mpg < 21 |
     | Intermediate_high | 21 <= mpg < 26 |
     | High              | 26 <= mpg      |
+
+This homework will be due at **October 7th, 9am**.
+
+
