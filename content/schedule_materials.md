@@ -44,15 +44,13 @@ td, th {
 | Sep 30 | R programming basics: conditional statements            |   <a href="../lectures/10_condition/conditions.html" target="_blank">📙</a>  | <a href="../assignments/#homework-2" target="_blank">02</a>  |         |
 | Oct 5  | R programming basics: loops, apply                      |       |     |         |
 | Oct 7  | Strings and Regular expressions                         |       | <a href="../assignments/#homework-3" target="_blank">03</a>  |         |
-| Oct 9  | API and data scraping   (make up for August 31)                                 |       |     |         |
-| Oct 12  | Data input and output in R                              |       | <a href="../assignments/#homework-4" target="_blank">04</a>  |         |
-| Oct 14 | Data manipulation with R                                |       |     |         |
-| Oct 19 | More data manipulation with R                           |       |  <a href="../assignments/#homework-5" target="_blank">05</a>  |         |
-| Oct 21 | Data visualization with R (make up for Sept 2, virtual)                               |       |     |         |
+| Oct 12  | API and data scraping                              |       |   |         |
+| Oct 14 | Data input, output, manipulation with R             |       |   |         |
+| Oct 19 | More data manipulation with R                           |       | <a href="../assignments/#homework-4" target="_blank">04</a>  |         |
 | Oct 26 | Data visualization with R                               |       |     |         |
-| Oct 28 | Spatial data visualization                              |       |  <a href="../assignments/#homework-6" target="_blank">06</a>  |         |
+| Oct 28 | Spatial data visualization                              |       |  <a href="../assignments/#homework-5" target="_blank">05</a>  |         |
 | Nov 2  | Exploratory data analysis                               |       |     |         |
-| Nov 4  | Regression methods                                      |       |     |         |
+| Nov 4  | Regression methods                                      |       | <a href="../assignments/#homework-6" target="_blank">06</a>   |         |
 | Nov 9  | More on Regression methods                              |       |     |         |
 | Nov 11 | Write your own functions                                |       |  <a href="../assignments/#homework-7" target="_blank">07</a>  |         |
 | Nov 16 | Write your own R package                                |       |     |         |
