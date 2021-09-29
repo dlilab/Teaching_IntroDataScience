@@ -166,5 +166,205 @@ So if else is useful to work with one value/situation/condition/evaluation at ea
 
 # `ifelse()`
 
+`ifelse()` is a compact and vectorized version of the if-else construct. The syntax is:
 
+```{r eval=FALSE}
+ifelse(cond, statement for TRUE, statement for FALSE)
+```
+
+### Problem to solve
+
+Suppose that we have a vector `vec_a` with 5 elements:
+
+```{r}
+vec_a <- c(3, 2, -5, 7, 0)
+```
+
+Now we want to take square root for *positive and zero* values while leave negative values alone. How can we do this?
+
+We may do the following things step by step for **each element**:
+
+1. Is it non-negative?
+2. If yes, take the square root (recall the functions from last class).
+3. If no, return the original value.
+
+#### Solution 1: combine if else with for()
+
+We will talk more about loops in the next lecture.
+
+
+```{r}
+vec_a2 <- vector(mode = "numeric", length = length(vec_a)) # to hold results
+for (i in 1:length(vec_a)){
+  if (vec_a[i] >= 0){
+    vec_a2[i] = sqrt(vec_a[i])
+  } else {
+    vec_a2[i] = vec_a[i]
+  }
+} 
+vec_a2
+```
+
+|           Pros |                                                                                                  Cons |
+| -------------: | ----------------------------------------------------------------------------------------------------: |
+|      Intuitive |   Multiple steps of coding: reate vector to hold results, then the 3-steps procedure for each element |
+| Easy to follow |                                                        Relatively slow (imagine millions of elements) |
+
+
+#### Solution 2: use `ifelse()`
+
+```{r}
+ifelse(vec_a >= 0, sqrt(vec_a), vec_a)
+vec_a2
+```
+
+
+#### Vectorization
+
+A "whole project" thinking instead of "element-wise".
+
+- In `R`, this means a function takes the whole vector as input (instead of one element each time the `if()` function takes within the `for()` loop above)
+- In `R`, vectorized functions are much faster
+- But `for` loops are still very important (see next class)
+- [More information about vectorization](http://www.noamross.net/blog/2014/4/16/vectorization-in-r--why.html)
+
+**Why warning message??**
+
+```r
+Warning message:
+In sqrt(vec_a) : NaNs produced
+```
+
+```{r}
+(vec_test <- vec_a >= 0)
+(vec_yes <- sqrt(vec_a)) # warning here
+(vec_no <- vec_a)
+ifelse(vec_test, vec_yes, vec_no) # no warning
+```
+
+- if the *i*th element of `vec_test` is `TRUE`
+- then take the *i*th element of `vec_yes`
+- otherwise, take the *i*th element of `vec_no`
+
+Now, suppose instead of return the original value if it is negative, we want to return `NA`.
+
+```{r}
+ifelse(vec_a >= 0, sqrt(vec_a), NA)
+sqrt(ifelse(vec_a >= 0, vec_a, NA)) # No warning any more
+```
+
+#### `ifelse()` works for whole matrix too
+
+```{r}
+mat_a <- matrix(data = c(1:6, -2, -5, 0), nrow = 3, ncol = 3)
+mat_a
+ifelse(mat_a > 0, sqrt(mat_a), mat_a)
+```
+
+#### More examples
+
+Suppose we have exam scores for students, and we want to assign pass (>= 60) or fail (<60) to each of them.
+
+```{r}
+set.seed(123)
+scores <- data.frame(names = letters,
+                     score = runif(n = 26, min = 30, max = 100))
+head(scores, n = 3)
+hist(scores$score)
+```
+
+How do we add another column that will indicate pass and fail?
+
+```{r}
+str(scores)
+scores$score
+(pass_fail <- ifelse(scores$score >= 60, "pass", "fail")) # recycle
+scores$status <- pass_fail
+head(scores, n = 6)
+table(scores$status)
+table(scores$score >= 60)
+```
+
+What about if we want also assign "A" (>= 85), "B" (>= 75), "C" (>= 60) to those who passed the exam?
+
+```{r}
+# nested ifelse
+vec_levels <- 
+  ifelse(scores$score < 60, "fail", 
+       ifelse(scores$score < 75, "C",
+              ifelse(scores$score < 85, "B", "A")))
+vec_score <- scores$score # to make it easier to check
+names(vec_score) <- vec_levels # in pratice, you should make it as a new column
+vec_score
+
+dplyr::case_when(
+  scores$score < 60 ~ "fail",
+  scores$score < 75 ~ "C",
+  scores$score < 85 ~ "B",
+  TRUE ~ "A"
+)
+```
+
+If needed, you can also assign "D" (e.g. >= 50, < 60), "E" (< 50) to those who failed by replacing `"fail"` with another `ifelse()`.
+
+```{r fig.width = 6, fig.asp=1, out.height=400, fig.align='center'}
+# "A" (>= 85), "B" (>= 75), "C" (>= 60)
+boxplot(vec_score ~ vec_levels)
+abline(h = c(60, 75, 85), lty = 2)
+```
+
+**Be careful when use `ifelse()` with Dates and factors**
+
+```{r}
+(vec_x <- factor(c("b", "a", "d", "e")))
+(vec_y <- ifelse(vec_x == "a", vec_x, NA))
+as.numeric(vec_x)
+vec_x2 <- as.character(vec_x) # convert first
+ifelse(vec_x2 == "a", vec_x2, NA)
+```
+
+See `?ifelse` for example of Dates
+
+- The results of `ifelse()` have the same length as the input `test`, but attributes may not been preserved
+- Values are selected from `vec_yes` and `vec_no`
+- If `vec_yes` and `vec_no` are too short, they are recycled
+- `NA` in the input give `NA` in the output
+
+## `if else ` vs `ifelse()`
+
+`if(test) yes else no` is much more efficient and often much preferable to `ifelse(test, yes, no)` whenever `test` is a simple true/false result, i.e., when `length(test) == 1`.
+
+
+# `switch()`
+
+`switch` chooses statements based on the value of an expression. The syntax is `switch(expr, ...)` where `...` represents statements tied to the possible outcome values of `expr`. It’s easiest to understand how switch works by looking at the example in the following listing.
+
+```{r}
+feelings <- c("sad", "afraid")
+for (i in feelings){
+  print(
+    switch(i,
+           happy  = "I am glad you are happy",
+           afraid = "There is nothing to fear",
+           sad    = "Cheer up",
+           angry  = "Calm down now"
+    ) 
+  )
+}
+```
+
+`switch` can be very useful when write our own functions to deal with different scenarios. 
+
+```{r}
+mydate <- function(type="long") {
+  switch(type,
+         long =  format(Sys.time(), "%A %B %d %Y"),
+         short = format(Sys.time(), "%m-%d-%y"),
+         cat(type, "is not a recognized type\n")
+  ) 
+}
+mydate("long")
+mydate("short")
+mydate("medium")
+```
 

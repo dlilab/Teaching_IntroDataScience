@@ -20,22 +20,29 @@ This homework will be due at **September 23th, 9am**.
 
 ## Homework 2
 
-1. Fix each of the following common data frame subsetting errors:
+1. (2 points) Fix each of the following common data frame subsetting errors:
    ```r
    mtcars[mtcars$cyl < 6]
    mtcars[-1:3,]
    mtcars[mtcars$cyl = 8, ]
    mtcars[mtcars$cyl == 4 | 6, ]
    ```
-2. Why does the following code generated five missing values?
+2. (1 point) Why does the following code generated five missing values?
    ```r
    x = 1:5
    x[NA]
    ```
-3. Why does `mtcars[1:15]` return an error? How does it differ from `mtcars[1:15, ]`?
-4. Explain how does the following code work.
+3. (2 points) Why does `mtcars[1:15]` return an error? How does it differ from `mtcars[1:15, ]`?
+4. (2 points) Explain how does the following code work.
    ```r
    x = matrix(c(1:3, NA, 5:7, NA, NA), nrow = 3)
    x[is.na(x)] = 0
    ```
-5. To be added.
+5. (3 points) Load the Car Road Tests dataset (in R, run `data("mtcars")`, `?mtcars`), then add a new column named as `mpg_2` for the `mtcars` data frame. You can use `if ... else ...` or `ifelse` or any other functions that can get the job done. This new column will categorize `mpg` into four categories using the thresholds below: 
+
+    | `mpg_2` category  | Thresholds     |
+    |-------------------|----------------|
+    | Low               | mpg < 16       |
+    | Low_intermediate  | 16 <= mpg < 21 |
+    | Intermediate_high | 21 <= mpg < 26 |
+    | High              | 26 <= mpg      |
