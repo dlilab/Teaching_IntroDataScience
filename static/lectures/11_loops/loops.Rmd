@@ -1,0 +1,15 @@
+---
+title: "Loops"
+author: "Daijiang Li"
+date: "10/05/2021"
+output: 
+  html_document: 
+    toc: yes
+    highlight: kate
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
