@@ -13,3 +13,30 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+In this lecture, we will talk about loops. Loops are very powerful in terms to do some tasks repeatedly (like thousands of times). Computers are very good with doing repeated tasks, which we as human are pretty bad. Even though we present examples in R here, the logic applies to pretty much any programming language.
+
+Loops repeat two steps: evaluation and execution. For evaluation, we tell the computer to test for a specific condition, and there are two outcomes of this evaluation: condition satisfied and not satisfied. Then for each scenario, we can let the computer know what to do respectively.
+
+Three types of loops in R:
+
+- `for` loop
+- `while` loop
+- `repeat` loop
+
+# `for` loop
+
+```{r eval=FALSE}
+# syntax
+for (variable in sequence){
+  statements for each variable
+}
+```
+
+```{r}
+for (i in 1:5) {
+  print(paste(i, "^2 = ", i ^ 2, sep = ""))
+}
+```
+
+
+
