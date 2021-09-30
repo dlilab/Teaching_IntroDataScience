@@ -19,11 +19,54 @@ Loops repeat two steps: evaluation and execution. For evaluation, we tell the co
 
 Three types of loops in R:
 
-- `for` loop
-- `while` loop
-- `repeat` loop
+- `repeat` 
+- `while` 
+- `for` 
 
-# `for` loop
+# `repeat` 
+
+`repeat` is the simplest loop to repeat the same expression
+
+```{r eval=FALSE}
+repeat {expression}
+```
+
+To stop repeating the expression, you can use the keyword `break`. To skip to the
+next iteration in a loop, you can use the command `next`.
+
+```{r}
+i <- 5
+repeat {
+  if (i > 25) 
+    break 
+  else 
+    print(i); i <- i + 5
+}
+```
+
+If you do not include a `break` command, the R code will be an infinite loop.
+
+# `while`
+
+Another useful construction is `while` loops, which repeat an expression while a condition is true:
+
+```{r eval=FALSE}
+while (condition) expression
+```
+
+```{r}
+i <- 5
+while (i <= 25) { 
+  print(i) 
+  i <- i + 5
+}
+```
+
+You can also use `break` and `next` inside while loops. The `break` statement is used to stop iterating through a loop. The `next` statement skips to the next loop iteration
+without evaluating the remaining expressions in the loop body.
+
+
+# `for` 
 
 ```{r eval=FALSE}
 # syntax
@@ -32,11 +75,156 @@ for (variable in sequence){
 }
 ```
 
+**Results are not printed inside a loop unless you explicitly call the `print` function.**
+
+```{r}
+for (i in 1:5) {
+  paste(i, "^2 = ", i ^ 2, sep = "")
+}
+```
+
+Add `print`.
+
 ```{r}
 for (i in 1:5) {
   print(paste(i, "^2 = ", i ^ 2, sep = ""))
 }
 ```
+
+```{r}
+for (i in 1:5) {
+  # Concatenate and Print
+  cat(i, "^2 = ", i ^ 2, "\n", sep = "")
+}
+```
+
+```{r}
+a <- c(2, 6)
+for (i in 1:2) {
+  print(paste('i', '=', i, sep=' ')) 
+  print(paste(c('a', '=', a), collapse=' ')) 
+  cat('execution\n') 
+  a[i] <- a[i] + 10 
+  print(paste(c('a', '=', a), collapse=' ')) 
+  print(paste('i', '=', i, sep=' ')) 
+  cat('next\n\n') 
+}
+a
+a <- c(2, 6) 
+a + 10
+```
+
+**The variable `var` that is set in a for loop is changed in the calling environment.**
+
+```{r}
+b <- character(2) # to hold results
+i <- 1
+for (i in 1:2) {
+  b[i] <- toupper(a[i])
+}
+i
+b
+toupper(a)
+```
+
+```{r}
+years <- 2016:2025
+for (i in seq_along(years)) {
+  print(paste('Year', years[i], sep=' '))
+}
+paste('Year', 2016:2025, sep=' ')
+```
+
+# Applying a Function to Each Element of an Object
+
+Except loops such as `for()`, The base R packages include a set of different functions to apply a function to each element (or a subset of elements) of an object.
+
+## To apply a function to part of an array or a matrix
+
+To apply a function to parts of an array (or matrix), use the `apply` function:
+
+```{r eval=FALSE}
+apply(array, margin, FUN, ...)
+# ... are arguments to be passed to FUN
+```
+
+```{r}
+x = matrix(1:20, nrow = 5)
+x
+# for each row, find the max value
+for(i in 1:nrow(x)){
+  print(max(x[i, ]))
+}
+# apply
+apply(X = x, MARGIN = 1, FUN = max, nam.rm = TRUE)
+
+# for each column, find the max value
+for(i in 1:ncol(x)){
+  print(max(x[, i]))
+}
+# apply
+apply(X = x, MARGIN = 2, FUN = max, nam.rm = TRUE)
+```
+
+A more complicated example:
+
+```{r}
+x = array(1:27, dim = c(3, 3, 3))
+x
+apply(X = x, MARGIN = 1, FUN = paste, collapse = ", ")
+apply(X = x, MARGIN = 2, FUN = paste, collapse = ", ")
+apply(X = x, MARGIN = 3, FUN = paste, collapse = ", ")
+apply(X = x, MARGIN = c(1, 2), FUN = paste, collapse = ", ")
+```
+```{r include=FALSE, eval=FALSE}
+# for loop
+x2 = matrix(0, nrow = 3, ncol = 3)
+for(i in 1:nrow(x2)){
+  for(j in 1:ncol(x2)){
+    vv = vector(length = 3)
+    for(k in 1:3){
+      vv[k] = x[i, j, k]
+    }
+    x2[i, j] = paste(vv, collapse = ", ")
+  }
+}
+```
+
+## Apply a function to a list or vector
+
+To apply a function to each element in a vector or a list and **return a list**, you can use the function `lapply`. The function `lapply` requires two arguments: an object `X` and a function `FUN`. (You may specify additional arguments that will be passed to `FUN`.)
+
+```{r}
+x <- 1:5
+lapply(X = x, FUN = function(i) 2^i)
+
+x <- data.frame(x = 1:5, y = 6:10)
+lapply(X = x, FUN = function(i) 2^i)
+lapply(X = x, FUN = mean)
+```
+
+Sometimes, you might prefer to get a vector, matrix, or array instead of a list. To do this, use the `sapply` function. This function works exactly the same way as `lapply`,
+except that it returns a vector or matrix (when appropriate).
+
+```{r}
+sapply(X = x, FUN = function(i) 2^i)
+vapply(X = x, FUN = function(i) 2^i, FUN.VALUE = rep(1, 5))
+```
+
+
+Another related function is `mapply`, the “multivariate” version of `sapply`.
+
+```{r}
+mapply(paste, 
+       c(1, 2, 3, 4, 5),
+       c("a","b","c","d","e"),
+       c("A","B","C","D","E"),
+       MoreArgs = list(sep = "-")
+)
+```
+
+# Tidyverse
+
 
 
 
