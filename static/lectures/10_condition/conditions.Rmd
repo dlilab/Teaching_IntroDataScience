@@ -159,6 +159,18 @@ if (a %in% small) {
 b
 ```
 
+#### Defensive coding
+
+When write your own function or doing analysis, we should be very careful about potential errors / failures. It is recommended to warn / message / fail early!
+
+```{r}
+if(TRUE) warning("This is a warning")
+if(TRUE) message("This is a message")
+# if(TRUE) stop("Stoped because of ...")
+stopifnot()
+```
+
+
 So if else is useful to work with one value/situation/condition/evaluation at each time.  What if we have multiple values/cases need to evaluate? 
 
 - `ifelse()`
