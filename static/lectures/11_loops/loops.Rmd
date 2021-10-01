@@ -225,6 +225,65 @@ mapply(paste,
 
 # Tidyverse
 
+The functions mentioned above are all from base R libraries. The popular `tidyverse` packages also have functions that are similar to the apply set functions.
+
+Data frame: work with data frame row by row.
+
+```{r}
+library(dplyr)
+df <- data.frame(x = runif(6), y = runif(6), z = runif(6))
+df
+# Compute the mean of x, y, z in each row
+df %>% rowwise() %>% mutate(m = mean(c(x, y, z)))
+```
+
+Work with some columns that meet specific conditions.
+
+```{r}
+df$a = letters[1:6]
+df$b = LETTERS[1:6]
+str(df)
+# convert columns with characters to factors
+for(i in 1:ncol(df)){
+  if(is.character(df[,i])){
+    df[,i] = as.factor(df[,i])
+  }
+}
+str(df)
+
+# dplyr version to convert factors to characters back
+df = mutate(df, across(where(is.factor), as.character))
+str(df)
+```
+
+Work with vectors, lists, or multiple of them.
+
+```{r}
+purrr::map_dbl(.x = 1:5, .f = function(i) i^2)
+purrr::map_dbl(.x = 1:5, .f = ~ .x^2)
+purrr::map_chr(.x = c("a", "b", "c"), .f = function(i) toupper(i))
+purrr::map(.x = rnorm(5), function(i) i > 0)
+```
+
+Two variables.
+
+```{r}
+purrr::map2_chr(.x = c("a", "b", "c"), .y = c("A", "B", "C"), .f = paste, sep = "-")
+purrr::map2_dbl(c(1:3), c(-1:-3), .f = `+`)
+```
+
+More than two variables.
+
+```{r}
+x <- list(1, 1, 1)
+y <- list(10, 20, 30)
+z <- list(100, 200, 300)
+purrr::pmap(list(x, y, z), sum)
+# Matching arguments by position
+purrr::pmap(list(x, y, z), function(first, second, third) (first + third) * second)
+```
+
+
 
 
 
