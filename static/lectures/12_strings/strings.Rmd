@@ -1,0 +1,16 @@
+---
+title: "Strings and Regular Expression"
+author: "Daijiang Li"
+date: "10/07/2021"
+output: 
+  html_document: 
+    toc: yes
+    highlight: kate
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+In this lecture, we will talk about how to work with strings.
