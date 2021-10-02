@@ -12,5 +12,156 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+So far, we have talked about common data structures in R, how to subset them, and how to write control-flow statements to iteratively work with data. And in all these lectures, we worked with data that are already cleaned and wholesome. However, the real world data are mostly full of problems, especially character data. In this lecture, we will talk about how to work with character data (i.e., strings). In R, they are represented as vectors of class `character`.
 
-In this lecture, we will talk about how to work with strings.
+In R, character strings can be expressed with `single or double quotes`.
+
+      'a character string with single quote'
+      "a character string with double quote"
+
+
+We can insert single quotes in a string with double quotes, and vice versa. 
+
+     "The 'R' project"
+     'The "R" project'
+
+**But we cannot inset single quotes in a string with single quotes, or inset double quotes within string with double quotes.**
+
+In base R, we have functions to deal with character data, including `nchar()`, `strsplit()`, `substr()`, `paste()`, `paste0()`. We also have other packages such as `{stringr}` and `{glue}` to deal with strings.
+
+
+# Create character vector
+
+```{r}
+# empty string
+(empty_str <- "")
+class(empty_str)
+
+# empty character vector
+(empty_chr <- character(length = 0))
+class(empty_chr)
+
+# they are different
+length(empty_str)
+length(empty_chr)
+
+empty_chr[1] <- "first"
+empty_chr
+empty_chr[4] <- "fourth"
+empty_chr
+
+# is.character, as.character; we already covered them in previous lectures
+```
+
+Now let's revisit `paste()`.
+
+```{r}
+paste("The life of", pi, sep = " ")
+paste("The life of", pi, sep = "-")
+paste0("The life of-", pi)
+paste("I", "love", "R", sep = "-")
+paste("X", 1:5, sep = ".") # recycle
+paste("X", 1:5, sep = ".", collapse = "-") 
+paste("NA will be coerced", NA)
+```
+
+# Read raw text into R
+
+We can use `readLines()` to read text into R *as is*.
+
+```{r}
+top105 = readLines("http://www.textfiles.com/music/ktop100.txt")
+head(top105, n = 15)
+tail(top105, n = 10)
+```
+
+# String printing
+
+|   Function   |      Description     |
+|:------------:|:--------------------:|
+|   `print()`  | generic printing     |
+|  `noquote()` | print with no quotes |
+|    `cat()`   | concatenation        |
+|  `format()`  | special formats      |
+| `toString()` | convert to string    |
+|  `sprintf()` | printing             |
+
+The choice of function will depend on what we want to print, how we want to print it, and where we want to print it. 
+
+```{r}
+print(top105[1])
+print(top105[1], quote = FALSE)
+noquote(top105[1])
+cat(top105[1]) # similar to print
+cat(top105[1:2])
+cat(top105[1:2], sep = " + ")
+cat(month.name[1:4], sep = " --> ")
+cat(top105[1:2], sep = " + ", fill = 30) # break long strings
+# save as a text file
+# cat(top105[1:2], sep = " + ", file = "output.tex") 
+```
+
+### Encoding strings with `format()`
+
+```{r}
+format(11.7)
+format(11.7, nsmall = 3)
+format(c(5, 10.2), digits = 2)
+format(c(5, 10.2), digits = 2, nsmall = 2)
+format(pi)
+format(1234567890, big.mark = ",")
+format(c("A", "BB", "CCC"), width = 5, justify = "none")
+format(c("A", "BB", "CCC"), width = 5, justify = "left")
+format(c("A", "BB", "CCC"), width = 5, justify = "centre")
+format(c("A", "BB", "CCC"), width = 5, justify = "right")
+```
+
+# C-style string formatting with `sprintf()`
+
+```r
+sprintf(fmt, ...)
+```
+
+The argument `fmt` specifies format, and all start with `%`, followed with numbers or letters. See `?sprintf` for more examples.
+
+```{r}
+# fixed point
+sprintf("%f", pi)
+# decimal notation with 3 decimal digits
+sprintf("%.3f", pi)
+```
+
+
+# String manipulations
+
+Basic string manipulation functions
+
+| Function       | Description                      |
+|----------------|----------------------------------|
+| `nchar()`      | number of characters             |
+| `tolower()`    | convert to lower case            |
+| `toupper()`    | convert to upper case            |
+| `casefold()`   | case folding                     |
+| `chartr()`     | character translation            |
+| `abbreviate()` | abbreviation                     |
+| `substring()`  | substrings of a character vector |
+| `substr()`     | substrings of a character vector |
+
+```{r}
+nchar(c("How", "many", "characters?"))
+length(c("How", "many", "characters?")) # vs
+nchar("How many characters?") # space counts
+tolower(c("alL CAses", "BBBBD"))
+toupper(c("alL CAses", "BBBBD"))
+casefold(c("alL CAses", "BBBBD"))
+casefold(c("alL CAses", "BBBBD"), upper = TRUE)
+unname(abbreviate(top105[1:15]))
+y = c("may", "the", "force", "be", "with", "you")
+substr(y, 2, 3)
+substr(y, 2, 3) <- ":)"
+y
+```
+
+# String manipulations with `{stringr}`
+
+
