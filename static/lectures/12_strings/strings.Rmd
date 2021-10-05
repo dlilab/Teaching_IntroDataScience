@@ -164,4 +164,262 @@ y
 
 # String manipulations with `{stringr}`
 
+Even though the base functions are enough to allow us to get the job done, they are not consistent (both the arguments and behaviors) and have drawbacks. For example:
+
+```{r}
+paste("one", "word", "here", NULL, character(0))
+```
+
+In the above example, `NULL` and `character(0)` have zero length and probably should be removed. But they were converted to empty string "".
+
+In R, the [`{stringr}` package](https://stringr.tidyverse.org/) is very useful to work with strings. According to the description of the package (see https://cran.r-project.org/web/packages/stringr/index.html) stringr
+
+>A consistent, simple and easy to use set of wrappers around the fantastic 'stringi' package. All function and argument names (and positions) are consistent, all functions deal with "NA"'s and zero length vectors in the same way, and the output from one function is easy to feed into the input of another.
+
+```{r}
+# install.packages("stringr")
+# load 'stringr'
+library(stringr)
+```
+
+All functions in stringr start with "str_" followed by a term associated to the task they perform. The following table contains the stringr functions for basic string operations:
+
+| Function       | Description                             | Similar to    |
+|----------------|-----------------------------------------|---------------|
+| `str_c()`      | string concatenation                    | `paste()`     |
+| `str_length()` | number of characters                    | `nchar()`     |
+| `str_sub()`    | extracts substrings                     | `substring()` |
+| `str_dup()`    | duplicates characters                   | none          |
+| `str_trim()`   | removes leading and trailing whitespace | none          |
+| `str_pad()`    | pads a string                           | none          |
+| `str_wrap()`   | wraps a string paragraph                | `strwrap()`   |
+
+```{r}
+str_c("one", "word", "here", NULL, character(0), sep = " ")
+some_factor = factor(c(1, 1, 1, 2, 2, 2), labels = c("good", "bad"))
+some_factor
+# nchar(some_factor)
+# Error in nchar(some_factor) : 'nchar()' requires a character vector
+str_length(some_factor)
+
+str_sub("adios", 1:3)
+str_sub("adios", start = 1, end = -2)
+
+str_dup("hola", times = 3)
+str_dup(c("hola", "adios"), times = 3)
+str_dup(c("hola", "adios"), times = c(2, 5))
+
+str_pad("hola", width = 7, side = "left")
+str_pad("hola", width = 7, side = "both")
+str_pad("hola", width = 7, side = "right")
+str_pad("hola", width = 7, side = "right", pad = "&")
+
+stringr_desc = "A consistent, simple and easy to use set of wrappers around the fantastic 'stringi' package. All function and argument names (and positions) are consistent, all functions deal with NA's and zero length vectors in the same way, and the output from one function is easy to feed into the input of another."
+stringr_desc
+cat(str_wrap(stringr_desc, width = 80, indent = 3))
+cat(str_wrap(stringr_desc, width = 80, exdent = 3))
+
+# text with whitespaces
+btext = c("This example ", "has several   ", "whitespaces like this ")
+str_trim(btext)
+
+word(btext, 1)
+word(btext, 2)
+```
+
+# Regular expressions
+
+The above functions can already allow us to handle some basic tasks with strings. However, if we really want to unleash the power of strings manipulation, we need to leanr _regular exoressions_ (aka **regex**). 
+
+**A regular expression is a pattern that describes a set of strings.**
+
+Because that it is impossible to cover most of it in one lecture, I put some resources here so that you can read more later.
+
+- [Regex wikipedia](https://en.wikipedia.org/wiki/Regular_expression)
+- [Regular-expression.info](https://www.regular-expressions.info)
+- [An RStudio addin slash regex utility belt](https://github.com/gadenbuie/regexplain)
+- `help(regex)` in R
+
+## Regex basics
+
+The main purpose of working with regular expressions is to describe patterns that are used to match against text strings. The simplest version of pattern matching is to search for some specific characters in a string.
+
+
+### metacharacters 
+
+There are some special characters that have a reserved status and they are known as **metacharacters**. The metacharacters in _Extended Regular Expressions_ (EREs) are:
+
+    . \ | ( ) [ { $ * + ?
+    
+For example, the pattern "money\$" does not match “money$”. Likewise, the pattern "what?" does not match “what?”. Except for a few cases, metacharacters have a special meaning and purporse when working with regular expressions. In R, we need to escape them with a double backslash \\. 
+
+| Metacharacter | Escape in R |
+|---------------|-------------|
+| .             | \\.         |
+| $             | \\$         |
+| *             | \\*         |
+| +             | \\+         |
+| ?             | \\?         |
+| \|            | \\|         |
+| \             | \\\\        |
+| ^             | \\^         |
+| [             | \\[         |
+| ]             | \\]         |
+| {             | \\{         |
+| }             | \\}         |
+| (             | \\(         |
+| )             | \\)         |
+
+
+
+```{r}
+money = "$money"
+# the naive but wrong way
+sub(pattern = "$", replacement = "", x = money)
+```
+
+```{r eval=FALSE}
+# the usual (in other languages) yet wrong way in R
+sub(pattern = "\$", replacement = "", x = money)
+```
+
+```{r}
+# escape in R
+sub(pattern = "\\$", replacement = "", x = money)
+```
+
+```{r}
+sub("\\|", "", "Peace|Love")
+sub("\\^", "", "Peace^Love")
+sub("\\[", "", "Peace[Love]")
+sub("\\]", "", "Peace[Love]")
+```
+
+### Sequences
+
+Sequences define sequences of characters which can match. We have short-hand versions (or anchors) for commonly used sequences in R:
+
+
+| Anchor | Description                  |
+| :----- | :--------------------------- |
+| \\d    | match a digit character      |
+| \\D    | match a non-digit character  |
+| \\s    | match a space character      |
+| \\S    | match a non-space character  |
+| \\w    | match a word character       |
+| \\W    | match a non-word character   |
+| \\b    | match a word boundary        |
+| \\B    | match a non-(word boundary)  |
+| \\h    | match a horizontal space     |
+| \\H    | match a non-horizontal space |
+| \\v    | match a vertical space       |
+| \\V    | match a non-vertical space   |
+
+```{r}
+sub("\\d", "_", "Covid 19")
+gsub("\\d", "_", "Covid 19")
+sub("\\D", "_", "Covid 19")
+gsub("\\D", "_", "Covid 19")
+sub("\\s", "_", "Covid 19")
+sub("\\S", "_", "Covid 19")
+gsub("\\S", "_", "Covid 19")
+sub("\\w", "_", "Covid 19")
+gsub("\\w", "_", "Covid 19")
+sub("\\W", "_", "Covid 19")
+gsub("\\W", "_", "Covid 19")
+```
+
+### character class
+
+A _character class_ or _character set_ is a list of characters enclosed by square brackets `[ ]`. Character sets are used to match only one of several characters. For instance, the regex character class `[aA]` matches any lower case letter a or any upper case letter A.
+
+| Anchor       | Description                                 |
+| :----------- | :------------------------------------------ |
+| [aeiou]      | match any one lower case vowel              |
+| [AEIOU]      | match any one upper case vowel              |
+| [0123456789] | match any digit                             |
+| [0-9]        | match any digit (same as previous class)    |
+| [a-z]        | match any lower case ASCII letter           |
+| [A-Z]        | match any upper case ASCII letter           |
+| [a-zA-Z0-9]  | match any of the above classes              |
+| [^aeiou]     | match anything other than a lowercase vowel |
+| [^0-9]       | match anything other than a digit           |
+
+```{r}
+d = c("car", "bike", "plane", "boat", "Oct 07", "I-II-III", "R 4.1.1")
+# look for 'e' or 'i'
+grep(pattern = "[ei]", x = d, value = TRUE)
+grep(pattern = "[01]", x = d, value = TRUE)
+
+```
+
+### POSIX Character Classes
+
+Closely related to the regex character classes we have what is known as _POSIX character classes_. In R, POSIX character classes are represented with expressions inside double brackets `[[ ]]`.
+
+| Class        | POSIX Character Classes in R Description                                            |
+| :----------- | :---------------------------------------------------------------------------------- |
+| [[:lower:]]  | Lower-case letters                                                                  |
+| [[:upper:]]  | Upper-case letters                                                                  |
+| [[:alpha:]]  | Alphabetic characters ([[:lower:]] and [[:upper:]])                                 |
+| [[:digit:]]  | Digits: 0,1,2,3,4,5,6,7,8,9                                                         |
+| [[:alnum:]]  | Alphanumeric characters ([[:alpha:]] and [[:digit:]])                               |
+| [[:blank:]]  | Blank characters: space and tab                                                     |
+| [[:cntrl:]]  | Control characters                                                                  |
+| [[:punct:]]  | Punctuationcharacters: ! ”#%&’()*+,-. /: ;                                          |
+| [[:space:]]  | Space characters: tab, newline, vertical tab, form feed, carriage return, and space |
+| [[:xdigit:]] | Hexadecimaldigits: 0-9 A B C D E F a b c d e f                                      |
+| [[:print:]]  | Printable characters ([[:alpha:]], [[:punct:]] and space)                           |
+| [[:graph:]]  | Graphical characters ([[:alpha:]] and [[:punct:]])                                  |
+
+```{r}
+gsub(pattern = "[[:blank:]]", replacement = "", x = d)
+gsub(pattern = "[[:lower:]]", replacement = "", x = d)
+gsub(pattern = "[[:alnum:]]", replacement = "", x = d)
+```
+
+### Quantifiers
+
+Quantifiers are used when we want to match a certain number of characters that meet certain criteria. Quantifiers specify how many instances of a character, group, or character class must be present in the input for a match to be found.
+
+| Quantifier | Description                                                               |
+| :--------- | :------------------------------------------------------------------------ |
+| ?          | The preceding item is optional and will be matched at most once           |
+| *          | The preceding item will be matched zero or more times                     |
+| +          | The preceding item will be matched one or more times                      |
+| {n}        | The preceding item is matched exactly n times                             |
+| {n,}       | The preceding item is matched n or more times                             |
+| {n,m}      | The preceding item is matched at least n times, but not more than m times |
+
+```{r}
+sts = row.names(USArrests)
+sts
+# match 'm' at most once (0 or 1)
+grep(pattern = "m?", sts, value = TRUE)
+grep(pattern = "m{1}", sts, value = TRUE) # only once
+grep(pattern = "l+", sts, value = TRUE) #  once or more
+grep(pattern = "l{2,3}", sts, value = TRUE) # 2 or 3 times
+```
+
+### Main Base R functions for Regex
+
+| Function     | Purpose                 | Characteristic                              |
+| :----------- | :---------------------- | :------------------------------------------ |
+| `grep()`     | finding regex matches   | which elements are matched (index or value) |
+| `grepl()`    | finding regex matches   | which elements are matched (TRUE & FALSE)   |
+| `regexpr()`  | finding regex matches   | positions of the first match                |
+| `gregexpr()` | finding regex matches   | positions of all matches                    |
+| `regexec()`  | finding regex matches   | hybrid of `regexpr()` and `gregexpr()`      |
+| `sub()`      | replacing regex matches | only first match is replaced                |
+| `gsub()`     | replacing regex matches | all matches are replaced                    |
+| `strsplit()` | splitting regex matches | split vector according to matches           |
+
+All regex functions require two main arguments: a pattern (i.e. regular expression), and a text to match.
+
+### Regex functions in `{stringr}`
+
+They all following the following general form:
+
+    str_function(string, pattern)
+    
 
