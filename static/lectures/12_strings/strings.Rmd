@@ -401,6 +401,31 @@ grep(pattern = "l+", sts, value = TRUE) #  once or more
 grep(pattern = "l{2,3}", sts, value = TRUE) # 2 or 3 times
 ```
 
+### Position of pattern within a string
+
+- `^`: matches the start of the string
+- `$`: matches the end of the string
+- `\b`: matches the empty string at either edge of a word. Don’t confuse it with `^` `$` which marks the edge of a string.
+- `\B`: matches the empty string provided it is not at an edge of a word.
+
+```{r}
+strings <- c("abcd", "cdab", "cabd", "c abd")
+grep("ab", strings, value = TRUE)
+grep("^ab", strings, value = TRUE)
+grep("ab$", strings, value = TRUE)
+grep("\\bab", strings, value = TRUE)
+grep("\\Bab", strings, value = TRUE)
+```
+
+### Operators
+
+- `.`: matches any single character
+- `[...]`: matches any one of the characters inside the brackets
+- `[^...]`: matches any other characters except those inside the brackets
+- `|`: or, matches either side of the vertical bar
+- `(...)`: grouping in regex. This allows you to retrieve the bits that matched various parts of your regular expression so you can alter them or use them for building up a new string. Each group can than be refer using `\\N`, with N being the No. of `(...)` used. This is called backreference.
+
+
 ### Main Base R functions for Regex
 
 | Function     | Purpose                 | Characteristic                              |

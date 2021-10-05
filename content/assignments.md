@@ -50,4 +50,32 @@ This homework will be due at **September 23th, 9am**.
 This homework will be due at **October 7th, 9am**. Please submit your homework as an Rmd file to GitHub. It is probably a good idea to create a `hw_02` subfolder within your `homework` folder and put the Rmd file there. Please also generate a PDF file there. You don't need to email me again about your homework. I have your GitHub repo link and will check out your homework there. This should apply to all homework assignments.
 
 
+## Homework 3
 
+1. (2 points) Suppose we have a dataset A (see code below) where each column represents multiple measures of nitrogen concentration in a particular lake. We want to get the average value for each lake. Do this in two ways: a `for` loop and a vectorized function `colMeans()`. 
+
+    ```r
+    set.seed(12) # to be reproducible
+    A = matrix(data = 1:500, nrow = 50, ncol = 10)
+    colnames(A) = paste("lake", 1:10, sep = "_")
+    ```
+2. (2 points) From the for loop lecture, we see the following example of using `apply()`:
+
+   ```r
+   x = array(1:27, dim = c(3, 3, 3))
+   apply(X = x, MARGIN = c(1, 2), 
+         FUN = paste, collapse = ", ")
+   ```
+   
+   Now, use `for` loops to get the same task done (hint: nested loops). The results should be the same.
+
+3. (2 points) The Fibonacci Sequence is the series of numbers that the next number is the sum of the previous two numbers: 0, 1, 1, 2, 3, 5, 8 ... Use a `for` loop to get the first 30 numbers of the Fibonacci Sequence. This question should demonstrate the need for loops because there is no easy way to use vectorized functions in this case.
+4. (2 points) In the example data below, extract those ranking numbers **with regular expression**. The results should have the number(s) and `.` if it follows after the numbers immediately (i.e., `1.`, `12.`, `105.`, `105.3`, etc.). Remove empty strings from the final results. You should get 107 strings for your results.
+
+   ```r
+   top105 = readLines("http://www.textfiles.com/music/ktop100.txt")
+   top105 = top105[-c(64, 65)] # missing No. 54 and 55
+   ```
+5. (2 points) For the vector with length of 107 you got from question 4, remove all **trailing `.`**. (hint: `?sub`). Then convert it to a numeric vector and find out which numbers have duplications (i.e., a tie in ranking). Don't count by eyes, use R to find it out (hint: `table()`, `sort()`; or `duplicated()`, `which()`, `[` subsetting; there are more than one way to do so).
+
+This homework will be due at **October 14th, 9am**.

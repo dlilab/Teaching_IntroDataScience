@@ -277,6 +277,8 @@ pre code {
 <li><a href="#character-class">character class</a></li>
 <li><a href="#posix-character-classes">POSIX Character Classes</a></li>
 <li><a href="#quantifiers">Quantifiers</a></li>
+<li><a href="#position-of-pattern-within-a-string">Position of pattern within a string</a></li>
+<li><a href="#operators">Operators</a></li>
 <li><a href="#main-base-r-functions-for-regex">Main Base R functions for Regex</a></li>
 <li><a href="#regex-functions-in-stringr">Regex functions in <code>{stringr}</code></a></li>
 </ul></li>
@@ -1034,6 +1036,36 @@ pre code {
 ## [13] &quot;South Carolina&quot;</code></pre>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="at">pattern =</span> <span class="st">&quot;l{2,3}&quot;</span>, sts, <span class="at">value =</span> <span class="cn">TRUE</span>) <span class="co"># 2 or 3 times</span></span></code></pre></div>
 <pre><code>## [1] &quot;Illinois&quot;</code></pre>
+</div>
+<div id="position-of-pattern-within-a-string" class="section level3">
+<h3>Position of pattern within a string</h3>
+<ul>
+<li><code>^</code>: matches the start of the string</li>
+<li><code>$</code>: matches the end of the string</li>
+<li><code>\b</code>: matches the empty string at either edge of a word. Don’t confuse it with <code>^</code> <code>$</code> which marks the edge of a string.</li>
+<li><code>\B</code>: matches the empty string provided it is not at an edge of a word.</li>
+</ul>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="#cb195-1" aria-hidden="true" tabindex="-1"></a>strings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;abcd&quot;</span>, <span class="st">&quot;cdab&quot;</span>, <span class="st">&quot;cabd&quot;</span>, <span class="st">&quot;c abd&quot;</span>)</span>
+<span id="cb195-2"><a href="#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;ab&quot;</span>, strings, <span class="at">value =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;abcd&quot;  &quot;cdab&quot;  &quot;cabd&quot;  &quot;c abd&quot;</code></pre>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;^ab&quot;</span>, strings, <span class="at">value =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;abcd&quot;</code></pre>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;ab$&quot;</span>, strings, <span class="at">value =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;cdab&quot;</code></pre>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">bab&quot;</span>, strings, <span class="at">value =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;abcd&quot;  &quot;c abd&quot;</code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">Bab&quot;</span>, strings, <span class="at">value =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;cdab&quot; &quot;cabd&quot;</code></pre>
+</div>
+<div id="operators" class="section level3">
+<h3>Operators</h3>
+<ul>
+<li><code>.</code>: matches any single character</li>
+<li><code>[...]</code>: matches any one of the characters inside the brackets</li>
+<li><code>[^...]</code>: matches any other characters except those inside the brackets</li>
+<li><code>|</code>: or, matches either side of the vertical bar</li>
+<li><code>(...)</code>: grouping in regex. This allows you to retrieve the bits that matched various parts of your regular expression so you can alter them or use them for building up a new string. Each group can than be refer using <code>\\N</code>, with N being the No. of <code>(...)</code> used. This is called backreference.</li>
+</ul>
 </div>
 <div id="main-base-r-functions-for-regex" class="section level3">
 <h3>Main Base R functions for Regex</h3>
