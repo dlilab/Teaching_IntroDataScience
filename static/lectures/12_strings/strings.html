@@ -749,57 +749,57 @@ pre code {
 <table>
 <thead>
 <tr class="header">
-<th align="left">Anchor</th>
+<th align="left">Anchor in R</th>
 <th align="left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">\d</td>
+<td align="left"><code>\\d</code></td>
 <td align="left">match a digit character</td>
 </tr>
 <tr class="even">
-<td align="left">\D</td>
+<td align="left"><code>\\D</code></td>
 <td align="left">match a non-digit character</td>
 </tr>
 <tr class="odd">
-<td align="left">\s</td>
+<td align="left"><code>\\s</code></td>
 <td align="left">match a space character</td>
 </tr>
 <tr class="even">
-<td align="left">\S</td>
+<td align="left"><code>\\S</code></td>
 <td align="left">match a non-space character</td>
 </tr>
 <tr class="odd">
-<td align="left">\w</td>
+<td align="left"><code>\\w</code></td>
 <td align="left">match a word character</td>
 </tr>
 <tr class="even">
-<td align="left">\W</td>
+<td align="left"><code>\\W</code></td>
 <td align="left">match a non-word character</td>
 </tr>
 <tr class="odd">
-<td align="left">\b</td>
+<td align="left"><code>\\b</code></td>
 <td align="left">match a word boundary</td>
 </tr>
 <tr class="even">
-<td align="left">\B</td>
+<td align="left"><code>\\B</code></td>
 <td align="left">match a non-(word boundary)</td>
 </tr>
 <tr class="odd">
-<td align="left">\h</td>
+<td align="left"><code>\\h</code></td>
 <td align="left">match a horizontal space</td>
 </tr>
 <tr class="even">
-<td align="left">\H</td>
+<td align="left"><code>\\H</code></td>
 <td align="left">match a non-horizontal space</td>
 </tr>
 <tr class="odd">
-<td align="left">\v</td>
+<td align="left"><code>\\v</code></td>
 <td align="left">match a vertical space</td>
 </tr>
 <tr class="even">
-<td align="left">\V</td>
+<td align="left"><code>\\V</code></td>
 <td align="left">match a non-vertical space</td>
 </tr>
 </tbody>
@@ -833,45 +833,45 @@ pre code {
 <table>
 <thead>
 <tr class="header">
-<th align="left">Anchor</th>
+<th align="left">Anchor in R</th>
 <th align="left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">[aeiou]</td>
+<td align="left"><code>[aeiou]</code></td>
 <td align="left">match any one lower case vowel</td>
 </tr>
 <tr class="even">
-<td align="left">[AEIOU]</td>
+<td align="left"><code>[AEIOU]</code></td>
 <td align="left">match any one upper case vowel</td>
 </tr>
 <tr class="odd">
-<td align="left">[0123456789]</td>
+<td align="left"><code>[0123456789]</code></td>
 <td align="left">match any digit</td>
 </tr>
 <tr class="even">
-<td align="left">[0-9]</td>
+<td align="left"><code>[0-9]</code></td>
 <td align="left">match any digit (same as previous class)</td>
 </tr>
 <tr class="odd">
-<td align="left">[a-z]</td>
+<td align="left"><code>[a-z]</code></td>
 <td align="left">match any lower case ASCII letter</td>
 </tr>
 <tr class="even">
-<td align="left">[A-Z]</td>
+<td align="left"><code>[A-Z]</code></td>
 <td align="left">match any upper case ASCII letter</td>
 </tr>
 <tr class="odd">
-<td align="left">[a-zA-Z0-9]</td>
+<td align="left"><code>[a-zA-Z0-9]</code></td>
 <td align="left">match any of the above classes</td>
 </tr>
 <tr class="even">
-<td align="left">[^aeiou]</td>
+<td align="left"><code>[^aeiou]</code></td>
 <td align="left">match anything other than a lowercase vowel</td>
 </tr>
 <tr class="odd">
-<td align="left">[^0-9]</td>
+<td align="left"><code>[^0-9]</code></td>
 <td align="left">match anything other than a digit</td>
 </tr>
 </tbody>
@@ -888,8 +888,8 @@ pre code {
 <p>Closely related to the regex character classes we have what is known as <em>POSIX character classes</em>. In R, POSIX character classes are represented with expressions inside double brackets <code>[[ ]]</code>.</p>
 <table>
 <colgroup>
-<col width="12%" />
-<col width="87%" />
+<col width="14%" />
+<col width="85%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -899,51 +899,51 @@ pre code {
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">[[:lower:]]</td>
+<td align="left"><code>[[:lower:]]</code></td>
 <td align="left">Lower-case letters</td>
 </tr>
 <tr class="even">
-<td align="left">[[:upper:]]</td>
+<td align="left"><code>[[:upper:]]</code></td>
 <td align="left">Upper-case letters</td>
 </tr>
 <tr class="odd">
-<td align="left">[[:alpha:]]</td>
+<td align="left"><code>[[:alpha:]]</code></td>
 <td align="left">Alphabetic characters ([[:lower:]] and [[:upper:]])</td>
 </tr>
 <tr class="even">
-<td align="left">[[:digit:]]</td>
+<td align="left"><code>[[:digit:]]</code></td>
 <td align="left">Digits: 0,1,2,3,4,5,6,7,8,9</td>
 </tr>
 <tr class="odd">
-<td align="left">[[:alnum:]]</td>
+<td align="left"><code>[[:alnum:]]</code></td>
 <td align="left">Alphanumeric characters ([[:alpha:]] and [[:digit:]])</td>
 </tr>
 <tr class="even">
-<td align="left">[[:blank:]]</td>
+<td align="left"><code>[[:blank:]]</code></td>
 <td align="left">Blank characters: space and tab</td>
 </tr>
 <tr class="odd">
-<td align="left">[[:cntrl:]]</td>
+<td align="left"><code>[[:cntrl:]]</code></td>
 <td align="left">Control characters</td>
 </tr>
 <tr class="even">
-<td align="left">[[:punct:]]</td>
+<td align="left"><code>[[:punct:]]</code></td>
 <td align="left">Punctuationcharacters: ! ”#%&amp;’()*+,-. /: ;</td>
 </tr>
 <tr class="odd">
-<td align="left">[[:space:]]</td>
+<td align="left"><code>[[:space:]]</code></td>
 <td align="left">Space characters: tab, newline, vertical tab, form feed, carriage return, and space</td>
 </tr>
 <tr class="even">
-<td align="left">[[:xdigit:]]</td>
+<td align="left"><code>[[:xdigit:]]</code></td>
 <td align="left">Hexadecimaldigits: 0-9 A B C D E F a b c d e f</td>
 </tr>
 <tr class="odd">
-<td align="left">[[:print:]]</td>
+<td align="left"><code>[[:print:]]</code></td>
 <td align="left">Printable characters ([[:alpha:]], [[:punct:]] and space)</td>
 </tr>
 <tr class="even">
-<td align="left">[[:graph:]]</td>
+<td align="left"><code>[[:graph:]]</code></td>
 <td align="left">Graphical characters ([[:alpha:]] and [[:punct:]])</td>
 </tr>
 </tbody>
@@ -971,27 +971,27 @@ pre code {
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">?</td>
+<td align="left"><code>?</code></td>
 <td align="left">The preceding item is optional and will be matched at most once</td>
 </tr>
 <tr class="even">
-<td align="left">*</td>
+<td align="left"><code>*</code></td>
 <td align="left">The preceding item will be matched zero or more times</td>
 </tr>
 <tr class="odd">
-<td align="left">+</td>
+<td align="left"><code>+</code></td>
 <td align="left">The preceding item will be matched one or more times</td>
 </tr>
 <tr class="even">
-<td align="left">{n}</td>
+<td align="left"><code>{n}</code></td>
 <td align="left">The preceding item is matched exactly n times</td>
 </tr>
 <tr class="odd">
-<td align="left">{n,}</td>
+<td align="left"><code>{n,}</code></td>
 <td align="left">The preceding item is matched n or more times</td>
 </tr>
 <tr class="even">
-<td align="left">{n,m}</td>
+<td align="left"><code>{n,m}</code></td>
 <td align="left">The preceding item is matched at least n times, but not more than m times</td>
 </tr>
 </tbody>

@@ -300,20 +300,20 @@ sub("\\]", "", "Peace[Love]")
 Sequences define sequences of characters which can match. We have short-hand versions (or anchors) for commonly used sequences in R:
 
 
-| Anchor | Description                  |
-| :----- | :--------------------------- |
-| \\d    | match a digit character      |
-| \\D    | match a non-digit character  |
-| \\s    | match a space character      |
-| \\S    | match a non-space character  |
-| \\w    | match a word character       |
-| \\W    | match a non-word character   |
-| \\b    | match a word boundary        |
-| \\B    | match a non-(word boundary)  |
-| \\h    | match a horizontal space     |
-| \\H    | match a non-horizontal space |
-| \\v    | match a vertical space       |
-| \\V    | match a non-vertical space   |
+| Anchor in R | Description                  |
+| :---------- | :--------------------------- |
+| `\\d`       | match a digit character      |
+| `\\D`       | match a non-digit character  |
+| `\\s`       | match a space character      |
+| `\\S`       | match a non-space character  |
+| `\\w`       | match a word character       |
+| `\\W`       | match a non-word character   |
+| `\\b`       | match a word boundary        |
+| `\\B`       | match a non-(word boundary)  |
+| `\\h`       | match a horizontal space     |
+| `\\H`       | match a non-horizontal space |
+| `\\v`       | match a vertical space       |
+| `\\V`       | match a non-vertical space   |
 
 ```{r}
 sub("\\d", "_", "Covid 19")
@@ -333,17 +333,17 @@ gsub("\\W", "_", "Covid 19")
 
 A _character class_ or _character set_ is a list of characters enclosed by square brackets `[ ]`. Character sets are used to match only one of several characters. For instance, the regex character class `[aA]` matches any lower case letter a or any upper case letter A.
 
-| Anchor       | Description                                 |
-| :----------- | :------------------------------------------ |
-| [aeiou]      | match any one lower case vowel              |
-| [AEIOU]      | match any one upper case vowel              |
-| [0123456789] | match any digit                             |
-| [0-9]        | match any digit (same as previous class)    |
-| [a-z]        | match any lower case ASCII letter           |
-| [A-Z]        | match any upper case ASCII letter           |
-| [a-zA-Z0-9]  | match any of the above classes              |
-| [^aeiou]     | match anything other than a lowercase vowel |
-| [^0-9]       | match anything other than a digit           |
+| Anchor in R    | Description                                 |
+| :------------- | :------------------------------------------ |
+| `[aeiou]`      | match any one lower case vowel              |
+| `[AEIOU]`      | match any one upper case vowel              |
+| `[0123456789]` | match any digit                             |
+| `[0-9]`        | match any digit (same as previous class)    |
+| `[a-z]`        | match any lower case ASCII letter           |
+| `[A-Z]`        | match any upper case ASCII letter           |
+| `[a-zA-Z0-9]`  | match any of the above classes              |
+| `[^aeiou]`     | match anything other than a lowercase vowel |
+| `[^0-9]`       | match anything other than a digit           |
 
 ```{r}
 d = c("car", "bike", "plane", "boat", "Oct 07", "I-II-III", "R 4.1.1")
@@ -357,20 +357,20 @@ grep(pattern = "[01]", x = d, value = TRUE)
 
 Closely related to the regex character classes we have what is known as _POSIX character classes_. In R, POSIX character classes are represented with expressions inside double brackets `[[ ]]`.
 
-| Class        | POSIX Character Classes in R Description                                            |
-| :----------- | :---------------------------------------------------------------------------------- |
-| [[:lower:]]  | Lower-case letters                                                                  |
-| [[:upper:]]  | Upper-case letters                                                                  |
-| [[:alpha:]]  | Alphabetic characters ([[:lower:]] and [[:upper:]])                                 |
-| [[:digit:]]  | Digits: 0,1,2,3,4,5,6,7,8,9                                                         |
-| [[:alnum:]]  | Alphanumeric characters ([[:alpha:]] and [[:digit:]])                               |
-| [[:blank:]]  | Blank characters: space and tab                                                     |
-| [[:cntrl:]]  | Control characters                                                                  |
-| [[:punct:]]  | Punctuationcharacters: ! ”#%&’()*+,-. /: ;                                          |
-| [[:space:]]  | Space characters: tab, newline, vertical tab, form feed, carriage return, and space |
-| [[:xdigit:]] | Hexadecimaldigits: 0-9 A B C D E F a b c d e f                                      |
-| [[:print:]]  | Printable characters ([[:alpha:]], [[:punct:]] and space)                           |
-| [[:graph:]]  | Graphical characters ([[:alpha:]] and [[:punct:]])                                  |
+| Class          | POSIX Character Classes in R Description                                            |
+| :------------- | :---------------------------------------------------------------------------------- |
+| `[[:lower:]]`  | Lower-case letters                                                                  |
+| `[[:upper:]]`  | Upper-case letters                                                                  |
+| `[[:alpha:]]`  | Alphabetic characters ([[:lower:]] and [[:upper:]])                                 |
+| `[[:digit:]]`  | Digits: 0,1,2,3,4,5,6,7,8,9                                                         |
+| `[[:alnum:]]`  | Alphanumeric characters ([[:alpha:]] and [[:digit:]])                               |
+| `[[:blank:]]`  | Blank characters: space and tab                                                     |
+| `[[:cntrl:]]`  | Control characters                                                                  |
+| `[[:punct:]]`  | Punctuationcharacters: ! ”#%&’()*+,-. /: ;                                          |
+| `[[:space:]]`  | Space characters: tab, newline, vertical tab, form feed, carriage return, and space |
+| `[[:xdigit:]]` | Hexadecimaldigits: 0-9 A B C D E F a b c d e f                                      |
+| `[[:print:]]`  | Printable characters ([[:alpha:]], [[:punct:]] and space)                           |
+| `[[:graph:]]`  | Graphical characters ([[:alpha:]] and [[:punct:]])                                  |
 
 ```{r}
 gsub(pattern = "[[:blank:]]", replacement = "", x = d)
@@ -384,12 +384,12 @@ Quantifiers are used when we want to match a certain number of characters that m
 
 | Quantifier | Description                                                               |
 | :--------- | :------------------------------------------------------------------------ |
-| ?          | The preceding item is optional and will be matched at most once           |
-| *          | The preceding item will be matched zero or more times                     |
-| +          | The preceding item will be matched one or more times                      |
-| {n}        | The preceding item is matched exactly n times                             |
-| {n,}       | The preceding item is matched n or more times                             |
-| {n,m}      | The preceding item is matched at least n times, but not more than m times |
+| `?`        | The preceding item is optional and will be matched at most once           |
+| `*`        | The preceding item will be matched zero or more times                     |
+| `+`        | The preceding item will be matched one or more times                      |
+| `{n}`      | The preceding item is matched exactly n times                             |
+| `{n,}`     | The preceding item is matched n or more times                             |
+| `{n,m}`    | The preceding item is matched at least n times, but not more than m times |
 
 ```{r}
 sts = row.names(USArrests)
