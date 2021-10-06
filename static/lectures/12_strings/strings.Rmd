@@ -253,22 +253,22 @@ There are some special characters that have a reserved status and they are known
     
 For example, the pattern "money\$" does not match “money$”. Likewise, the pattern "what?" does not match “what?”. Except for a few cases, metacharacters have a special meaning and purporse when working with regular expressions. In R, we need to escape them with a double backslash \\. 
 
-| Metacharacter | Escape in R |
-|---------------|-------------|
-| .             | \\.         |
-| $             | \\$         |
-| *             | \\*         |
-| +             | \\+         |
-| ?             | \\?         |
-| \|            | \\|         |
-| \             | \\\\        |
-| ^             | \\^         |
-| [             | \\[         |
-| ]             | \\]         |
-| {             | \\{         |
-| }             | \\}         |
-| (             | \\(         |
-| )             | \\)         |
+| Metacharacter | Escape in R   |
+|---------------|---------------|
+| .             | `\\.`         |
+| $             | `\\$`         |
+| *             | `\\*`         |
+| +             | `\\+`         |
+| ?             | `\\?`         |
+| \|            | `\\|`         |
+| \             | `\\\\`        |
+| ^             | `\\^`         |
+| [             | `\\[`         |
+| ]             | `\\]`         |
+| {             | `\\{`         |
+| }             | `\\}`         |
+| (             | `\\(`         |
+| )             | `\\)`         |
 
 
 

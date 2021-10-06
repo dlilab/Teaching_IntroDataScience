@@ -156,14 +156,14 @@ for(i in 1:nrow(x)){
   print(max(x[i, ]))
 }
 # apply
-apply(X = x, MARGIN = 1, FUN = max, nam.rm = TRUE)
+apply(X = x, MARGIN = 1, FUN = max, na.rm = TRUE)
 
 # for each column, find the max value
 for(i in 1:ncol(x)){
   print(max(x[, i]))
 }
 # apply
-apply(X = x, MARGIN = 2, FUN = max, nam.rm = TRUE)
+apply(X = x, MARGIN = 2, FUN = max, na.rm = TRUE)
 ```
 
 A more complicated example:

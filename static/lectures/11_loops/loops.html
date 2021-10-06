@@ -426,7 +426,7 @@ pre code {
 ## [1] 19
 ## [1] 20</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># apply</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X =</span> x, <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> max, <span class="at">nam.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X =</span> x, <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> max, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] 16 17 18 19 20</code></pre>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for each column, find the max value</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(x)){</span>
@@ -437,7 +437,7 @@ pre code {
 ## [1] 15
 ## [1] 20</code></pre>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># apply</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X =</span> x, <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> max, <span class="at">nam.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="at">X =</span> x, <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> max, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1]  5 10 15 20</code></pre>
 <p>A more complicated example:</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">27</span>, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>))</span>
@@ -549,33 +549,33 @@ pre code {
 ##     intersect, setdiff, setequal, union</code></pre>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">6</span>), <span class="at">y =</span> <span class="fu">runif</span>(<span class="dv">6</span>), <span class="at">z =</span> <span class="fu">runif</span>(<span class="dv">6</span>))</span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
-<pre><code>##            x         y          z
-## 1 0.05014736 0.9737758 0.24830936
-## 2 0.91140326 0.3481633 0.40665120
-## 3 0.06708421 0.7218694 0.20686782
-## 4 0.68245541 0.5500044 0.08436236
-## 5 0.24651329 0.8509016 0.85201735
-## 6 0.04620595 0.2370141 0.47530447</code></pre>
+<pre><code>##           x         y          z
+## 1 0.4011895 0.6195792 0.17242947
+## 2 0.1124757 0.1248370 0.57025222
+## 3 0.2490356 0.5352071 0.41677648
+## 4 0.4246986 0.7393657 0.70896651
+## 5 0.2551054 0.4828538 0.03619375
+## 6 0.9598166 0.4743240 0.33248919</code></pre>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the mean of x, y, z in each row</span></span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">c</span>(x, y, z)))</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 4
 ## # Rowwise: 
-##        x     y      z     m
-##    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-## 1 0.0501 0.974 0.248  0.424
-## 2 0.911  0.348 0.407  0.555
-## 3 0.0671 0.722 0.207  0.332
-## 4 0.682  0.550 0.0844 0.439
-## 5 0.247  0.851 0.852  0.650
-## 6 0.0462 0.237 0.475  0.253</code></pre>
+##       x     y      z     m
+##   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 0.401 0.620 0.172  0.398
+## 2 0.112 0.125 0.570  0.269
+## 3 0.249 0.535 0.417  0.400
+## 4 0.425 0.739 0.709  0.624
+## 5 0.255 0.483 0.0362 0.258
+## 6 0.960 0.474 0.332  0.589</code></pre>
 <p>Work with some columns that meet specific conditions.</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>a <span class="ot">=</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>]</span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>b <span class="ot">=</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>]</span>
 <span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    6 obs. of  5 variables:
-##  $ x: num  0.0501 0.9114 0.0671 0.6825 0.2465 ...
-##  $ y: num  0.974 0.348 0.722 0.55 0.851 ...
-##  $ z: num  0.2483 0.4067 0.2069 0.0844 0.852 ...
+##  $ x: num  0.401 0.112 0.249 0.425 0.255 ...
+##  $ y: num  0.62 0.125 0.535 0.739 0.483 ...
+##  $ z: num  0.1724 0.5703 0.4168 0.709 0.0362 ...
 ##  $ a: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
 ##  $ b: chr  &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; ...</code></pre>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert columns with characters to factors</span></span>
@@ -586,18 +586,18 @@ pre code {
 <span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    6 obs. of  5 variables:
-##  $ x: num  0.0501 0.9114 0.0671 0.6825 0.2465 ...
-##  $ y: num  0.974 0.348 0.722 0.55 0.851 ...
-##  $ z: num  0.2483 0.4067 0.2069 0.0844 0.852 ...
+##  $ x: num  0.401 0.112 0.249 0.425 0.255 ...
+##  $ y: num  0.62 0.125 0.535 0.739 0.483 ...
+##  $ z: num  0.1724 0.5703 0.4168 0.709 0.0362 ...
 ##  $ a: Factor w/ 6 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6
 ##  $ b: Factor w/ 6 levels &quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,..: 1 2 3 4 5 6</code></pre>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dplyr version to convert factors to characters back</span></span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">mutate</span>(df, <span class="fu">across</span>(<span class="fu">where</span>(is.factor), as.character))</span>
 <span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    6 obs. of  5 variables:
-##  $ x: num  0.0501 0.9114 0.0671 0.6825 0.2465 ...
-##  $ y: num  0.974 0.348 0.722 0.55 0.851 ...
-##  $ z: num  0.2483 0.4067 0.2069 0.0844 0.852 ...
+##  $ x: num  0.401 0.112 0.249 0.425 0.255 ...
+##  $ y: num  0.62 0.125 0.535 0.739 0.483 ...
+##  $ z: num  0.1724 0.5703 0.4168 0.709 0.0362 ...
 ##  $ a: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
 ##  $ b: chr  &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; ...</code></pre>
 <p>Work with vectors, lists, or multiple of them.</p>
@@ -621,7 +621,7 @@ pre code {
 ## [1] TRUE
 ## 
 ## [[5]]
-## [1] FALSE</code></pre>
+## [1] TRUE</code></pre>
 <p>Two variables.</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">::</span><span class="fu">map2_chr</span>(<span class="at">.x =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>), <span class="at">.y =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="at">.f =</span> paste, <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;a-A&quot; &quot;b-B&quot; &quot;c-C&quot;</code></pre>
