@@ -366,9 +366,9 @@ Closely related to the regex character classes we have what is known as _POSIX c
 | `[[:alnum:]]`  | Alphanumeric characters ([[:alpha:]] and [[:digit:]])                               |
 | `[[:blank:]]`  | Blank characters: space and tab                                                     |
 | `[[:cntrl:]]`  | Control characters                                                                  |
-| `[[:punct:]]`  | Punctuationcharacters: ! ”#%&’()*+,-. /: ;                                          |
+| `[[:punct:]]`  | Punctuation characters: ! ”#%&’()*+,-. /: ;                                         |
 | `[[:space:]]`  | Space characters: tab, newline, vertical tab, form feed, carriage return, and space |
-| `[[:xdigit:]]` | Hexadecimaldigits: 0-9 A B C D E F a b c d e f                                      |
+| `[[:xdigit:]]` | Hexadecimal digits: 0-9 A B C D E F a b c d e f                                     |
 | `[[:print:]]`  | Printable characters ([[:alpha:]], [[:punct:]] and space)                           |
 | `[[:graph:]]`  | Graphical characters ([[:alpha:]] and [[:punct:]])                                  |
 
