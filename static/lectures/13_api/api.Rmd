@@ -1,0 +1,32 @@
+---
+title: "Web scraping and API"
+author: "Daijiang Li"
+date: "10/12/2021"
+output: 
+  html_document: 
+    toc: yes
+    highlight: kate
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In today's lecture, we are going to talk about getting data from the web with R. Nowadays, the amount of data online increases exponentially everyday. How to get such data and analyze them to gain knowledge is critical. We will briefly talk about the scenarios that we can get data from online. I won't even try to cover most of the things since this topic can be a whole course by itself. Before we get into the lecture, here are some R books about this topic.
+
+- [XML and Web Technologies for Data Sciences with R](https://www.springer.com/gp/book/9781461478997): classic book, but not free
+- [Web Scraping with R](https://steviep42.github.io/webscraping/book/): free!
+
+Some Acronyms
+
+- `WWW`: World Wide Web
+- `W3C`: World Wide Web Consortium 
+- `URL`: Uniform Resource Locator
+- `HTTP`: HyperText Transfer Protocol 
+- `XML`: eXtensible Markup Language
+- `HTML`: HyperText Markup Language 
+- `CSS`: Cascade Style Sheets
+- `JSON`: JavaScript Object Notation
+
+
+[Youtube API](https://developers.google.com/youtube/v3/docs)
