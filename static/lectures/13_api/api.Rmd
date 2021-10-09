@@ -15,7 +15,12 @@ knitr::opts_chunk$set(echo = TRUE)
 In today's lecture, we are going to talk about getting data from the web with R. Nowadays, the amount of data online increases exponentially everyday. How to get such data and analyze them to gain knowledge is critical. We will briefly talk about the scenarios that we can get data from online. I won't even try to cover most of the things since this topic can be a whole course by itself. Before we get into the lecture, here are some R books about this topic.
 
 - [XML and Web Technologies for Data Sciences with R](https://www.springer.com/gp/book/9781461478997): classic book, but not free
-- [Web Scraping with R](https://steviep42.github.io/webscraping/book/): free!
+- [Automated Data Collection with R](https://www.amazon.com/Automated-Data-Collection-Practical-Scraping/dp/111883481X/ref=pd_sim_14_1?ie=UTF8&dpID=51Tm7FHxWBL&dpSrc=sims&preST=_AC_UL160_SR108%2C160_&refRID=1VJ1GQEY0VCPZW7VKANX)
+- [Web Scraping with R](https://steviep42.github.io/webscraping/book/): a free short book!
+- [A nice blogpost](https://afit-r.github.io/scraping)
+- [Another short blog post](https://nceas.github.io/oss-lessons/data-liberation/intro-webscraping.html)
+
+- [CRAN Task View: Web Technologies and Services](https://cran.r-project.org/web/views/WebTechnologies.html)
 
 Some Acronyms
 
@@ -28,5 +33,243 @@ Some Acronyms
 - `CSS`: Cascade Style Sheets
 - `JSON`: JavaScript Object Notation
 
+# Web scrapping
 
-[Youtube API](https://developers.google.com/youtube/v3/docs)
+Based on [Wikipedia](https://en.wikipedia.org/wiki/Web_scraping):
+
+> Web scraping (web harvesting or web data extraction) is a computer software technique of extracting information from websites.
+>
+>  Web scraping focuses on the transformation of unstructured data on the web, typically in HTML format, into structured data that can be stored and analyzed in a central local database or spreadsheet.
+
+First, let's take a look at a simple XML file:
+
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE movies>
+<movie mins="126" lang="en">
+  <!-- this is a comment -->
+  <title>Good Will Hunting</title>
+  <director>
+    <first_name>Gus</first_name>
+    <last_name>Van Sant</last_name>
+  </director>
+  <year>1998</year>
+  <genre>drama</genre>
+</movie>
+```
+
+HTML is an XML dialect:
+
+```html
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    
+    <title>Your Page Title</title>
+    
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  
+  <body>
+    <h1>A First-level Heading</h1>
+    
+    <p>A paragraph.</p>
+    
+    <img src="/images/foo.png" alt="A nice image" />
+    
+    <ul>
+      <li>An item.</li>
+      <li>Another item.</li>
+      <li>Yet another item.</li>
+    </ul>
+    
+    <script src="/js/bar.js"></script>
+  </body>
+
+</html>
+```
+
+### Principles of scraping
+
+- Identify the tag
+- Download the webpage
+- Extract content matching the tag
+- Save the content
+- Optional: repeat
+
+### Some useful R package:
+
+- `Rcurl`: low level wrapper for `libcurl` that provides convenient functions to allow you to fetch URIs, get & post forms; basically, it allows us to use R as a Web Client. 
+- `httr`: similar to `Rcurl`; provides a user-friendly interface for executing HTTP methods and provides support for modern web authentication protocols (OAuth 1.0, OAuth 2.0). It is a wrapper around the `curl` package
+- `rvest`: a higher level package mostly based on `httr`. It is simpler to use for basic tasks.
+- `Rselenium`: can be used to automate interactions and extract page content from dynamically generated webpages (i.e., those requiring user interaction to display results like clicking on button)
+
+### An simple example
+
+Task: to extract all titles of the [Web Scrapping Wiki page](https://en.wikipedia.org/wiki/Web_scraping)
+
+Open the website with Chrome, right click and select `Inspect` and see what tags are used for page/section/subsection titles.
+
+Or install the [Selectorgadget](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb?hl=en) add-on for Chrome
+
+It seems that we can just extract the table of content and we will get all what we need.
+
+```{r}
+library(rvest)
+library(dplyr)
+wiki = read_html("https://en.wikipedia.org/wiki/Web_scraping")
+
+wiki %>% 
+  html_elements(css = c("div#toc.toc")) # based on inspect
+
+wiki %>% 
+  html_elements(css = c("#toc")) # based on selectorgadget
+
+toc = wiki %>% 
+  html_elements(css = c("#toc")) %>% 
+  html_text()
+
+toc
+```
+
+The texts are not in the format that we want, so we need to do some clean using what we learned in previous lecture.
+
+```{r}
+(toc2 <- stringr::str_split(toc, pattern = "\n")[[1]])
+# it seems that we just need those have number(s)
+(toc3 <- grep(pattern = "\\d", x = toc2, value = TRUE))
+```
+
+**Challenge: create a data frame, with the first column to be the numbers in toc3 (i.e, 1, 2, 2.1, etc.) and the second column to be the text without leading space**
+
+```{r include=FALSE}
+stringr::str_view(toc3, "^\\d\\.?\\d?")
+```
+
+
+### Revist the [Youtube example](../02_proj_cycle/presentation.html#7)
+
+```{r eval=FALSE}
+library(rvest, warn.conflicts = FALSE)
+library(RSelenium)
+# to set up a server to run javascript
+rs = RSelenium::rsDriver(browser = "firefox")
+rsc = rs$client
+rsc$navigate("https://www.youtube.com/playlist?list=PLE7DDD91010BC51F8")
+# now get the page source
+ht = rsc$getPageSource()
+url = rvest::read_html(ht[[1]])
+lectures = html_elements(url, css = '#video-title') # show how to get this
+lec_names = html_text2(lectures)
+lec_links = html_attr(lectures, "href")
+lec_links_full = paste0("https://www.youtube.com", lec_links)
+
+# try one link
+# does not work
+url2 = read_html(lec_links_full[1])
+x = html_elements(url2, css = "#info")
+
+# need this
+rsc$navigate(lec_links_full[1])
+ht2 = rsc$getPageSource()
+  
+ok2 <- rvest::read_html(ht2[[1]])
+# show how to get this
+view = html_elements(ok2, css = ".ytd-video-view-count-renderer")
+view_count = html_text(view[1])
+view_count
+as.numeric(gsub(",| views", "", view_count))
+
+# put it as a function
+get_view = function(link){
+  rsc$navigate(link)
+  url2 = rsc$getPageSource()
+  Sys.sleep(1) 
+  url2 <- rvest::read_html(url2[[1]])
+  view = html_elements(url2, css = ".ytd-video-view-count-renderer")
+  view_count = html_text(view[1])
+  view_count = as.integer(gsub(",| views", "", view_count))
+  return(view_count)
+}
+
+# run it
+view_counts = data.frame(names = lec_names, views = NA_integer_)
+for(i in 1:length(lec_links_full)){
+  cat(lec_links_full[i], "\t")
+  view_count = get_view(lec_links_full[i])
+  # for some reason, sometimes it takes multiple tries
+  while(length(view_count) == 0)
+    view_count = get_view(lec_links_full[i])
+  view_counts$views[i] = view_count
+}
+
+# save results
+write.csv(view_counts, "view.csv")
+rs$server$stop() # close the server
+```
+
+- It is slow and inefficient. Notice the `while()` loop?
+- It is not scalable. For example, if we want to apply the code to another playlist, chances are that the code will not work.
+- It is not sustainable. The code probably won't work after a couple of years when Youtube changed their website structure.
+
+# Application Programming Interfaces (API)
+
+Nowadays many companies, websites, sources, etc. use APIs as their primary means to share information and data. Many large websites like Reddit, Youtube, Twitter, and Facebook offer APIs so that data analysts and data scientists can access interesting data. 
+
+And having an API to share data has become a standard thing to have. In the context of biological data, many data repositories also have APIs to share data (e.g., figshare, dryad, dataone, GBIF, iNaturalist). 
+
+An API is a set of rules, protocols, and tools for building software and applications. It allows programmers to request data directly from a website. When a website like Facebook sets up an API, they are essentially setting up a computer that waits for data requests. 
+
+Most APIs don’t allow you to send too many requests at once (i.e. asynchronous requests). The main reason to limit the number of requests is to prevent users from overloading the API servers. 
+
+We will need to write code in R that creates the request and tells the computer running the API what we need. That computer will then read our code, process the request, and return nicely-formatted data that can be easily parsed by existing R libraries.
+
+APIs have some key verbs:
+
+| http Method | Description                                                                            |
+|-------------|----------------------------------------------------------------------------------------|
+| GET         | retrieves whatever information is identified by the Request-URI                        |
+| POST        | request with data enclosed in the request body                                         |
+| HEAD        | identical to GET except that the server MUST NOT return a message-body in the response |
+| PUT         | requests that the enclosed entity be stored under the supplied Request-URI             |
+| DELETE      | requests that the origin server delete the resource identified by the Request-URI      |
+| TRACE       | invokes a remote, application-layer loop-back of the request message                   |
+| CONNECT     | for use with a proxy that can dynamically switch to being a tunnel                     |
+
+There are several types of Web service APIs (e.g. XML-RPC, JSON-RPC and SOAP) but the most popular is Representational State Transfer or REST. RESTful APIs can return output as XML, JSON, CSV and several other data formats. Each API has documentation and specifications which determine how data can be transferred. 
+
+R has a few HTTP client packages: "crul", "curl", "httr", and "RCurl"; 
+
+A simple example:
+
+```{r}
+dj <- httr::GET('https://api.github.com/users/daijiang')
+djInfo <- jsonlite::fromJSON(httr::content(dj, "text"), simplifyVector = T)
+djInfo
+```
+[GBIF](https://www.gbif.org/)
+
+[GBIF API](https://www.gbif.org/developer/summary)
+
+```{r}
+gbif_country <- httr::GET('https://api.gbif.org/v1/enumeration/country')
+jsonlite::fromJSON(httr::content(gbif_country, "text"))
+
+gbif_example <- httr::GET('https://api.gbif.org/v1/occurrence/search?year=1998,1999&country=US')
+
+jsonlite::fromJSON(httr::content(gbif_example, "text"))
+```
+
+
+### R packages that wrap APIs
+
+Before we dive too deep into web scrapping, we should check whether the website provides API. Similarly, before we dive deep into APIs, we should check whether there is already an R package that has wrapped the API for us thus makes it much easier to get data from the website.
+
+For the case of GBIF, we have an existing R package `rgbif` available. It wraps the API of GBIF and provides R functions for users that have limited knowledge about APIs. Check the webpage of `rgbif` to learn more.
+
+Other similar R packages include `rnoaa`, `rtimes`, etc.
+
+For the case of [Youtube API](https://developers.google.com/youtube/v3/docs), there is an R package called `tuber`.
+
