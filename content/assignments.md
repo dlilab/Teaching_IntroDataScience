@@ -56,7 +56,7 @@ This homework will be due at **October 7th, 9am**. Please submit your homework a
 
     ```r
     set.seed(12) # to be reproducible
-    A = matrix(data = 1:500, nrow = 50, ncol = 10)
+    A = matrix(data = runif(n = 1:500), nrow = 50, ncol = 10)
     colnames(A) = paste("lake", 1:10, sep = "_")
     ```
 2. (2 points) From the for loop lecture, we see the following example of using `apply()`:
