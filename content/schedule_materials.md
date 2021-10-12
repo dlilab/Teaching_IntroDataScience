@@ -43,8 +43,8 @@ td, th {
 | Sep 28 | More R basics: lists, dates, etc.                       |   <a href="../lectures/09_r_basic/Basics.html" target="_blank">📙</a>  |     |  <a href="https://adv-r.hadley.nz/subsetting.html" target="_blank">Hadley, Chapter 4</a> |
 | Sep 30 | R programming basics: conditional statements            |   <a href="../lectures/10_condition/conditions.html" target="_blank">📙</a>  | <a href="../assignments/#homework-2" target="_blank">02</a>  |         |
 | Oct 5  | R programming basics: loops, apply                      |   <a href="../lectures/11_loops/loops.html" target="_blank">📙</a>      |     |         |
-| Oct 7  | Strings and Regular expressions                         |   <a href="../lectures/12_strings/strings.html" target="_blank">📙</a>     | <a href="../assignments/#homework-3" target="_blank">03</a>  |         |
-| Oct 12  | API and data scraping                              |       |   |         |
+| Oct 7  | Strings and Regular expressions                         |   <a href="../lectures/12_strings/strings.html" target="_blank">📙</a>     | <a href="../assignments/#homework-3" target="_blank">03</a>  |   <a href="https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html" target="_blank">Peng, Chapter 17</a>    |
+| Oct 12  | API and data scraping                              |  <a href="../lectures/13_api/api.html" target="_blank">📙</a>  |   |         |
 | Oct 14 | Data input, output, manipulation with R             |       |   |         |
 | Oct 19 | More data manipulation with R                           |       | <a href="../assignments/#homework-4" target="_blank">04</a>  |         |
 | Oct 26 | Data visualization with R                               |       |     |         |
