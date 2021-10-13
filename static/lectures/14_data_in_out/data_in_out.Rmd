@@ -1,0 +1,28 @@
+---
+title: "Data input and output"
+author: "Daijiang Li"
+date: "10/14/2021"
+output: 
+  html_document: 
+    toc: yes
+    highlight: kate
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Data input
+
+We can get data into R through keyboard, from the clipboard, or from an external file (local or online).
+
+We have learned the `c()` function to concatenate data as a vector.
+
+We can also use the `scan()` function if we want to type or paste a few numbers into a vector from the keyboard.
+
+**Demo**
+
+You can also use scan to paste in groups of numbers from the clipboard. In Excel, highlight the column of numbers you want, then type `Ctrl+C`. Now go back into R. At the 1: prompt just type `Ctrl+V` and the numbers will be scanned into R.
+
+**Demo**
+
