@@ -78,4 +78,4 @@ This homework will be due at **October 7th, 9am**. Please submit your homework a
    ```
 5. (2 points) For the vector with length of 107 you got from question 4, remove all **trailing `.`**. (hint: `?sub`). Then convert it to a numeric vector and find out which numbers have duplications (i.e., a tie in ranking). Don't count by eyes, use R to find it out (hint: `table()`, `sort()`; or `duplicated()`, `which()`, `[` subsetting; there are more than one way to do so).
 
-This homework will be due at **October 14th, 9am**.
+This homework will be due at **October 18th, 9am**.

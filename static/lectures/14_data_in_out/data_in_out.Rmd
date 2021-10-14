@@ -16,13 +16,159 @@ knitr::opts_chunk$set(echo = TRUE)
 
 We can get data into R through keyboard, from the clipboard, or from an external file (local or online).
 
+## From keyboard
+
 We have learned the `c()` function to concatenate data as a vector.
 
 We can also use the `scan()` function if we want to type or paste a few numbers into a vector from the keyboard.
 
 **Demo**
 
+## From clipboard
+
 You can also use scan to paste in groups of numbers from the clipboard. In Excel, highlight the column of numbers you want, then type `Ctrl+C`. Now go back into R. At the 1: prompt just type `Ctrl+V` and the numbers will be scanned into R.
 
 **Demo**
+
+```{r eval=FALSE}
+z <- scan("clipboard", what=numeric())
+# what=character(), sep=","
+```
+
+## From external files
+
+If you use Excel, try to export the data as text file (e.g., `.csv`, `tsv`). It is possible that you cannot open a 10-year old Excel file, but plain text files will always work.
+
+When write code to read files, always use *relative path* instead of absolute path.
+
+### Base R functions
+
+Existing datasets provided by the base package of R.
+
+```{r}
+data()
+```
+
+
+```{r}
+# read.table()
+args(read.table)
+
+read.table(file = "../02_proj_cycle/view.csv", header = TRUE, sep = ",")
+read.table(file = "../02_proj_cycle/view.csv", header = TRUE, sep = ",", row.names = 1)
+
+# read.delim()
+args(read.delim)
+# read.csv()
+args(read.csv)
+
+# read.table(file = file.choose()) # not recommended
+
+# readLines()
+args(readLines)
+
+# load()
+args(load) # .RData
+
+# x <- readRDS() # can rename it
+args(readRDS) # for individual file .rds
+```
+
+Some useful functions
+
+```{r eval=FALSE}
+dir.exists()
+dir.create()
+file.exists()
+file.create()
+```
+
+### Non-base packages/functions
+
+One of the most popular package is [`readr`](https://readr.tidyverse.org/), which is a core package of the `tidyverse`. From its webpage: 
+
+>The goal of readr is to provide a fast and friendly way to read rectangular data (like csv, tsv, and fwf). It is designed to flexibly parse many types of data found in the wild, while still cleanly failing when data unexpectedly changes. 
+
+-   `read_csv()`: comma separated (CSV) files
+-   `read_tsv()`: tab separated files
+-   `read_delim()`: general delimited files
+-   `read_fwf()`: fixed width files
+-   `read_table()`: tabular files where columns are separated by
+    white-space.
+-   `read_log()`: web log files
+
+
+```{r}
+library(readr)
+read_csv(readr_example("mtcars.csv"))
+```
+
+Other packages:
+
+- `haven` reads SPSS, Stata, and SAS files.
+- `readxl` reads excel files (both .xls and .xlsx).
+- For hierarchical data: use `jsonlite` for json, and `xml2` for XML
+
+**Large data?** If data size is too large to be read into R (R read data into memory), then R package `DBI`, along with a database specific backend (e.g. RMySQL, RSQLite, RPostgreSQL etc) allows you to run SQL queries against a database and return a data frame. Another useful package is [`dbplyr`](https://dbplyr.tidyverse.org/) if you are used to the `dplyr` package. `dbplyr` is the database backend for `dplyr.` It allows you to use remote database tables as if they are in-memory data frames by automatically converting dplyr code into SQL.
+
+The [`fst`](http://www.fstpackage.org/index.html) package for R provides a fast, easy and flexible way to serialize data frames. With access speeds of multiple GB/s, fst is specifically designed to unlock the potential of high speed solid state disks that can be found in most modern computers. Data frames stored in the fst format have full random access, both in column and rows.
+
+Also check out the [`vroom`](https://vroom.r-lib.org/) package: the fastest delimited reader for R, 1.23 GB/sec.
+
+
+
+# Data output
+
+After we finished data cleaning, we genrally want to save the cleaned data as external files so that we can use them directly next time.
+
+If the data size is relatively small, try to save data as plain text files such as `.csv` files. Otherwise, we can save data as compressed binary files. It will be smaller but will need specific tools (R here) to open them.
+
+## Base R functions
+
+With R or RStudio, when we quit, the program normally will ask us whether we want to save the workspace. If we choose so, every objects we created in R will be saved into one file (default to be `.RData`) at the root directory. Next time, when we open R or RStudio, this file will be automatically loaded so that we can have access to all objects we created previously (recall the `load()` in the data input section). This is convient, but **I don't recommend it** as your code may not be reproducible. For example, if we created an object but did not save the code; next time when we use R, we still have the object in our computer. But if we share the code with others, they won't be able to run it.
+
+In RStudio, I recommend to set the `Save the workspace as an image on exit` to `never`.
+
+It is better to save key objects/data as their own external files.
+
+```{r}
+# writeClipboard(as.character(numeric.variables)) # go to Excel, Ctrl+V
+
+# write.csv()
+args(write.csv)
+
+args(write.table)
+
+
+# save() # one or multiple objects
+args(save)
+
+args(save.image) # save all objects
+
+# saveRDS()
+args(saveRDS) # to save one object
+```
+
+
+## Non-base packages
+
+Again, `readr` has corresponding write functions. They are an improvement to analogous base R functions.
+
+```{r}
+# write_csv()
+args(write_csv)
+# write_rds()
+args(write_rds)
+```
+
+
+# Exercise
+
+Download this file: https://figshare.com/ndownloader/files/17461766 to your computer. Then try to read it into R. You can try `read.table`, `read.csv`, `read_csv`, etc.
+
+Then save it to your disk. Again, you can try `write.csv` or `write_csv` or `write_rds`.
+
+
+
+
 
