@@ -274,6 +274,7 @@ pre code {
 <li><a href="#base-r-functions-1">Base R functions</a></li>
 <li><a href="#non-base-packages">Non-base packages</a></li>
 </ul></li>
+<li><a href="#additional-file-related-functions">Additional file related functions</a></li>
 <li><a href="#exercise">Exercise</a></li>
 </ul>
 </div>
@@ -436,21 +437,13 @@ pre code {
 </ul>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="fu">readr_example</span>(<span class="st">&quot;mtcars.csv&quot;</span>))</span></code></pre></div>
+<pre><code>## Rows: 32 Columns: 11</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## dbl (11): mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   mpg = col_double(),
-##   cyl = col_double(),
-##   disp = col_double(),
-##   hp = col_double(),
-##   drat = col_double(),
-##   wt = col_double(),
-##   qsec = col_double(),
-##   vs = col_double(),
-##   am = col_double(),
-##   gear = col_double(),
-##   carb = col_double()
-## )</code></pre>
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre><code>## # A tibble: 32 × 11
 ##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -486,29 +479,29 @@ pre code {
 <p>With R or RStudio, when we quit, the program normally will ask us whether we want to save the workspace. If we choose so, every objects we created in R will be saved into one file (default to be <code>.RData</code>) at the root directory. Next time, when we open R or RStudio, this file will be automatically loaded so that we can have access to all objects we created previously (recall the <code>load()</code> in the data input section). This is convient, but <strong>I don’t recommend it</strong> as your code may not be reproducible. For example, if we created an object but did not save the code; next time when we use R, we still have the object in our computer. But if we share the code with others, they won’t be able to run it.</p>
 <p>In RStudio, I recommend to set the <code>Save the workspace as an image on exit</code> to <code>never</code>.</p>
 <p>It is better to save key objects/data as their own external files.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># writeClipboard(as.character(numeric.variables)) # go to Excel, Ctrl+V</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># write.csv()</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(write.csv)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># writeClipboard(as.character(numeric.variables)) # go to Excel, Ctrl+V</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># write.csv()</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(write.csv)</span></code></pre></div>
 <pre><code>## function (...) 
 ## NULL</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(write.table)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(write.table)</span></code></pre></div>
 <pre><code>## function (x, file = &quot;&quot;, append = FALSE, quote = TRUE, sep = &quot; &quot;, 
 ##     eol = &quot;\n&quot;, na = &quot;NA&quot;, dec = &quot;.&quot;, row.names = TRUE, col.names = TRUE, 
 ##     qmethod = c(&quot;escape&quot;, &quot;double&quot;), fileEncoding = &quot;&quot;) 
 ## NULL</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save() # one or multiple objects</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(save)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save() # one or multiple objects</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(save)</span></code></pre></div>
 <pre><code>## function (..., list = character(), file = stop(&quot;&#39;file&#39; must be specified&quot;), 
 ##     ascii = FALSE, version = NULL, envir = parent.frame(), compress = isTRUE(!ascii), 
 ##     compression_level, eval.promises = TRUE, precheck = TRUE) 
 ## NULL</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(save.image) <span class="co"># save all objects</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(save.image) <span class="co"># save all objects</span></span></code></pre></div>
 <pre><code>## function (file = &quot;.RData&quot;, version = NULL, ascii = FALSE, compress = !ascii, 
 ##     safe = TRUE) 
 ## NULL</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># saveRDS()</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(saveRDS) <span class="co"># to save one object</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># saveRDS()</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(saveRDS) <span class="co"># to save one object</span></span></code></pre></div>
 <pre><code>## function (object, file = &quot;&quot;, ascii = FALSE, version = NULL, compress = TRUE, 
 ##     refhook = NULL) 
 ## NULL</code></pre>
@@ -516,17 +509,63 @@ pre code {
 <div id="non-base-packages" class="section level2">
 <h2>Non-base packages</h2>
 <p>Again, <code>readr</code> has corresponding write functions. They are an improvement to analogous base R functions.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write_csv()</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(write_csv)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write_csv()</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(write_csv)</span></code></pre></div>
 <pre><code>## function (x, file, na = &quot;NA&quot;, append = FALSE, col_names = !append, 
-##     quote_escape = &quot;double&quot;, eol = &quot;\n&quot;, path = deprecated()) 
+##     quote = c(&quot;needed&quot;, &quot;all&quot;, &quot;none&quot;), escape = c(&quot;double&quot;, 
+##         &quot;backslash&quot;, &quot;none&quot;), eol = &quot;\n&quot;, num_threads = readr_threads(), 
+##     progress = show_progress(), path = deprecated(), quote_escape = deprecated()) 
 ## NULL</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write_rds()</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(write_rds)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write_rds()</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(write_rds)</span></code></pre></div>
 <pre><code>## function (x, file, compress = c(&quot;none&quot;, &quot;gz&quot;, &quot;bz2&quot;, &quot;xz&quot;), version = 2, 
-##     path = deprecated(), ...) 
+##     refhook = NULL, path = deprecated(), ...) 
 ## NULL</code></pre>
 </div>
+</div>
+<div id="additional-file-related-functions" class="section level1">
+<h1>Additional file related functions</h1>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.dirs</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;.&quot;</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(list.dirs)</span></code></pre></div>
+<pre><code>## function (path = &quot;.&quot;, full.names = TRUE, recursive = TRUE) 
+## NULL</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;data_in_out.html&quot; &quot;data_in_out.Rmd&quot;</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(list.files)</span></code></pre></div>
+<pre><code>## function (path = &quot;.&quot;, pattern = NULL, all.files = FALSE, full.names = FALSE, 
+##     recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, 
+##     no.. = FALSE) 
+## NULL</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;demo&quot;</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>){</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(i)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">sample</span>(letters, <span class="dv">10</span>),</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> <span class="fu">rpois</span>(<span class="dv">10</span>, <span class="at">lambda =</span> <span class="dv">1</span>))</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(d, <span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">&quot;demo/example_0&quot;</span>, i, <span class="st">&quot;.csv&quot;</span>))</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>){</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(i <span class="sc">*</span> <span class="dv">2</span>)</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">sample</span>(letters, <span class="dv">10</span>),</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> <span class="fu">rpois</span>(<span class="dv">10</span>, <span class="at">lambda =</span> <span class="dv">1</span>))</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(d, <span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">&quot;demo/test_0&quot;</span>, i, <span class="st">&quot;.csv&quot;</span>))</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a><span class="co"># demo use of list.files</span></span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;demo&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;example_01.csv&quot; &quot;example_02.csv&quot; &quot;example_03.csv&quot; &quot;example_04.csv&quot;
+## [5] &quot;test_01.csv&quot;    &quot;test_02.csv&quot;    &quot;test_03.csv&quot;    &quot;test_04.csv&quot;</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;demo&quot;</span>, <span class="at">full.names =</span> T)</span></code></pre></div>
+<pre><code>## [1] &quot;demo/example_01.csv&quot; &quot;demo/example_02.csv&quot; &quot;demo/example_03.csv&quot;
+## [4] &quot;demo/example_04.csv&quot; &quot;demo/test_01.csv&quot;    &quot;demo/test_02.csv&quot;   
+## [7] &quot;demo/test_03.csv&quot;    &quot;demo/test_04.csv&quot;</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;demo&quot;</span>, <span class="at">pattern =</span> <span class="st">&quot;2|4&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;example_02.csv&quot; &quot;example_04.csv&quot; &quot;test_02.csv&quot;    &quot;test_04.csv&quot;</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;demo&quot;</span>, <span class="at">pattern =</span> <span class="st">&quot;^test&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;test_01.csv&quot; &quot;test_02.csv&quot; &quot;test_03.csv&quot; &quot;test_04.csv&quot;</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>(<span class="st">&quot;rm -rf demo&quot;</span>)</span></code></pre></div>
+<p><strong>Challenge</strong>: how to read all files start with ‘test’ into R at once?</p>
 </div>
 <div id="exercise" class="section level1">
 <h1>Exercise</h1>

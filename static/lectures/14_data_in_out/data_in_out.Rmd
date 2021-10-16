@@ -161,6 +161,53 @@ args(write_csv)
 args(write_rds)
 ```
 
+# Additional file related functions
+
+```{r}
+list.dirs()
+args(list.dirs)
+list.files()
+args(list.files)
+```
+
+```{r}
+dir.create("demo")
+for(i in 1:4){
+  set.seed(i)
+  d = data.frame(x = sample(letters, 10),
+                 y = rpois(10, lambda = 1))
+  write.csv(d, file = paste0("demo/example_0", i, ".csv"))
+}
+
+for(i in 1:4){
+  set.seed(i * 2)
+  d = data.frame(x = sample(letters, 10),
+                 y = rpois(10, lambda = 1))
+  write.csv(d, file = paste0("demo/test_0", i, ".csv"))
+}
+
+# demo use of list.files
+list.files(path = "demo")
+list.files(path = "demo", full.names = T)
+list.files(path = "demo", pattern = "2|4")
+list.files(path = "demo", pattern = "^test")
+
+system("rm -rf demo")
+```
+
+**Challenge**: how to read all files start with 'test' into R at once?
+
+```{r include=FALSE}
+a = list.files(path = "demo", pattern = "^test", full.names = TRUE)
+aa = vector(mode = "list", length = 4)
+for(i in seq_along(a)){
+  aa[[i]] = read.csv(a[i])
+}
+do.call(rbind, aa)
+purrr::map_dfr(a, readr::read_csv, show_col_type = FALSE)
+```
+
+
 
 # Exercise
 
