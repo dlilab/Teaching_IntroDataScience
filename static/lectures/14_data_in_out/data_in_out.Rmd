@@ -149,6 +149,14 @@ args(save.image) # save all objects
 args(saveRDS) # to save one object
 ```
 
+# Naming things
+
+**Be sure to take a look at this [excellent slide](https://speakerdeck.com/jennybc/how-to-name-files)!**
+
+- Machine readable
+- Human readable
+- Plays well with default ordering
+
 
 ## Non-base packages
 
