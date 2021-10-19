@@ -79,3 +79,15 @@ This homework will be due at **October 7th, 9am**. Please submit your homework a
 5. (2 points) For the vector with length of 107 you got from question 4, remove all **trailing `.`**. (hint: `?sub`). Then convert it to a numeric vector and find out which numbers have duplications (i.e., a tie in ranking). Don't count by eyes, use R to find it out (hint: `table()`, `sort()`; or `duplicated()`, `which()`, `[` subsetting; there are more than one way to do so).
 
 This homework will be due at **October 18th, 9am**.
+
+## Homework 4
+
+1. (3 points) Use the `rvest` R package to scrape the schedule and materials **table** into R from the course webpage (https://introdatasci.dlilab.com/schedule_materials/). Read the [documentation of `rvest`](https://rvest.tidyverse.org/) so you get a better idea about the functions provided by `rvest` and their usages.
+2. (2 points) With the extracted data frame, create two new columns based on the `Date` column: `month` and `day`. `month` would be the month abbrevations from the `Date` column; `day` would be the numeric numbers from the `Date` column. Although you can use whatever approach to get this done (do not enter them by hand...), I suggest you try to practice regular expression here (`sub()` or `stringr::str_extract()`).
+3. (2 points) With the data frame generated from Q2, use `group_by()` and `summarise()` to find out the number of lectures for each `month`, order the results by the number of lectures (high to low).
+3. (3 points) For the `Topic` column, split all values into words (hint: `stringr::str_split()`). Observe the values in the `Topic` column and use regular expression to specify the `pattern` in the `stringr::str_split()` or `strsplit()` function. Once this is done, you should get a list of list, you can use `unlist()` to convert it into a vector and name it as `words`. Use `table()` and `sort()` to find the top 5 most frequent words. 
+
+I was thinking to have a homework to get all plant occurrence data within Baton Rouge from GBIF. But it will require you to register an account and have account name and password when you use the `rgbif` package. This may have the risk of get your password leaked (you can avoid this by reading the documentation of `rgbif`); so I decided not to do so. If you are interested, you may want to run some example codes from the [`rgbif` package's documentation](https://cran.r-project.org/web/packages/rgbif/rgbif.pdf).
+
+This homework will be due at **October 28th, 9am**.
+

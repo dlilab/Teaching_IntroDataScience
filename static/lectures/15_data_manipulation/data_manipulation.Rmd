@@ -79,6 +79,12 @@ We will skip these steps and leave it to the "Exploratory data analysis" lecture
 
 Instead, I will introduce some functions by tasks.
 
+**All verbs in `tidyverse` work similarly**:
+
+1. The first argument is a data frame.
+2. The subsequent arguments describe what to do with the data frame, using the variable names (without quotes).
+3. The result is a new data frame.
+
 ## How to select some columns/variables? `select()`
 
 This dataset is a data frame. So, we can always use the data frame subsetting codes we learned to select specific columns.
@@ -89,7 +95,7 @@ data_bird[, c("siteID", "plotID", "pointID", "observation_datetime",
               "latitude", "longitude", "elevation")]
 ```
 
-More conveniently, we can use the `select()` functions from `dplyr`.
+More conveniently, we can use the `select()` functions from [`dplyr`](https://dplyr.tidyverse.org/).
 
 ```{r}
 library(dplyr, warn.conflicts = FALSE)
@@ -147,6 +153,99 @@ mutate(data_bird, lat_band = ifelse(latitude > 45, "high", "low")) %>%
 mutate(data_bird, siteID = recode(siteID, "BART" = "BART2"))
 ```
 
+## How to get summary values for each group? `summarise()`
 
+Suppose we want to calculate the number of species observed (species richness) at each site, how should we get such values? We can combine `summarise()` with `group_by()`.
+
+```{r}
+data_bird %>% 
+  group_by(siteID)
+
+sp_rich_by_site <- data_bird %>% 
+  group_by(siteID) %>% 
+  summarise(sp_richness = n_distinct(taxon_id))
+# same as length(unique(taxon_id))
+sp_rich_by_site
+
+# data can be grouped by multiple variables
+sp_rich_by_site_point <- data_bird %>% 
+  group_by(siteID, pointID) %>% 
+  summarise(sp_richness = n_distinct(taxon_id),
+            .groups = "drop")
+sp_rich_by_site_point
+
+# summarise() can have multiple calculations
+data_bird %>% 
+  group_by(siteID, pointID) %>% 
+  summarise(sp_richness = n_distinct(taxon_id),
+            abundance = sum(value),
+            n_obs = n(),
+            .groups = "drop")
+```
+
+## How to order the rows? `arrange()`
+
+For the `sp_rich_by_site_point` data frame, how do we order the rows by `sp_richness` (high to low)?
+
+```{r}
+arrange(sp_rich_by_site_point, desc(sp_richness))
+```
+
+## How to remove rows (observations) with `NA` of latitude? `drop_na()`
+
+Observations without latitude probably won't be that useful, how should we remove them? We can do so with Base R:
+
+```{r}
+mean(is.na(data_bird$latitude))
+data_bird[!is.na(data_bird$latitude), ]
+```
+
+Or with `filter()`:
+
+```{r}
+filter(data_bird, !is.na(latitude))
+```
+
+Or with the `drop_na()` function from `tidyr` package.
+
+```{r}
+tidyr::drop_na(data_bird, latitude)
+```
+
+## How to combine multiple operations? `%>%`
+
+So, each of the above verb can be useful. They do one thing and do that well. We can combine them with the pipe `%>%` together to do complex things at once. This would remove the need to name intermediate results. 
+
+For example, if we want to 1) remove `NA` in latitude, then 2) select only key variables, and 3) focus on some specific sites, and 4) calculate species richness of each site. 
+
+Without pipe, we need to do this:
+
+```{r}
+d = tidyr::drop_na(data_bird, latitude)
+d1 = select(d, siteID, taxon_id, value)
+d2 = filter(d1, siteID %in% c("BART", "HARV", "BLAN"))
+d3 = group_by(d2, siteID)
+summarise(d3, sp_richness = n_distinct(taxon_id))
+```
+
+With pipe, we don't need to save intermediate variables:
+
+```{r}
+data_bird %>% 
+  tidyr::drop_na(latitude) %>% # d
+  select(siteID, taxon_id, value) %>% # d1
+  filter(siteID %in% c("BART", "HARV", "BLAN")) %>% # d2
+  group_by(siteID) %>% # d3
+  summarise(sp_richness = n_distinct(taxon_id))
+```
+
+# More functions if time allows...
+
+- `left_join()`, `right_join()`, `full_join()`, etc.
+- [`tidyr`](https://tidyr.tidyverse.org/): 
+    + `pivot_wider()`, `pivot_longer()`
+    + `separate()`
+
+# Otherwise, see the [RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
 
  
