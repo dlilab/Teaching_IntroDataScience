@@ -45,17 +45,17 @@ td, th {
 | Oct 5  | R programming basics: loops, apply                      |   <a href="../lectures/11_loops/loops.html" target="_blank">📙</a>      |     |         |
 | Oct 7  | Strings and Regular expressions                         |   <a href="../lectures/12_strings/strings.html" target="_blank">📙</a>     | <a href="../assignments/#homework-3" target="_blank">03</a>  |   <a href="https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html" target="_blank">Peng, Chapter 17</a>    |
 | Oct 12  | API and data scraping                              |  <a href="../lectures/13_api/api.html" target="_blank">📙</a>  |   |         |
-| Oct 14 | Data input, output, manipulation with R             |  <a href="../lectures/14_data_in_out/data_in_out.html" target="_blank">📙</a>       |   |   <a href="https://r4ds.had.co.nz/data-import.html" target="_blank">Hadley, Chapter 11</a>   |
-| Oct 19 | More data manipulation with R                           |  <a href="../lectures/15_data_manipulation/data_manipulation.html" target="_blank">📙</a>  | <a href="../assignments/#homework-4" target="_blank">04</a>  |  <a href="https://r4ds.had.co.nz/transform.html" target="_blank">Hadley, Chapter 5</a>   |
-| Oct 26 | Data visualization with R                               |       |     |         |
-| Oct 28 | Spatial data visualization                              |       |  <a href="../assignments/#homework-5" target="_blank">05</a>  |         |
+| Oct 14 | Data input and output             |  <a href="../lectures/14_data_in_out/data_in_out.html" target="_blank">📙</a>       |   |   <a href="https://r4ds.had.co.nz/data-import.html" target="_blank">Hadley, Chapter 11</a>   |
+| Oct 19 | Data manipulation with R                           |  <a href="../lectures/15_data_manipulation/data_manipulation.html" target="_blank">📙</a>  | <a href="../assignments/#homework-4" target="_blank">04</a>  |  <a href="https://r4ds.had.co.nz/transform.html" target="_blank">Hadley, Chapter 5</a>   |
+| Oct 26 | More data manipulation with R                           |  <a href="../lectures/15_data_manipulation/data_manipulation.html" target="_blank">📙</a>  |  |  <a href="https://r4ds.had.co.nz/transform.html" target="_blank">Hadley, Chapter 5</a>   |
+| Oct 28 | Data visualization with R                               |       |  <a href="../assignments/#homework-5" target="_blank">05</a>  |         |
 | Nov 2  | Exploratory data analysis                               |       |     |         |
 | Nov 4  | Regression methods                                      |       | <a href="../assignments/#homework-6" target="_blank">06</a>   |         |
 | Nov 9  | More on Regression methods                              |       |     |         |
 | Nov 11 | Write your own functions                                |       |  <a href="../assignments/#homework-7" target="_blank">07</a>  |         |
 | Nov 16 | Write your own R package                                |       |     |         |
 | Nov 18 | Open Science and automating things with Makefile        |       |     |         |
-| Nov 23 | Ethics in data science                                  |       |     |         |
+| Nov 23 | Ethics in data science (virtual)                        |       |     |         |
 | Nov 25 | Thanksgiving, _no class_                                |       |     |         |
 | Nov 30 | Final project presentation                              |       |     |         |
 | Dec 2  | Final project presentation and wrap up                  |       |     |         |

@@ -1,7 +1,7 @@
 ---
 title: "Data manipulation"
 author: "Daijiang Li"
-date: "10/14/2021"
+date: "10/19/2021"
 output: 
   html_document: 
     toc: yes
@@ -239,13 +239,54 @@ data_bird %>%
   summarise(sp_richness = n_distinct(taxon_id))
 ```
 
-# More functions if time allows...
+## How to derive a site by species matrix (*wide* data frame) from a *long* data frame? `pivot_wider()`
 
-- `left_join()`, `right_join()`, `full_join()`, etc.
-- [`tidyr`](https://tidyr.tidyverse.org/): 
-    + `pivot_wider()`, `pivot_longer()`
-    + `separate()`
+The current `data_bird` data frame is a _long_ data frame: each row is an observation, each column is a variable, each cell is a single value. To learn more about **tidy data**, see [here](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html).
 
-# Otherwise, see the [RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+Some times we need to reshape the long data frame into a wide format: a site by species matrix, with cells to be presence/absence or abundance values. How to do this?
+
+```{r}
+library(tidyr)
+# let's select relevant columns first to make it simpler
+d = select(data_bird, siteID, plotID, taxon_id, value) %>% 
+  distinct() # remove duplicated rows
+d
+# aggregate first
+d_long = d %>% 
+  group_by(siteID, plotID, taxon_id) %>% 
+  summarise(abundance = sum(value, na.rm = TRUE), .groups = "drop")
+d_long
+d_wide = pivot_wider(d_long, 
+                     id_cols = c(siteID, plotID),
+                     names_from = taxon_id, 
+                     values_from = abundance,
+                     values_fill = 0)
+d_wide
+
+# we can convert it back to long format
+d_wide %>% 
+  pivot_longer(cols = -c(siteID, plotID),
+               names_to = "taxon_id",
+               values_to = "abundance") %>% 
+  filter(abundance > 0)
+```
+
+## How to add information from another data frame to a data frame? `left_join()`
+
+Here is another data frame that contains site information.
+
+```{r}
+neonDivData::neon_sites
+```
+
+How can we add the site information to `d_wide`?
+
+```{r}
+unique(d_wide$siteID)
+d_wide_site = left_join(d_wide[, 1:5], neonDivData::neon_sites, by = "siteID")
+d_wide_site
+```
+
+# To learn more, check out the [RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
 
  
