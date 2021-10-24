@@ -48,7 +48,7 @@ td, th {
 | Oct 14 | Data input and output             |  <a href="../lectures/14_data_in_out/data_in_out.html" target="_blank">📙</a>       |   |   <a href="https://r4ds.had.co.nz/data-import.html" target="_blank">Hadley, Chapter 11</a>   |
 | Oct 19 | Data manipulation with R                           |  <a href="../lectures/15_data_manipulation/data_manipulation.html" target="_blank">📙</a>  | <a href="../assignments/#homework-4" target="_blank">04</a>  |  <a href="https://r4ds.had.co.nz/transform.html" target="_blank">Hadley, Chapter 5</a>   |
 | Oct 26 | More data manipulation with R                           |  <a href="../lectures/15_data_manipulation/data_manipulation.html" target="_blank">📙</a>  |  |  <a href="https://r4ds.had.co.nz/transform.html" target="_blank">Hadley, Chapter 5</a>   |
-| Oct 28 | Data visualization with R                               |       |  <a href="../assignments/#homework-5" target="_blank">05</a>  |         |
+| Oct 28 | Data visualization with R                               |       |  <a href="../assignments/#homework-5" target="_blank">05</a>  |  <a href="https://web.stanford.edu/class/bios221/book/Chap-Graphics.html" target="_blank">Holmes and Huber, Chapter 3</a>   |
 | Nov 2  | Exploratory data analysis                               |       |     |         |
 | Nov 4  | Regression methods                                      |       | <a href="../assignments/#homework-6" target="_blank">06</a>   |         |
 | Nov 9  | More on Regression methods                              |       |     |         |
