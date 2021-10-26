@@ -183,6 +183,19 @@ data_bird %>%
             .groups = "drop")
 ```
 
+### Exercise
+
+Install the following data package.
+
+```{r}
+if(!require(palmerpenguins)) install.packages("palmerpenguins")
+palmerpenguins::penguins
+```
+
+1. For each species and island combination, find the average body mass and bill length.
+2. For the same species, do male penguins have larger body mass than females?
+
+
 ## How to order the rows? `arrange()`
 
 For the `sp_rich_by_site_point` data frame, how do we order the rows by `sp_richness` (high to low)?
