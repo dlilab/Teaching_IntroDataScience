@@ -1,0 +1,219 @@
+---
+title: "Regression"
+author: "Daijiang Li"
+date: "11/04/2021"
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Statistics is a discipline where relatively simple models are applied to approximately describe “random" phenomena observed in the real world and inference/prediction are made.
+
+## Basic
+
+Regression is one of the most basic but fundamental statistical tools.
+
+- Random variable _Y_
+    + Normal distribution $Y \sim N(\mu, \sigma^2)$
+    + Binomial $Y \sim B(n, \pi)$
+- Sampling and sampling distribution of $\bar{Y}$, $S^2$
+- Statistical inference
+    + Hypothesis testing
+    + Confidence intervals
+    + Prediction intervals
+- Simple linear regression $Y = \beta_0 + \beta_1X+\varepsilon$
+    + $Y$: response variable (or independent variable)
+    + $X$: Predictor variable (or independent variable, explanatory variable, covariate).
+    + $\varepsilon$: Random error (or random disturbance).
+    + $\beta_0$, $\beta_1$: Regression coefficients.
+        + $\beta_0$: Intercept (expected value of Y when X = 0).
+        + $\beta_1$: Slope (expected change in Y for unit increase in X).
+        
+For observations $i = 1,2, ..., n$,
+
+$$y_i = \beta_0 + \beta_1x_i+\varepsilon_i$$
+where
+$$\varepsilon_i \sim iidN(0, \sigma^2)$$
+
+- $y_i$: *i*th value of the response variable Y.
+- $x_i$: *i*th value of the predictor variable X.
+- $\varepsilon_i$ : Random error in the approximation of $y_i$. 
+- iid: Identically and independently distributed. 
+- $n$: Sample size.
+
+**Model assumptions**:
+
+- The simple linear regression model is correct: $E(Y) = \beta_0 + \beta_1X$.
+- The errors $\varepsilon_i$ are independent.
+- The errors $\varepsilon_i$ have equal variance: $Var(\varepsilon_i) = \sigma^2$.
+- The errors $\varepsilon_i$ have normal distribution: $\varepsilon_i ∼ N(0, \sigma^2)$.
+
+**Model fitting by least squares**: residual sum of squares (RSS) 
+
+$$ 
+RSS = \sum_{i=1}^n \left\{  y_i - \left(\beta_0 + \beta_1 x_i \right)\right\}^2 
+$$
+
+Find $\beta_0$ and $\beta_1$ that have the lowest RSS. For mathmatical details, read a book on linear models.
+
+## Example
+
+A study was conducted to evaluate the utilization of phosphorus (P) by 9 corn plants. The data consist of x, the inorganic P in soil (ppm), and y, the plant-available P (ppm).
+
+```{r}
+d = data.frame(x = c(1, 4, 5, 9, 13, 11, 23, 23, 28),
+               y = c(64, 71, 54, 81, 93, 76, 77, 95, 109))
+plot(d$x, d$y, xlab = "Soil inorganic P", ylab = "Plant available P")
+cor(d$x, d$y)
+fit_d = lm(y ~ x, data = d)
+summary(fit_d)
+# beta 0
+coef(fit_d)[1]
+# beta 1  Units??
+coef(fit_d)["x"]
+```
+
+So, the linear regression line for this dataset is
+
+$$\hat{Y} = 61.58 + 1.417 X$$
+
+**Tests of Hypotheses**:
+
+- A specific test of hypothesis about the slope $H_0 :\beta_1 = 0$ can be conducted by either F-test using the idea of analysis of variance (ANOVA) or T-test.
+- More general test of hypothesis about the slope $H_0 :\beta_1 = \beta_{1}^0$ or about the intercept $H_0 :\beta_0 = \beta_{0}^0$ can be conducted by T-test.
+
+### ANOVA
+
+Partition the sum of squares (SS)
+
+$$SST=SSR+SSE$$
+with 
+
+$$SST=\mathop{\Sigma_{i=1}^{n}(y_{i}-\bar{y})^{2},df=n-1}$$
+$$SSR=\Sigma_{i=1}^{n}(\hat{y}_{i}-\bar{y})^{2},df=1$$
+$$SSE=\Sigma_{i=1}^{n}(y_{i}-\hat{y}_{i})^{2}=SST-SSR,df=n-2$$
+
+![anova](https://bookdown.org/egarpor/SSS2-UC3M/images/R/anova.png)
+
+ANOVA table:
+
+| Source     | df  | SS  | MS  | F       |
+|------------|-----|-----|-----|---------|
+| Regression | 1   | SSR | MSR | MSR/MSE |
+| Error      | n-2 | SSE | MSE |         |
+| Total      | n-1 | SST |     |         |
+
+Distribution under $H_0 :\beta_1 = 0$,
+
+$$F=\frac{MSR}{MSE}\sim F_{1,n-2}$$
+Estimate the error variance $\sigma^2$: 
+
+$$\hat{\sigma}^{2}=MSE=\frac{SSE}{n-2}$$
+
+```{r}
+anova(fit_d)
+```
+
+Thus, reject $H_0$ at the 5% level. There is strong evidence of a relationship between soil inorganic P and plant-available P.
+
+### T-test for $H_0 :\beta_1 = 0$
+
+Distribution under $H_0 :\beta_1 = 0$,
+
+$$T=\frac{\hat{\beta_{1}}-0}{s.e.(\hat{\beta_{1}})}\sim T_{n-2}$$
+
+$$s.e.(\hat{\beta_{1}})=\frac{\hat{\sigma}}{\sqrt{\sum_{i=1}^{n}(x_{i}-\bar{x})^{2}}},\hat{\sigma}=\sqrt{MSE}$$
+
+```{r}
+summary(fit_d)
+```
+
+Thus, reject $H_0$ at the 5% level. Same conclusion as the F test above.
+
+**Note**: in simple linear regression only, $t^{2}=(3.59)^{2}=12.887=f$
+
+```{r}
+plot(d$x, d$y, xlab = "Soil inorganic P", ylab = "Plant available P")
+abline(fit_d)
+```
+
+### Confidence interval for $\beta_0$ and $\beta_1$
+
+The (1 − α) × 100% confidence interval for $\beta_1$ is
+
+$$\hat{\beta_{1}}\pm t_{n-2,\alpha/2}\times s.e.(\hat{\beta_{1}})$$
+
+The (1 − α) × 100% confidence interval for $\beta_0$ is
+
+$$\hat{\beta_{0}}\pm t_{n-2,\alpha/2}\times s.e.(\hat{\beta_{0}})$$
+
+Exercise: $t_{7,0.025}=2.36$, calculate the 95% CI of $\beta_0$ and $\beta_1$.
+
+```{r, eval=FALSE}
+confint(fit_d)
+```
+
+
+### Measuring the quality of fit
+
+1. Strength of the linear relationship: F test or T test.
+2. Sample correlation between Y and X.
+3. Sample correlation between Y and $\hat{Y}$.
+4. The coefficient of determination: $R^{2}=\frac{SSR}{SST}$
+
+```{r}
+x = summary(fit_d)
+x
+x$r.squared
+```
+
+
+### Prediction of Y
+
+Estimate (predict) Y at a given $X=x_{0}$ by $\hat{y_{0}}=\hat{\beta_{0}}+\hat{\beta_{1}}x_{0}$
+
+*But the standard error of the prediction depends on the objective*.
+
+- $\hat{y_{0}}$ is a _predictor_ of a new/future observation at $x_{0}$ (prediction interval)
+- $\hat{y_{0}}$ is an estimator of the _expected_ value $y_{0}=E(Y|X=x_{0})=\beta_{0}+\beta_{1}x_{0}$ (confidence interval)
+
+```{r}
+predict(fit_d, newdata = data.frame(x = 18), interval = "prediction")
+predict(fit_d, newdata = data.frame(x = 18), interval = "confidence")
+```
+
+### Model Diagnostics
+
+Correct inference hinges on correct (reasonable) model assumptions. Hence it is important to evaluate the model assumptions, that is, to perform model diagnostics. Our approach is to examine the residuals.
+
+Raw residual = Observed value − Fitted value
+
+A simple and effective method for model diagnostics is the examination of residual plots.
+
+- Normal probability plot: The plot of ordered residuals versus normal scores. Check the normality assumption (a nearly straight line).
+- Scatter plot of residual ($\varepsilon_i$) against predictor variable ($x_i$). Check the linearity and equal-variance assumption (random scatter).
+- Scatter plot of residual ($\varepsilon_i$) against response variable ($y_i$). Check the linearity and equal-variance assumption (random scatter).
+- Index plot: The plot of residuals against the observation number. Check the independence assumption (e.g., over time or space).
+
+
+*Possible Patterns in Residual Plots*:
+
+- Curvature: Non-linearity.
+- Fan shape: Unequal variances.
+- Outlier: Extremely large residuals.
+- There are no golden rules nor magic formulas.
+- Decision may be difficult to make for small sample size. However, small/minor violations of the model assumptions do not invalidate conclusions in a major way.
+- Gross violations of the model assumptions can seriously alter conclusions.
+- Model diagnostics help achieve a thorough and informative analysis of the data.
+- Some formal testing procedures are available, such as a formal test for outliers.
+
+
+```{r}
+par(mfrow = c(2, 2))
+plot(fit_d)
+```
+
+
+*Cook’s distance* measures the influence of the _i_th observation on all n fitted values. A practical rule: If Di > 1, investigate the _i_th observation as possibly influential.
