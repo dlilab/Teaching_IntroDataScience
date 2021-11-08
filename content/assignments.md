@@ -110,3 +110,57 @@ In the `neonDivData` data package, there is a data frame named as `data_plant`. 
    ![hw5](../images/hw5.png)
 
 This homework will be due at **November 4th, 9am**.
+
+## Homework 6
+
+**Note: Please please please write some text in your answers, do not just put R code there! Also, you should have a PDF file along with the Rmd file in your homework folder.** For this homework, you can use R to get answers except 1c, where you should have a hand-calculated solution (show the process); you can use R code to verify your answer though. If you assigned anything as an object in R for your answers, remember to print it out so that I can see your results. 
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<ol style="list-style-type: decimal">
+<li><p>The data consist of a predictor variable x, plant height, and a response variable y, grain yield, for eight varieties of rice.</p></li>
+
+   ```r
+   variety = 1:8
+   x = c(110.5, 105.4, 118.1, 104.5, 93.6, 84.1, 77.8, 75.6)
+   y = c(5.755, 5.939, 6.010, 6.545, 6.730, 6.750, 6.899, 7.862)
+   ```
+   </ol>
+   <p>Consider fitting a simple linear regression model <span class="math inline">\(y_i = \beta_0 + \beta_1x_i+\varepsilon_i\)</span> where <span class="math inline">\(\varepsilon_i \sim iidN(0, \sigma^2)\)</span>, i = 1, 2, …, 8.</p>
+   <ol style="list-style-type: lower-alpha">
+   <li>Give the least squares estimate (<span class="math inline">\(\hat{\beta_{1}}\)</span>) of the slope <span class="math inline">\(\beta_{1}\)</span>. Give a brief interpretation of <span class="math inline">\(\hat{\beta_{1}}\)</span>.</li>
+   <li>Perform a test for <span class="math inline">\(H_{0}:\beta_{1}=0\)</span> versus <span class="math inline">\(H_{a}:\beta_{1}\neq0\)</span> using an F test first and then a T test.</li>
+   <li>Construct a 95% confidence interval for the intercept <span class="math inline">\(\beta_{0}\)</span> by hand using the equation from the lecture, compare your results with those from R and briefly interpret the 95% confidence interval. You can get <span class="math inline">\(t_{n-2,\alpha/2}\)</span> using R code <code>qt(alpha/2, n-2)</code> where alpha is 0.05 here.</li>
+   <li>Give the fitted regression line (as a equation that looks like <span class="math inline">\(\hat{y}=a+bx\)</span>) and the raw residuals.</li>
+   <li>Give an estimate (<span class="math inline">\(\hat{\sigma}^{2}\)</span>) of the error variance (<span class="math inline">\(\sigma^{2}\)</span>).</li>
+   <li>Estimate the expected yield of a rice variety (<span class="math inline">\(\mu_{0}\)</span>) that has height <span class="math inline">\(x_{0}=100\)</span> and provide a 95% confidence interval.</li>
+   <li>Predict the yield of a new rice variety that has height <span class="math inline">\(x_{0}=100\)</span>
+and provide a 95% prediction interval. Compare the results with those
+from (f), which one is wider?</li>
+   <li>Compute the coefficient of determination <span class="math inline">\(R^{2}\)</span> and briefly
+interpret what does it mean.</li>
+   </ol>
+
+2. <p>This problem is designed to demonstrate why residuals are plotted against <span class="math inline">\(\hat{y}\)</span> (instead of <span class="math inline">\(y\)</span>). Consider the following (artificial) data set that was constructed so that the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> is quadratic. It is immediately evident that a linear fit is not appropriate. However, we adopt the point of view that the residual plot will provide diagnostic information on the lack of fit.</p>
+
+
+   ```r
+   x = c(1, 2, 3, 4, 5, 6, 7, 8, 9)
+   y = c(-2.08, -0.72, 0.28, 0.92, 1.20, 1.12, 0.68, -0.12, -1.28)
+   ```
+   
+   </ol>
+   <ol style="list-style-type: lower-alpha">
+   <li><p>Plot <span class="math inline">\(y\)</span> vs. <span class="math inline">\(x\)</span>.</p></li>
+   <li><p>Plot the raw residuals vs. <span class="math inline">\(y\)</span>.</p></li>
+   <li><p>Plot the raw residuals vs. <span class="math inline">\(x\)</span>.</p></li>
+   <li><p>Plot the raw residuals vs. <span class="math inline">\(\hat{y}\)</span>.</p></li>
+   <li><p>Give the simple linear regression least squares estimates for the intercept (<span class="math inline">\(\hat{\beta_{0}}\)</span>) and the slope (<span class="math inline">\(\hat{\beta_{1}}\)</span>).</p></li>
+   <li><p>Compare the plots from (b), (c), and (d). Is there a meaningful difference between (c) and (d)? Explain. Which of the plots (b) or (d) gives a better indication of the lack of fit? Explain.</p></li>
+   </ol>
+   <p>Note: If you were to compute the correlation between <span class="math inline">\(\hat{y}\)</span> and the raw residuals, you would find this to be 0. If you compute the correlation between the observed <span class="math inline">\(y\)</span> and the raw residuals, you find that this is <span class="math inline">\(\sqrt{1-R^{2}}\)</span> where <span class="math inline">\(R^{2}=SSR/SST\)</span>. It is the absence of correlation in plot (d) — and also plot (c) — that is important. No computations of correlation are required in this problem, but you may give it a try in R.</p>
+
+
+This homework will be due at **November 15th, 9am**.
+
