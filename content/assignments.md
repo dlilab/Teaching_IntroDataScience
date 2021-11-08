@@ -122,23 +122,23 @@ This homework will be due at **November 4th, 9am**.
 <li><p>The data consist of a predictor variable x, plant height, and a response variable y, grain yield, for eight varieties of rice.</p></li>
 
    ```r
-   variety = 1:8
    x = c(110.5, 105.4, 118.1, 104.5, 93.6, 84.1, 77.8, 75.6)
    y = c(5.755, 5.939, 6.010, 6.545, 6.730, 6.750, 6.899, 7.862)
    ```
+   
    </ol>
    <p>Consider fitting a simple linear regression model <span class="math inline">\(y_i = \beta_0 + \beta_1x_i+\varepsilon_i\)</span> where <span class="math inline">\(\varepsilon_i \sim iidN(0, \sigma^2)\)</span>, i = 1, 2, …, 8.</p>
    <ol style="list-style-type: lower-alpha">
-   <li>Give the least squares estimate (<span class="math inline">\(\hat{\beta_{1}}\)</span>) of the slope <span class="math inline">\(\beta_{1}\)</span>. Give a brief interpretation of <span class="math inline">\(\hat{\beta_{1}}\)</span>.</li>
-   <li>Perform a test for <span class="math inline">\(H_{0}:\beta_{1}=0\)</span> versus <span class="math inline">\(H_{a}:\beta_{1}\neq0\)</span> using an F test first and then a T test.</li>
-   <li>Construct a 95% confidence interval for the intercept <span class="math inline">\(\beta_{0}\)</span> by hand using the equation from the lecture, compare your results with those from R and briefly interpret the 95% confidence interval. You can get <span class="math inline">\(t_{n-2,\alpha/2}\)</span> using R code <code>qt(alpha/2, n-2)</code> where alpha is 0.05 here.</li>
-   <li>Give the fitted regression line (as a equation that looks like <span class="math inline">\(\hat{y}=a+bx\)</span>) and the raw residuals.</li>
-   <li>Give an estimate (<span class="math inline">\(\hat{\sigma}^{2}\)</span>) of the error variance (<span class="math inline">\(\sigma^{2}\)</span>).</li>
-   <li>Estimate the expected yield of a rice variety (<span class="math inline">\(\mu_{0}\)</span>) that has height <span class="math inline">\(x_{0}=100\)</span> and provide a 95% confidence interval.</li>
-   <li>Predict the yield of a new rice variety that has height <span class="math inline">\(x_{0}=100\)</span>
+   <li>(1 point) Give the least squares estimate (<span class="math inline">\(\hat{\beta_{1}}\)</span>) of the slope <span class="math inline">\(\beta_{1}\)</span>. Give a brief interpretation of <span class="math inline">\(\hat{\beta_{1}}\)</span>.</li>
+   <li>(1 point) Perform a test for <span class="math inline">\(H_{0}:\beta_{1}=0\)</span> versus <span class="math inline">\(H_{a}:\beta_{1}\neq0\)</span> using an F test first and then a T test. Your conclusion?</li>
+   <li>(1 point) Construct a 95% confidence interval for the intercept <span class="math inline">\(\beta_{0}\)</span> by hand using the equation from the lecture, compare your results with those from R and briefly interpret the 95% confidence interval. You can get <span class="math inline">\(t_{n-2,\alpha/2}\)</span> using R code <code>qt(alpha/2, n-2)</code> where alpha is 0.05 here.</li>
+   <li>(1 point) Give the fitted regression line (as a equation that looks like <span class="math inline">\(\hat{y}=a+bx\)</span>) and the raw residuals.</li>
+   <li>(1 point) Give an estimate (<span class="math inline">\(\hat{\sigma}^{2}\)</span>) of the error variance (<span class="math inline">\(\sigma^{2}\)</span>).</li>
+   <li>(1 point) Estimate the expected yield of a rice variety (<span class="math inline">\(\mu_{0}\)</span>) that has height <span class="math inline">\(x_{0}=100\)</span> and provide a 95% confidence interval.</li>
+   <li>(1 point) Predict the yield of a new rice variety that has height <span class="math inline">\(x_{0}=100\)</span>
 and provide a 95% prediction interval. Compare the results with those
 from (f), which one is wider?</li>
-   <li>Compute the coefficient of determination <span class="math inline">\(R^{2}\)</span> and briefly
+   <li>(1 point) Compute the coefficient of determination <span class="math inline">\(R^{2}\)</span> and briefly
 interpret what does it mean.</li>
    </ol>
 
@@ -152,12 +152,11 @@ interpret what does it mean.</li>
    
    </ol>
    <ol style="list-style-type: lower-alpha">
-   <li><p>Plot <span class="math inline">\(y\)</span> vs. <span class="math inline">\(x\)</span>.</p></li>
-   <li><p>Plot the raw residuals vs. <span class="math inline">\(y\)</span>.</p></li>
-   <li><p>Plot the raw residuals vs. <span class="math inline">\(x\)</span>.</p></li>
-   <li><p>Plot the raw residuals vs. <span class="math inline">\(\hat{y}\)</span>.</p></li>
-   <li><p>Give the simple linear regression least squares estimates for the intercept (<span class="math inline">\(\hat{\beta_{0}}\)</span>) and the slope (<span class="math inline">\(\hat{\beta_{1}}\)</span>).</p></li>
-   <li><p>Compare the plots from (b), (c), and (d). Is there a meaningful difference between (c) and (d)? Explain. Which of the plots (b) or (d) gives a better indication of the lack of fit? Explain.</p></li>
+   <li><p>(0.25 point) Plot <span class="math inline">\(y\)</span> vs. <span class="math inline">\(x\)</span>.</p></li>
+   <li><p>(0.25 point) Plot the raw residuals vs. <span class="math inline">\(y\)</span>.</p></li>
+   <li><p>(0.25 point) Plot the raw residuals vs. <span class="math inline">\(x\)</span>.</p></li>
+   <li><p>(0.25 point) Plot the raw residuals vs. <span class="math inline">\(\hat{y}\)</span>.</p></li>
+   <li><p>(1 point) Compare the plots from (b), (c), and (d). Is there a meaningful difference between (c) and (d)? Explain. Which of the plots (b) or (d) gives a better indication of the lack of fit? Explain.</p></li>
    </ol>
    <p>Note: If you were to compute the correlation between <span class="math inline">\(\hat{y}\)</span> and the raw residuals, you would find this to be 0. If you compute the correlation between the observed <span class="math inline">\(y\)</span> and the raw residuals, you find that this is <span class="math inline">\(\sqrt{1-R^{2}}\)</span> where <span class="math inline">\(R^{2}=SSR/SST\)</span>. It is the absence of correlation in plot (d) — and also plot (c) — that is important. No computations of correlation are required in this problem, but you may give it a try in R.</p>
 
