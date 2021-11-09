@@ -51,7 +51,7 @@ td, th {
 | Oct 28 | Data visualization with R                               |  <a href="../lectures/16_data_visualization/data_visualization.html" target="_blank">📙</a>   |  <a href="../assignments/#homework-5" target="_blank">05</a>  |  <a href="https://web.stanford.edu/class/bios221/book/Chap-Graphics.html" target="_blank">Holmes and Huber, Chapter 3</a>   |
 | Nov 2  | Exploratory data analysis                               |    <a href="../lectures/17_EDA/exploratory_data_analysis.html" target="_blank">📙</a>    |     |  <a href="https://r4ds.had.co.nz/exploratory-data-analysis.html" target="_blank">Hadley, Chapter 7</a>    |
 | Nov 4  | Regression methods                                      |  <a href="../lectures/18_regression/regression.html" target="_blank">📙</a>   | <a href="../assignments/#homework-6" target="_blank">06</a>   |         |
-| Nov 9  | More on Regression methods                              |       |     |         |
+| Nov 9  | More on Regression methods                              |  <a href="../lectures/19_regression_2/regression_2.html" target="_blank">📙</a>   |     |   <a href="https://bookdown.org/ekothe/navarro26/regression.html" target="_blank">Navarro, Chapter 15</a>   |
 | Nov 11 | Write your own functions                                |       |     |         |
 | Nov 16 | Write your own R package                                |       |   <a href="../assignments/#homework-7" target="_blank">07</a>  |         |
 | Nov 18 | Open Science and automating things with Makefile        |       |     |         |

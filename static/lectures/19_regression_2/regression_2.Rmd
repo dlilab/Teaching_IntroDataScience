@@ -1,0 +1,154 @@
+---
+title: "Regression"
+author: "Daijiang Li"
+date: "11/09/2021"
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Formulas
+
+In regression models (and plots sometimes), we need to use formulas to express relationships between variables. R provides a *formula* class for this purpose.
+
+```{r}
+sample_f = as.formula(y ~ x1 + x2 + x3)
+sample_f
+class(sample_f)
+typeof(sample_f)
+```
+
+Here is an explanation of the meaning of different items in formulas:
+
+- Variable names: varaibles that hold the data
+- `~`: to show relationship between the response variable (to the left) and the stimulus variables (to the right)
+- `+`: to express a linear relationship between variables, e.g., `x1 + x2 + x3`
+- `0` or `-1`: when added to a formular, indicate that no intercept term should be included
+- `|`: to specify conditioning or grouping variables; e.g. `(1 | species)`
+- `I()`: identity function, to indicate that the enclosed expression should be interpreted by its arithmetic meaning; e.g., `I(a+b)` means that a variable "a plus b", not `a + b` "a and b".
+- `*`: indicates interactions between variables: `y ~ x1 * x2` is equivalent to `y ~ x1 + x2 + x1:x2`
+- `^`: indicates crossing to a specific degree: `y ~ (x1 + x2)^2` is equivalent to `y ~ (x1 + x2) * (x1 + x2)`
+- function of variables: indicates that the function of the specified variables should be interpreted as a variable: e,g, `y ~ log(x)`, `y ~ poly(x)`, `y ~ s(x)` for `gam`.
+
+# Multiple linear regression (MLR)
+
+In most cases, we have more than one predictor variable that needs to be included in the regression model.  We call such models multiple regression. When predictors include both numeric and categorical variables, this is ANCOVA (Analysis of co-variance).
+
+$$Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + ... + \beta_pX_p + \varepsilon$$
+
+$\beta_0$: intercept, expected value of Y when $X_1=X_2=...=X_p=0$
+
+$\beta_j$: slope (partial regression coefficient), expected change in Y for one-unit increase in $X_j$ with all other $X_{j'}\ (j'\neq j)$ held constant, where $j=1,2,...,p$.
+
+Same assumptions as simple linear regression (SLR). 
+
+Estimations of parameters, confidence intervals calculations, $R^2$, residual types, etc., are largely similar (but more complicated) as SLR.
+
+**Order of MLR model fitting**: `lm(y ~ x1 + x2)` and `lm(y ~ x2 + x1)` would have the same output when use `summary()`, but this is not the case when use `anova()` because the tested hypotheses are different. For details, Google different types of sums of squares (SS). By default, R calculates Type I SS (sequential).
+
+### ANCOVA
+
+```{r}
+Rye = read.csv("https://git.psu.edu/stat/essential-r/-/raw/master/Data/Rye-ANCOVA-2008.csv")
+head(Rye)
+summary(lm(RyeDMg ~ Tdate, data = Rye))
+summary(lm(RyeDMg ~ Plant, data = Rye))
+summary(lm(RyeDMg ~ Tdate + Plant, data = Rye))
+model1 <- lm(RyeDMg ~ Tdate + Plant + Tdate:Plant, data = Rye)
+summary(model1)
+plot(RyeDMg ~ Tdate, data = Rye, col = as.factor(Rye$Plant))
+mcf <- summary(model1)$coef[, 1] #coefficient estimates only
+abline(a = mcf[1], b = mcf[2])
+abline(a = mcf[1] + mcf[3], b = mcf[2] + mcf[4], lty = 2, col = "red")
+library(tidyverse, warn.conflicts = FALSE)
+ggplot(Rye, aes(x = Tdate, y = RyeDMg, color = Plant)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+### Multicollinearity
+
+*Multicollinearity* arises when there is a strong linear relationship among the predictor variables (X1, X2, ..., Xp).
+
+Effect of multicollinearity on the inference of the regression coefficients:
+
+- Larger changes in $\hat{\beta_j}$ when another predictor variable is added or deleted.
+- Larger changes in $\hat{\beta_j}$ when another observation is added or deleted.
+- Larger s.e.($\hat{\beta_j}$).
+- Harder to interpret $\hat{\beta_j}$ as the effect of $X_j$ on $Y$ , because the other $X_{j'}$ ’s cannot be held constant.
+- Estimation/prediction of Y is not a problem if within the data range.
+- The sign of $\hat{\beta_j}$ is counter-intuitive.
+
+_Variance Inflation Factor (VIF)_:
+
+For $j = 1, ..., p$, a variance inflation factor (VIF) for $\hat{\beta_j}$ is defined as
+
+$$VIF_j=\frac{1}{1-R_j^2}$$
+
+where $R_j^2$ is the coefficient of multiple determination when $X_j$ is regressed on the other $p − 1\ X_{j'}$’s predictor variables.
+
+If the largest VIF value among $VIF_j$ (j = 1, ..., p) is larger than 10, multicollinearity may have a large impact on the inference. If the mean VIF values of $VIF_j$’s is considerably greater than 1, there may be serious multicollinearity problems.
+
+```{r eval=FALSE}
+car::vif()
+```
+
+
+*Remedial Measures for Multicollinearity*:
+
+- Multicollinearity is not a modeling error, but rather a condition of the predictor variables.
+- One remedial measure is to add data from outside the current data range.
+- In practice, however, it may be hard to obtain observations outside the data range.
+- Alternatively, one can consider more advanced statistical methods (e.g. principal component regression, ridge regression).
+- Drop one or more predictor variables from the model. [Which one(s)?]
+- Create new predictor variables (e.g. $X' = X2 + X3$).
+
+
+### Model selection
+
+There are many different ways for testing different combinations of variables in models (forward selection, backward selection, both directions, ...). But there are critiques of all these methods (biased p-values, etc.). In R, you can use the `step()` function to conduct model selection.
+
+```{r}
+args(step)
+```
+
+
+The most defensible practice is to build a model based on hypothesis.
+
+General principles: Use simple models. Let science and common sense guide approach. Sometimes there is no single “best” model. There may not be enough information in the data to tell what the truth is exactly.
+
+
+# Nonlinear models
+
+## Generalized linear models (GLMs)
+
+
+GLMs are a generlization of linear models and can be used to fit linear regression models, logistic regression models, Poisson regression models, etc.
+
+In R, you can model all of these different types of models using the `glm` function.
+
+```{r}
+args(glm)
+```
+
+The following function families are available in R:
+
+```r
+binomial(link = "logit")
+gaussian(link = "identity")
+Gamma(link = "inverse")
+inverse.gaussian(link = "1/mu^2")
+poisson(link = "log")
+quasi(link = "identity", variance = "constant")
+quasibinomial(link = "logit")
+quasipoisson(link = "log")
+```  
+
+## Generalized linear mixed models (GLMMs)
+
+[A brief introduction to mixed effects modelling and multi-model inference in ecology](https://peerj.com/articles/4794/)
+
+[R package lme4](https://github.com/lme4/lme4/)
+

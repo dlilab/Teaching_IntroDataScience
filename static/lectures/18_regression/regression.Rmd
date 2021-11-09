@@ -95,7 +95,11 @@ $$SST=\mathop{\Sigma_{i=1}^{n}(y_{i}-\bar{y})^{2},df=n-1}$$
 $$SSR=\Sigma_{i=1}^{n}(\hat{y}_{i}-\bar{y})^{2},df=1$$
 $$SSE=\Sigma_{i=1}^{n}(y_{i}-\hat{y}_{i})^{2}=SST-SSR,df=n-2$$
 
-![anova](https://bookdown.org/egarpor/SSS2-UC3M/images/R/anova.png)
+
+```{r out.width='60%'}
+knitr::include_graphics("https://bookdown.org/egarpor/SSS2-UC3M/images/R/anova.png")
+```
+
 
 ANOVA table:
 
@@ -217,3 +221,26 @@ plot(fit_d)
 
 
 *Cook’s distance* measures the influence of the _i_th observation on all n fitted values. A practical rule: If Di > 1, investigate the _i_th observation as possibly influential.
+
+
+### Transformation of data
+
+When the model diagnostic indicates violation of model assumptions, we may can try transform the variables to meet model assumptions.
+
+```{r fig.width=9, fig.height=8}
+library(MASS) 
+data(mammals)
+model1 <- lm(brain ~ body, data = mammals) 
+summary(model1)
+par(mfrow = c(2, 2))
+plot(model1)
+m_par = par(mfrow = c(1, 2))
+plot(mammals$body, mammals$brain)
+plot(log10(mammals$body), log10(mammals$brain))
+par(m_par)
+model2 <- lm(log(brain) ~ log(body), data = mammals) 
+summary(model2)
+par(mfrow = c(2, 2))
+plot(model2)
+```
+
