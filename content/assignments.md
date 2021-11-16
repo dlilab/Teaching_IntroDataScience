@@ -163,3 +163,34 @@ interpret what does it mean.</li>
 
 This homework will be due at **November 15th, 9am**.
 
+## Homework 7
+
+1. (2 points) Reorganize your `BIOL7800` Github Repository to have the following structure. If your respository already has this structure, great!! You will get all the points for this question.
+
+   ```
+   .
+   ├── final_project
+   └── homework
+       ├── hw_01
+       ├── hw_02
+       ├── hw_03
+       ├── hw_04
+       ├── hw_05
+       ├── hw_06
+       └── hw_07
+   ```
+
+2. (8 points) Create an R package and push it to your Github account. You can name it whatever you want. In the package, put two functions that you have written or you want to write. If you don't have such functions or ideas, try this: one function to remove rows with all 0s in the matrix generated below; and the other function to remove columns with all 0s. Name the first one as `rm_0s_by_row()` and the other as `rm_0s_by_col()`.
+
+   ```r
+   set.seed(123)
+   x = matrix(rpois(100, 1), 10, 10)
+   ```
+
+   Document them! I should be able to install your package using `remotes::install_github("your_github_name/pkg_name")` and run your code and read documentations.
+
+   You can work out the package locally first. Once success (pass `devtools::check()`; no error, no warning, no note), go to Github, create a new repository, don't add anything there yet (i.e., no README or license file added by Github). Then follow the command it provides and link your local directory to the Github repository; then commit and push it to Github repository.
+
+   Put the link to your R package Github repository in the `hw_07.md` file that will be found in your `BIOL7800/homework/hw_07` folder (so that I know where it is).
+
+This homework will be due at **November 23th, 9am**.
