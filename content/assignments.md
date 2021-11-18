@@ -184,7 +184,7 @@ This homework will be due at **November 15th, 9am**.
 
    ```r
    set.seed(123)
-   x = matrix(rpois(100, 1), 10, 10)
+   x = matrix(rpois(100, 0.1), 10, 10)
    ```
 
    Document them! I should be able to install your package using `remotes::install_github("your_github_name/pkg_name")` and run your code and read documentations.
