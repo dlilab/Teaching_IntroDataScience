@@ -1,0 +1,38 @@
+---
+title: "Open Science and Automating with Make"
+author: "Daijiang Li"
+date: "11/18/2021"
+output: 
+  html_document: 
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+# Open Science
+
+>Open science is the concept of opening up all aspects of scientific research, to allow others to follow the process and collaborate. ... it usually incorporates some of the aspects we looked at before, such as open access, open peer review, post-publication peer review, and open data. [What is open science by F1000](https://blog.f1000.com/2014/11/11/what-is-open-science/)
+
+
+## A recent story to demonstrate the importance of open science
+
+- [How it started](https://laskowskilab.faculty.ucdavis.edu/2020/01/29/retractions/)
+- [Spider biologist denies suspicions of widespread data fraud in his animal personality research](https://www.science.org/content/article/spider-biologist-denies-suspicions-widespread-data-fraud-his-animal-personality)
+- [‘Avalanche’ of spider-paper retractions shakes behavioural-ecology community](https://www.nature.com/articles/d41586-020-00287-y)
+- [As data probe concludes, spider biologist placed on leave, has Ph.D. thesis ‘withdrawn’](https://www.science.org/content/article/data-probe-concludes-spider-biologist-placed-leave-has-ph-d-thesis-withdrawn)
+- [List of retracted papers](https://en.wikipedia.org/wiki/Jonathan_Pruitt)
+
+
+## Other links
+
+- [What exactly is Open Science?](https://openscience.org/what-exactly-is-open-science/)
+- [Open Research Glossary](https://docs.google.com/document/d/1uXZzyXPHNcjCPiR5qkzEuB5u2PUIYQzq0mrG9BtD-Qo/edit#): This is an excellent resource for definitions of terminology commonly used in open science, developed by the community together. [PDF file here](https://figshare.com/articles/journal_contribution/Open_Research_Glossary/1482094)
+
+# Make
+
+- [Automation with makefiles](https://monashbioinformaticsplatform.github.io/2017-11-16-open-science-training/topics/automation.html)
+- [Minimal make tutorial](https://kbroman.org/minimal_make/)
+- [Examples](https://the-turing-way.netlify.app/reproducible-research/make/make-examples.html)
+

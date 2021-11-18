@@ -54,7 +54,7 @@ td, th {
 | Nov 9  | More on Regression methods                              |  <a href="../lectures/19_regression_2/regression_2.html" target="_blank">📙</a>   |     |   <a href="https://bookdown.org/ekothe/navarro26/regression.html" target="_blank">Navarro, Chapter 15</a>   |
 | Nov 11 | Write your own functions                                |  <a href="../lectures/20_functions/functions.html" target="_blank">📙</a>    |     |    <a href="https://r4ds.had.co.nz/functions.html" target="_blank">Hadley, Chapter 19</a>     |
 | Nov 16 | Write your own R package                                |   <a href="../lectures/21_R_pkg/pkg.html" target="_blank">📙</a> |   <a href="../assignments/#homework-7" target="_blank">07</a>  |    <a href="https://r-pkgs.org/whole-game.html" target="_blank">Hadley, Chapter 2</a>    |
-| Nov 18 | Open Science and automating things with Makefile        |       |     |         |
+| Nov 18 | Open Science and automating things with Makefile        |  <a href="../lectures/22_make/make.html" target="_blank">📙</a>  |     |         |
 | Nov 23 | Ethics in data science (virtual)                        |       |     |         |
 | Nov 25 | Thanksgiving, _no class_                                |       |     |         |
 | Nov 30 | Final project presentation                              |       |     |         |
