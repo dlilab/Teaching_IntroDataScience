@@ -1,0 +1,133 @@
+---
+title: "Ethics in Data Science"
+subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
+author: "Daijiang Li"
+institute: "LSU"
+date: "2021/11/23"
+output:
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "../style.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.align='center', out.width = '95%')
+```
+
+class: center, middle
+
+# Data Science & Ethics
+
+## Any connections??
+
+???
+
+Ethics: social science and philosophy.
+
+---
+
+# Data ethics
+
+.font150[
+>“Data ethics is a new branch of ethics that studies and evaluates moral problems related to data (including generation, recording, curation, processing, dissemination, sharing and use), algorithms (including artificial intelligence, artificial agents, machine learning and robots) and corresponding practices (including responsible innovation, programming, hacking and professional codes), in order to formulate and support morally good solutions (e.g. right conducts or right values).”  
+> .right[[Floridi & Taddeo (2016)](https://royalsocietypublishing.org/doi/10.1098/rsta.2016.0360#)]
+]
+
+---
+
+# Why it matters
+
+<iframe width="1424" height="500" src="https://www.youtube.com/embed/mA4gypAiRYU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+---
+
+class: center, middle, inverse
+
+## The way data scientists build models can have real implications for justice, health, and opportunity in people’s lives. And we have an obligation to consider the ethics of our discipline each and every day.
+
+---
+
+# Example: [To predict and serve?](https://rss.onlinelibrary.wiley.com/doi/10.1111/j.1740-9713.2016.00960.x)
+
+## Predictie policing with Machine Learning
+
+.font150[
+Bias in police-recorded data:
+- Variation in reporting rates
+- Variation in police attention
+- Variation in rates of enforcement
+- Collecting a random sample is difficult
+
+Data is only as accurate and objective as the people and processes used to generate and collect it
+
+ML will reproduce the biases in the data used to train it
+
+Consequences?
+]
+
+---
+
+# Questions to ask
+
+## Are the data valid for their intended use?
+
+## Any bias in the data and how can we minimize it when modeling?
+
+## Any bias in the data scientist?
+
+## Is the analysis transparent and reproducible?
+
+---
+
+# Principles
+
+.pull-left[
+
+## .red[F]indable
+## .red[A]ccessible
+## .red[I]nteroperable
+## .red[R]eusable
+
+>[Wilkinson et al. 2016](https://www.nature.com/articles/sdata201618)
+]
+
+.pull-right[
+
+## .red[C]ollective benefit
+## .red[A]uthority to control
+## .red[R]esponsibility
+## .red[E]thics
+
+>[Indigenous data governance](https://static1.squarespace.com/static/5d3799de845604000199cd24/t/5da9f4479ecab221ce848fb2/1571419335217/CARE+Principles_One+Pagers+FINAL_Oct_17_2019.pdf)
+]
+
+---
+
+# [Oxford-Munich code of conduct](http://www.code-of-ethics.org/code-of-conduct/)
+
+## For professional data scientists
+
+.font200[
+1. Lawfulness
+1. Competence
+1. Dealing with Data
+1. Algorithms and models
+1. Transparency Objectivity and Truth
+1. Working alone and with others
+1. (extra) Upcoming ethical challenges
+]
+
+---
+
+# Final report presentation orders
+
+## Run R code to decide
+
+### Each team has 10 mins to give a presentation and will have 3 mins for Q & A
+

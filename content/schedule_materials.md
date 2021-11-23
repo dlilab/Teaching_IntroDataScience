@@ -55,7 +55,7 @@ td, th {
 | Nov 11 | Write your own functions                                |  <a href="../lectures/20_functions/functions.html" target="_blank">📙</a>    |     |    <a href="https://r4ds.had.co.nz/functions.html" target="_blank">Hadley, Chapter 19</a>     |
 | Nov 16 | Write your own R package                                |   <a href="../lectures/21_R_pkg/pkg.html" target="_blank">📙</a> |   <a href="../assignments/#homework-7" target="_blank">07</a>  |    <a href="https://r-pkgs.org/whole-game.html" target="_blank">Hadley, Chapter 2</a>    |
 | Nov 18 | Open Science and automating things with Makefile        |  <a href="../lectures/22_make/make.html" target="_blank">📙</a>  |     |         |
-| Nov 23 | Ethics in data science (virtual)                        |       |     |         |
+| Nov 23 | Ethics in data science (virtual)                        |  <a href="../lectures/23_ethic/ethic.html" target="_blank">📙</a>   |     |   <a href="https://royalsocietypublishing.org/doi/10.1098/rsta.2016.0360#" target="_blank">Floridi & Taddeo (2016)</a>   |
 | Nov 25 | Thanksgiving, _no class_                                |       |     |         |
 | Nov 30 | Final project presentation                              |       |     |         |
 | Dec 2  | Final project presentation and wrap up                  |       |     |         |
