@@ -5,7 +5,7 @@ title: Syllabus
 
 ## Course overview
 
-Welcome to BIOL7800 section 6, _Introduction to Data Science_. We are living in a rapidly changing world, with the current pandemic as an immediate example among many other complex issues (e.g., climate warming, biodiversity loss). Meanwhile, increasing large volumes of data have become available during the past decades because of advances in technology, measurement approaches, establishment of citizen science programs, etc. This increasing wealth of data provides opportunities to solve complex problems that were unsolvable previously, fueling the rise of the new field of data science. Data science is interdisciplinary and usually combines elements of computer programming, statistics, graphic design, communication, and domain knowledge. A data scientist normally needs to identify relevant questions, gather appropriate data from different sources, clean, organize, and manage datasets, extract useful information to generate answers to the questions, and communicate results with others.
+Welcome to BIOL4800 section 3, _Introduction to Data Science_. We are living in a rapidly changing world, with the current pandemic as an immediate example among many other complex issues (e.g., climate warming, biodiversity loss). Meanwhile, increasing large volumes of data have become available during the past decades because of advances in technology, measurement approaches, establishment of citizen science programs, etc. This increasing wealth of data provides opportunities to solve complex problems that were unsolvable previously, fueling the rise of the new field of data science. Data science is interdisciplinary and usually combines elements of computer programming, statistics, graphic design, communication, and domain knowledge. A data scientist normally needs to identify relevant questions, gather appropriate data from different sources, clean, organize, and manage datasets, extract useful information to generate answers to the questions, and communicate results with others.
 
 This course will provide an introduction to data science by covering data science tools (e.g., command line, Git, etc.), basic to intermediate R programming, data management, data manipulation, data visualization, basic statistical models, and reproducible workflows to generate reports. This course will use R as the main programming language. However, the concepts and skills learned in this course will be easily transferable to other programming languages.
 
@@ -14,7 +14,6 @@ This course will provide an introduction to data science by covering data scienc
 Over the course, students should be able to:
 
 - Use `Git` and `GitHub` to create repositories, manage projects, track changes of files, recover old versions of files, push/pull changes to/from remote repositories, discuss through issues, and submit pull requests
-- Have basic working knowledge about command line and file systems
 - Be able to use `R` to get, clean, explore, visualize data, and conduct simple statistic analyses
 - Organize the above processes into a _project_ or an R package
 - Use unit tests in `R` to assure code functionality
@@ -34,15 +33,15 @@ Email address: dli30@lsu.edu
 
 ## Meeting times & locations
 
-Tu/Th 9:00-10:20 AM  
-Class location: [William's 206](https://www.google.com/maps/place/Williams+Hall/@30.4124295,-91.179734,17.11z/data=!4m5!3m4!1s0x8626a7217676d7ad:0xcf801c0f1a3d0ab8!8m2!3d30.4104184!4d-91.1777712)   
-Zoom link: https://lsu.zoom.us/j/92192729296  
+Tu/Th 1:30-2:50 PM  
+Class location: [Life Science A101](https://www.google.com/maps/place/Shirley+C.+Tucker+Herbarium/@30.4110394,-91.1767038,21z/data=!4m5!3m4!1s0x8626a7224bf5e2cd:0x196fe0a778c1b443!8m2!3d30.4108319!4d-91.1766467)   
+Zoom link: https://lsu.zoom.us/j/96140507560   
 Office room: LSB125  
-Office hours: Thursday 12-1pm in LSB 125 or by appointment
+Office hours: Tuesday 12-1pm in LSB 125 or by appointment
 
 ## Pre-requisites
 
-No pre-requisties
+No pre-requisties; ideally, you should have taken the BIOL 4800 FOUND COMP BIOLOGIST course. 
 
 ## Textbook(s) and/or readings 
 
@@ -92,6 +91,10 @@ Examples of unacceptable behavior include:
   professional setting
 
 **Note**: If you believe you have been a victim of an alleged violation of the [Code of Student Conduct](https://www.lsu.edu/saa/students/codeofconduct.php), or you are aware of such an alleged violation, you have the right to [report it to the University](https://www.lsu.edu/saa/students/codeofconduct.php).
+
+## Expectations
+
+LSU’s general policy states that for each credit hour, you (the student) should plan to spend at least two hours working on course related activities outside of class. Since this course is for three credit hours, you should expect to spend a minimum of six hours outside of class each week working on assignments for this course. 
 
 ## Evaluation 
 

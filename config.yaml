@@ -1,7 +1,7 @@
 baseURL: "/" 
 languageCode: en-us
 defaultContentLanguage: en
-title: Intro to Data Science 
+title: Introduction to Data Science 
 theme: "cupper-hugo-theme"
 googleAnalytics: UA-123456789-1
 disqusShortname: yourdiscussshortname
@@ -17,7 +17,7 @@ imaging:
   quality: 99
 
 params:
-  description: Course (BIOL7800) at LSU.
+  description: Course (BIOL4800) at LSU.
   homeMetaContent: Introduction to Data Science Course.
   footer: 
   # For more date formats see https://gohugo.io/functions/format/

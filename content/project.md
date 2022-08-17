@@ -5,7 +5,7 @@ title: Final project
 
 ## Final project objective
 
-The objective of the final project will be to build a fully reproducible project that uses data to address a scientific questions of your choice. The data can be from your own research or online open datasets. It can be individual or collaborative (with another classmate). Since this course is a graduate student level course (for fall 2021), I expect that the final report should be publishable. The project should have all of the following components:
+The objective of the final project will be to build a fully reproducible project that uses data to address a scientific questions of your choice. The data can be from your own research or online open datasets. It can be individual or collaborative (with another classmate). Since this course is an advanced undergraduate/graduate student level course, I expect that the final report should be publishable. The project should have all of the following components:
 
 - A `README` file to briefly introduce the project idea and how it is organized
 - A `LICENSE` file
@@ -19,7 +19,7 @@ The objective of the final project will be to build a fully reproducible project
 
 ## Final project topic selection
 
-Despite that we will have the whole semester to build the final project, we need to select project topics as soon as possible. A project proposal, with research questions and identified data sources, is due by ***September 26, 2021***. Therefore, students are encouraged to discuss potential ideas with me (and your advisor if needed) as soon as possible. The project proposal should include the following components:
+Despite that we will have the whole semester to build the final project, we need to select project topics as soon as possible. A project proposal, with research questions and identified data sources, is due by ***September 30, 2022***. Therefore, students are encouraged to discuss potential ideas with me (and your advisor if needed) as soon as possible. The project proposal should include the following components:
 
 - Title
 - Name(s)

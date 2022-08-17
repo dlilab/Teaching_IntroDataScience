@@ -1,5 +1,5 @@
 ---
-date: "2021-07-25"
+date: "2022-08-17"
 title: Introduction to Data Science 
 ---
 
@@ -13,9 +13,9 @@ title: Introduction to Data Science
 
 **Email**: dli30@lsu.edu
 
-**Class time**: Tu/Th 9:00-10:20 AM
+**Class time**: Tu/Th 1:30-2:50 PM
 
-**Classroom**: [William's 206](https://www.google.com/maps/place/Williams+Hall/@30.4124295,-91.179734,17.11z/data=!4m5!3m4!1s0x8626a7217676d7ad:0xcf801c0f1a3d0ab8!8m2!3d30.4104184!4d-91.1777712)
+**Classroom**: [Life Science A101](https://www.google.com/maps/place/Shirley+C.+Tucker+Herbarium/@30.4110394,-91.1767038,21z/data=!4m5!3m4!1s0x8626a7224bf5e2cd:0x196fe0a778c1b443!8m2!3d30.4108319!4d-91.1766467) 
 
-**Office hours**: Thursday 12-1pm in LSB 125 or by appointment
+**Office hours**: Tuesday 12-1pm in LSB 125 or by appointment
 
