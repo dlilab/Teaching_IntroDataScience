@@ -3,7 +3,7 @@ title: "Course Overview"
 subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
 author: "Daijiang Li"
 institute: "LSU"
-date: "2021/08/24"
+date: "2022/08/30"
 output:
   xaringan::moon_reader:
     css: ["default", "default-fonts", "../style.css"]
@@ -63,12 +63,12 @@ class: center, middle, inverse
 # My role
 
 .font200[
-First time teaching this course
+Second time teaching this course
 ]
 
 --
 
-.font200[I plan to make .red[a lot] of mistakes or even fail]
+.font200[I still plan to make .red[a lot] of mistakes or even fail]
 
 --
 
@@ -127,7 +127,7 @@ knitr::include_graphics("figs/datascience.png")
 class: middle, inverse
 
 .font200[
-> Data Scientist = statistician + programmer + coach + storyteller + artist”  
+> Data Scientist = statistician + programmer + coach + storyteller + artist  
 >
 > .right[Shlomo Aragmon]
 ]
@@ -235,7 +235,7 @@ background-size: contain
 | Exploratory               | Investigate correlations among multiple variables                                |
 | Inferential (most common) | Does air pollution correlate with life expectancy at the state level in the USA? |
 | Predictive                | Using polling data to predict election results; not necessarily explain why      |
-| Causal                    | *Average* risk of COVID vs non-vaccination                                       |
+| Causal                    | *Average* risk of COVID for vaccination vs non-vaccination                       |
 | Mechanistic               | Impacts of wing design on air flow over a wing; rare outside of engineering      |
 
 

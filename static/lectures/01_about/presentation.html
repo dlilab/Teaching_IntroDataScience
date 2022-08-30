@@ -13,11 +13,22 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Course Overview
-## Introduction to Data Science (BIOL7800) <a href="https://introdatasci.dlilab.com/" class="uri">https://introdatasci.dlilab.com/</a>
+]
+.subtitle[
+## Introduction to Data Science (BIOL7800)
+<a href="https://introdatasci.dlilab.com/" class="uri">https://introdatasci.dlilab.com/</a>
+]
+.author[
 ### Daijiang Li
+]
+.institute[
 ### LSU
-### 2021/08/24
+]
+.date[
+### 2022/08/30
+]
 
 ---
 
@@ -67,12 +78,12 @@ class: center, middle, inverse
 # My role
 
 .font200[
-First time teaching this course
+Second time teaching this course
 ]
 
 --
 
-.font200[I plan to make .red[a lot] of mistakes or even fail]
+.font200[I still plan to make .red[a lot] of mistakes or even fail]
 
 --
 
@@ -129,7 +140,7 @@ class: center, middle
 class: middle, inverse
 
 .font200[
-&gt; Data Scientist = statistician + programmer + coach + storyteller + artist”  
+&gt; Data Scientist = statistician + programmer + coach + storyteller + artist  
 &gt;
 &gt; .right[Shlomo Aragmon]
 ]
@@ -235,7 +246,7 @@ background-size: contain
 | Exploratory               | Investigate correlations among multiple variables                                |
 | Inferential (most common) | Does air pollution correlate with life expectancy at the state level in the USA? |
 | Predictive                | Using polling data to predict election results; not necessarily explain why      |
-| Causal                    | *Average* risk of COVID vs non-vaccination                                       |
+| Causal                    | *Average* risk of COVID for vaccination vs non-vaccination                       |
 | Mechanistic               | Impacts of wing design on air flow over a wing; rare outside of engineering      |
 
 
@@ -289,6 +300,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
