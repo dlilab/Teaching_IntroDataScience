@@ -15,7 +15,7 @@ title: Introduction to Data Science
 
 **Class time**: Tu/Th 1:30-2:50 PM
 
-**Classroom**: [Life Science A101](https://www.google.com/maps/place/Shirley+C.+Tucker+Herbarium/@30.4110394,-91.1767038,21z/data=!4m5!3m4!1s0x8626a7224bf5e2cd:0x196fe0a778c1b443!8m2!3d30.4108319!4d-91.1766467) 
+**Classroom**: [225 Tureaud Hall](https://www.google.com/maps/place/Tureaud+Hall/@30.4094801,-91.1791112,15z/data=!4m5!3m4!1s0x0:0x92922201c8e77288!8m2!3d30.4094801!4d-91.1791112) 
 
 **Office hours**: Tuesday 12-1pm in LSB 125 or by appointment
 

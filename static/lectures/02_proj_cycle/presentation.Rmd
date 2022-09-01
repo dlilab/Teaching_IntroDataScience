@@ -3,7 +3,7 @@ title: "Data science project cycle"
 subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
 author: "Daijiang Li"
 institute: "LSU"
-date: "2021/08/26"
+date: "2022/09/01"
 output:
   xaringan::moon_reader:
     css: ["default", "default-fonts", "../style.css"]
@@ -114,10 +114,12 @@ API: application programming interface
 
 # Get lecture names and links
 
+<!-- debug: sel <- wdman::selenium(); sel$log() -->
+
 ```{r eval=FALSE}
 library(rvest, warn.conflicts = FALSE)
 library(RSelenium)
-# to set up a server to run javascript
+# to set up a server to run javascript;
 rs = RSelenium::rsDriver(browser = "firefox")
 rsc = rs$client
 rsc$navigate("https://www.youtube.com/playlist?list=PLE7DDD91010BC51F8")
