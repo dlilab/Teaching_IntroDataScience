@@ -3,7 +3,7 @@ title: "Tools"
 subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
 author: "Daijiang Li"
 institute: "LSU"
-date: "2021/09/07"
+date: "2022/09/06"
 output:
   xaringan::moon_reader:
     css: ["default", "default-fonts", "../style.css"]
@@ -97,7 +97,7 @@ class: middle, inverse
 - Check Terminal in RStudio
 - Check git panel
 - `Alt + Shift + k` to show all shortcuts
-- [Cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf)
+- [Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
 ]
 
 
