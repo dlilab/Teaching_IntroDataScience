@@ -22,7 +22,7 @@ knitr::opts_chunk$set(fig.align='center', out.width = '95%')
 
 class: middle
 
-# We will continue to use [this excellent workshop material](https://carpentries-incubator.github.io/git-novice-branch-pr/) developed by Software Carpentry for today's lecture.
+# We will continue to use [this excellent workshop material](https://carpentries-incubator.github.io/git-novice-branch-pr/) developed by Software Carpentry for today's
 
 ---
 
