@@ -2,7 +2,7 @@
 title: "GitHub"
 subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
 author: "Daijiang Li"
-institute: "LSU"
+institute: "FSU"
 date: "2022/09/13"
 output:
   xaringan::moon_reader:
