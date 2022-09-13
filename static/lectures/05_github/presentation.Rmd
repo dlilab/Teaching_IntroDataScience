@@ -1,5 +1,5 @@
 ---
-title: "GitHub"
+title: "GitHub Github"
 subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
 author: "Daijiang Li"
 institute: "LSU"
