@@ -1,7 +1,7 @@
 ---
 title: "R basics"
 author: "Daijiang Li"
-date: "9/28/2021"
+date: "9/22/2022"
 output: 
   html_document: 
     toc: yes
@@ -112,7 +112,7 @@ unclass(now_ct)
 structure(now_ct, tzone = "Asia/Shanghai")
 ```
 
-**[The R package `lubridate` can make dealing with most date-time data easy.](https://lubridate.tidyverse.org/))** Make sure to install it and check it out.
+**[The R package `lubridate` can make dealing with most date-time data easy.](https://lubridate.tidyverse.org/)** Make sure to install it and check it out.
 
 
 # Subsetting

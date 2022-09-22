@@ -1,5 +1,6 @@
 ALL: 01_about/presentation.html 02_proj_cycle/presentation.html 03_tools/presentation.html 04_git/presentation.html \
-05_github/presentation.html 06_rmd/presentation.html 08_r_basic/presentation.html
+05_github/presentation.html 06_rmd/presentation.html 08_r_basic/presentation.html \
+09_r_basic/presentation.html
 
 OStype := $(shell uname -s)
 
