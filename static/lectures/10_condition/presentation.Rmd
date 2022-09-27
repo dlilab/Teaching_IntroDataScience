@@ -1,7 +1,7 @@
 ---
 title: "if...else..."
 author: "Daijiang Li"
-date: "9/30/2021"
+date: "9/27/2022"
 output: 
   html_document: 
     toc: yes
@@ -75,7 +75,7 @@ if(cond){
   statement for FALSE
 } 
 # bracket can be ignored too; 
-# but I find it is easy to read with it
+# but I find it is easier to read with it
 
 if(cond){
   statement for TRUE
@@ -368,7 +368,7 @@ for (i in feelings){
 `switch` can be very useful when write our own functions to deal with different scenarios. 
 
 ```{r}
-mydate <- function(type="long") {
+mydate <- function(type = "long") {
   switch(type,
          long =  format(Sys.time(), "%A %B %d %Y"),
          short = format(Sys.time(), "%m-%d-%y"),
