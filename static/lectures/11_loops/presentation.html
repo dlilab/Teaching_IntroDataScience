@@ -11,7 +11,6 @@
 
 <meta name="author" content="Daijiang Li" />
 
-<meta name="date" content="2021-10-05" />
 
 <title>Loops</title>
 
@@ -434,7 +433,7 @@ pre code {
 
 <h1 class="title toc-ignore">Loops</h1>
 <h4 class="author">Daijiang Li</h4>
-<h4 class="date">10/05/2021</h4>
+<h4 class="date">9/29/2022</h4>
 
 </div>
 
@@ -766,33 +765,33 @@ similar to the apply set functions.</p>
 ##     intersect, setdiff, setequal, union</code></pre>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">6</span>), <span class="at">y =</span> <span class="fu">runif</span>(<span class="dv">6</span>), <span class="at">z =</span> <span class="fu">runif</span>(<span class="dv">6</span>))</span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
-<pre><code>##            x          y          z
-## 1 0.51681499 0.06977931 0.76424966
-## 2 0.07410396 0.93650876 0.03073391
-## 3 0.93982293 0.45566178 0.70721291
-## 4 0.75291161 0.37345404 0.98645379
-## 5 0.40640248 0.41940066 0.72737558
-## 6 0.88495970 0.81631940 0.23225930</code></pre>
+<pre><code>##           x         y         z
+## 1 0.8830724 0.5037963 0.5501573
+## 2 0.5928932 0.7127719 0.2787936
+## 3 0.6315128 0.9055775 0.3700638
+## 4 0.2245421 0.6404621 0.8361321
+## 5 0.2621042 0.3655030 0.7612335
+## 6 0.1414994 0.1799045 0.3731657</code></pre>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the mean of x, y, z in each row</span></span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">c</span>(x, y, z)))</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 4
 ## # Rowwise: 
-##        x      y      z     m
-##    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-## 1 0.517  0.0698 0.764  0.450
-## 2 0.0741 0.937  0.0307 0.347
-## 3 0.940  0.456  0.707  0.701
-## 4 0.753  0.373  0.986  0.704
-## 5 0.406  0.419  0.727  0.518
-## 6 0.885  0.816  0.232  0.645</code></pre>
+##       x     y     z     m
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 0.883 0.504 0.550 0.646
+## 2 0.593 0.713 0.279 0.528
+## 3 0.632 0.906 0.370 0.636
+## 4 0.225 0.640 0.836 0.567
+## 5 0.262 0.366 0.761 0.463
+## 6 0.141 0.180 0.373 0.232</code></pre>
 <p>Work with some columns that meet specific conditions.</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>a <span class="ot">=</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>]</span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>b <span class="ot">=</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>]</span>
 <span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    6 obs. of  5 variables:
-##  $ x: num  0.5168 0.0741 0.9398 0.7529 0.4064 ...
-##  $ y: num  0.0698 0.9365 0.4557 0.3735 0.4194 ...
-##  $ z: num  0.7642 0.0307 0.7072 0.9865 0.7274 ...
+##  $ x: num  0.883 0.593 0.632 0.225 0.262 ...
+##  $ y: num  0.504 0.713 0.906 0.64 0.366 ...
+##  $ z: num  0.55 0.279 0.37 0.836 0.761 ...
 ##  $ a: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
 ##  $ b: chr  &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; ...</code></pre>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert columns with characters to factors</span></span>
@@ -803,18 +802,18 @@ similar to the apply set functions.</p>
 <span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    6 obs. of  5 variables:
-##  $ x: num  0.5168 0.0741 0.9398 0.7529 0.4064 ...
-##  $ y: num  0.0698 0.9365 0.4557 0.3735 0.4194 ...
-##  $ z: num  0.7642 0.0307 0.7072 0.9865 0.7274 ...
+##  $ x: num  0.883 0.593 0.632 0.225 0.262 ...
+##  $ y: num  0.504 0.713 0.906 0.64 0.366 ...
+##  $ z: num  0.55 0.279 0.37 0.836 0.761 ...
 ##  $ a: Factor w/ 6 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6
 ##  $ b: Factor w/ 6 levels &quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,..: 1 2 3 4 5 6</code></pre>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dplyr version to convert factors to characters back</span></span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">mutate</span>(df, <span class="fu">across</span>(<span class="fu">where</span>(is.factor), as.character))</span>
 <span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    6 obs. of  5 variables:
-##  $ x: num  0.5168 0.0741 0.9398 0.7529 0.4064 ...
-##  $ y: num  0.0698 0.9365 0.4557 0.3735 0.4194 ...
-##  $ z: num  0.7642 0.0307 0.7072 0.9865 0.7274 ...
+##  $ x: num  0.883 0.593 0.632 0.225 0.262 ...
+##  $ y: num  0.504 0.713 0.906 0.64 0.366 ...
+##  $ z: num  0.55 0.279 0.37 0.836 0.761 ...
 ##  $ a: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
 ##  $ b: chr  &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; ...</code></pre>
 <p>Work with vectors, lists, or multiple of them.</p>
@@ -835,10 +834,10 @@ similar to the apply set functions.</p>
 ## [1] TRUE
 ## 
 ## [[4]]
-## [1] FALSE
+## [1] TRUE
 ## 
 ## [[5]]
-## [1] TRUE</code></pre>
+## [1] FALSE</code></pre>
 <p>Two variables.</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">::</span><span class="fu">map2_chr</span>(<span class="at">.x =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>), <span class="at">.y =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="at">.f =</span> paste, <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;a-A&quot; &quot;b-B&quot; &quot;c-C&quot;</code></pre>
