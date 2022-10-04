@@ -42,7 +42,7 @@ td, th {
 | Sep 22 | More R basics: lists, dates, etc.                       |   <a href="../lectures/09_r_basic/presentation.html" target="_blank">📙</a>  |     |  <a href="https://adv-r.hadley.nz/subsetting.html" target="_blank">Hadley, Chapter 4</a> |
 | Sep 27 | R programming basics: conditional statements            |   <a href="../lectures/10_condition/presentation.html" target="_blank">📙</a>  | <a href="../assignments/#homework-2" target="_blank">02</a>  |         |
 | Sep 29  | R programming basics: loops, apply                      |   <a href="../lectures/11_loops/presentation.html" target="_blank">📙</a>      |     |         |
-| Oct 4  | Strings and Regular expressions                         |   <a href="../lectures/12_strings/strings.html" target="_blank">📙</a>     | <a href="../assignments/#homework-3" target="_blank">03</a>  |   <a href="https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html" target="_blank">Peng, Chapter 17</a>    |
+| Oct 4  | Strings and Regular expressions                         |   <a href="../lectures/12_strings/presentation.html" target="_blank">📙</a>     | <a href="../assignments/#homework-3" target="_blank">03</a>  |   <a href="https://bookdown.org/rdpeng/rprogdatascience/regular-expressions.html" target="_blank">Peng, Chapter 17</a>    |
 | Oct 6 | API and data scraping                              |  <a href="../lectures/13_api/api.html" target="_blank">📙</a>  |   |         |
 | Oct 11 | Data input and output             |  <a href="../lectures/14_data_in_out/data_in_out.html" target="_blank">📙</a>       |   |   <a href="https://r4ds.had.co.nz/data-import.html" target="_blank">Hadley, Chapter 11</a>   |
 | Oct 13 | Fall Holiday                    |   |     |    |

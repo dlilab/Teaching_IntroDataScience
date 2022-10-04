@@ -1,7 +1,7 @@
 ---
 title: "Strings and Regular Expression"
 author: "Daijiang Li"
-date: "10/07/2021"
+date: "10/04/2022"
 output: 
   html_document: 
     toc: yes
@@ -229,7 +229,7 @@ word(btext, 2)
 
 # Regular expressions
 
-The above functions can already allow us to handle some basic tasks with strings. However, if we really want to unleash the power of strings manipulation, we need to leanr _regular exoressions_ (aka **regex**). 
+The above functions can already allow us to handle some basic tasks with strings. However, if we really want to unleash the power of strings manipulation, we need to leanr _regular expressions_ (aka **regex**). 
 
 **A regular expression is a pattern that describes a set of strings.**
 
