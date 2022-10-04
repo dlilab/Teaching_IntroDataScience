@@ -47,7 +47,7 @@ This homework will be due at **September 22th, 1:30pm**.
     | Intermediate_high | 21 <= mpg < 26 |
     | High              | 26 <= mpg      |
 
-This homework will be due at **October 4th, 1:30pm**. Please submit your homework as an Rmd file to GitHub. It is probably a good idea to create a `hw_02` subfolder within your `homework` folder and put the Rmd file there. Please also generate a PDF file there. You don't need to email me again about your homework. I have your GitHub repo link and will check out your homework there. This should apply to all homework assignments.
+This homework will be due at **October 6th, 1:30pm**. Please submit your homework as an Rmd file to GitHub. It is probably a good idea to create a `hw_02` subfolder within your `homework` folder and put the Rmd file there. Please also generate a PDF file there. You don't need to email me again about your homework. I have your GitHub repo link and will check out your homework there. This should apply to all homework assignments.
 
 
 ## Homework 3
