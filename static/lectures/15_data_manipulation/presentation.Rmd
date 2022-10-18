@@ -29,6 +29,7 @@ Every one on the data chain should:
 Spreadsheet is probably the most common way to enter and organize data for most cases (when data size is relatively small). If this applies to your own work, be sure to read this [**excellent data organization with spreadsheet slides**](https://kbroman.org/Talk_DataOrg/dataorg_notes.pdf).
 
 Summary here:
+
 1. Be consistent
 2. Write dates as YYYY-MM-DD
 3. Choose good names for things 
