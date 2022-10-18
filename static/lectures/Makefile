@@ -1,7 +1,8 @@
 ALL: 01_about/presentation.html 02_proj_cycle/presentation.html 03_tools/presentation.html 04_git/presentation.html \
 05_github/presentation.html 06_rmd/presentation.html 08_r_basic/presentation.html \
 09_r_basic/presentation.html 10_condition/presentation.html 11_loops/presentation.html \
-12_strings/presentation.html
+12_strings/presentation.html 13_api/presentation.html 14_data_in_out/presentation.html \
+15_data_manipulation/presentation.html
 
 OStype := $(shell uname -s)
 
