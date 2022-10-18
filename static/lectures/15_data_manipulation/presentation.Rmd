@@ -51,15 +51,14 @@ Please do make sure to read his notes along with the slides.
  
 # Data cleaning -- useful functions that are regularly used
  
-Based on the comments received from the class, it seems that I was trying to cover too many things in one lecture and was not able to go deep with most of them. I made the previous lectures very broad with the purpose to introduce useful ideas (e.g., git, github, command line, file systems, etc.) and functions that I think will be needed sometime for your future research. In the remaining lectures, I will try to be more focused and go deeper with each function.
+<!-- Based on the comments received from the class, it seems that I was trying to cover too many things in one lecture and was not able to go deep with most of them. I made the previous lectures very broad with the purpose to introduce useful ideas (e.g., git, github, command line, file systems, etc.) and functions that I think will be needed sometime for your future research. In the remaining lectures, I will try to be more focused and go deeper with each function. -->
 
 Today, we will mainly introduce some functions from the `tidyverse` that I regularly use for daily work. Again, I will just focus on a very small proportion of them. To learn more, read the corresponding R packages' documentations!
 
 First, let's get some datasets.
 
 ```{r eval=FALSE}
-if(!require(remotes)) install.packages("remotes")
-remotes::install_github("daijiang/neonDivData")
+install.packages('neonDivData', repos = 'https://daijiang.r-universe.dev')
 ```
 This data package has organismal data collected by [NEON](https://www.neonscience.org). You can get all the raw data from its [data portal](https://data.neonscience.org/data-products/explore) and R package [`neonUtilities`](https://cran.r-project.org/package=neonUtilities).
 
