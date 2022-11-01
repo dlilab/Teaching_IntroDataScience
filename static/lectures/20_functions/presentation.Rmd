@@ -1,0 +1,288 @@
+---
+title: "Functions"
+author: "Daijiang Li"
+date: "11/15/2022"
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+One of the most powerful feature of R is its large packages (~20k). Each package contains some useful functions that allow users to use them to convert some input into an output. Today, we will learn how to write basic R functions.
+
+# Why?
+
+- Functions allow for reproducible code to remove possible tedious and error prone copy-and-paste.
+    + If you need to copy and paste some code twice, make it a function! (**Don't repeat yourself** DRY)
+- Functions make changing things easy (**Make change in one place**); when we need different parameters, we can just change the arguments of the function.
+- Functions can make complex programs tractable by having them performing specific tasks.
+- Functions are necessary to develop your own methods/algorithms and share with others.
+
+# The basic structure of a function
+
+The basic structure of a function is:
+
+```r
+my_function_name <- function(data, arg1 = value1, arg2 = value2, arg3, arg4, ...){
+    <command to do things with the data, with args to control behaviors>
+    return(results)
+}
+```
+
+# Example 1
+
+
+```{r}
+fahrenheit_to_celsius <- function(temp_F) {
+  temp_C <- (temp_F - 32) * 5 / 9
+  return(temp_C) # return is optional
+}
+fahrenheit_to_celsius(68)
+```
+
+Exercise: write a function to convert celsius to fahrenheit.
+
+```{r}
+celsius_to_kelvin <- function(temp_C) {
+  temp_K <- temp_C + 273.15
+  return(temp_K)
+}
+
+# freezing point of water in Kelvin
+celsius_to_kelvin(0)
+```
+
+Exercise: write a function to convert fahrenheit to kelvin. Hint: use `fahrenheit_to_celsius()` and `celsius_to_kelvin()`.
+
+```r
+fahrenheit_to_kelvin <- function(temp_F) {
+  temp_C <- ____________
+  temp_K <- ____________
+  temp_K
+}
+```
+
+**Tips**: Write modularized functions!
+
+# Example 2
+
+The environment of a function controls how R finds the value associated with a name.
+
+```{r}
+f <- function(x) {
+  x + y
+}
+```
+
+R uses rules called lexical scoping to find the value associated with a name. Since y is not defined inside the function, R will look in the environment where the function was defined:
+
+```{r}
+y <- 100
+f(10)
+
+y <- 1000
+f(10)
+```
+
+
+# Example 3
+
+Recall from home work 5 that we wrote some code to extract the binomial names from species names. The `neonDivData` has multiple data frames for different taxonomic groups. How can we make it as a function so that we can apply it to all other data frames?
+
+**Tips**: Write working code first, then convert into a function
+
+```{r}
+library(neonDivData)
+x = sub(pattern = "^([^ ]+ [^ ]*) .*", replacement = "\\1", x = data_plant$taxon_name)
+sample(unique(x), 100)
+```
+
+
+**Naming is hard**: have clear and short function names.
+
+Now, the first step is to think about a name for the function! What should we name it? `get_binomial_name`? Other options? 
+
+**Tip**: Verbs for function names
+
+**Tip**: Be consistent with style: snake_case, camelCase, etc.
+
+```r
+get_binomial_name <- function(){
+
+}
+```
+
+What about arguments? What kind of arguments should the function have??
+
+**Tip**: Nouns for arguments.
+
+
+```r
+get_binomial_name <- function(v){
+
+}
+```
+
+Exercise: finish the above function.
+
+
+
+
+```r
+get_binomial_name <- function(v){
+  v2 = sub(pattern = "^([^ ]+ [^ ]*) .*", replacement = "\\1", x = data_plant$taxon_name)
+  return(v2)
+}
+```
+
+What's wrong with the above function??
+
+
+How can we improve the function?
+
+```{r}
+get_binomial_name <- function(v, patterns = "^([^ ]+ [^ ]*) .*"){
+  v2 = sub(pattern = patterns, replacement = "\\1", x = v)
+  return(v2)
+}
+
+get_binomial_name <- function(v, 
+                              patterns = "^([^ ]+ [^ ]*) .*",
+                              repl = "\\1"
+                              ){
+  v2 = sub(pattern = patterns, replacement = repl, x = v)
+  return(v2)
+} # benefit?? be more flexible?
+```
+
+**Tips:** Data arguments first; detail arguments later with default values.
+
+```{r}
+head(get_binomial_name(data_bird$value), 10)
+head(data_bird$value, 10)
+class(data_bird$value)
+```
+
+**Tips:** Defensive coding and stop early; or return early.
+
+**If a function is going to fail, fail early!**
+
+```r
+get_binomial_name <- function(v, 
+                              patterns = "^([^ ]+ [^ ]*) .*",
+                              repl = "\\1"
+                              ){
+  if(!is.character(v)){
+    stop("The input vector is not character.")
+  }
+  v2 = sub(pattern = patterns, replacement = repl, x = v)
+  return(v2)
+} 
+get_binomial_name(data_bird$value)
+# Error in get_binomial_name(data_bird$value) : 
+#   The input vector is not character.
+```
+
+**Sometimes, return early too!**
+
+```r
+f <- function(args){
+    if(x){
+      some complex calculation
+      out = results
+    } else {
+      some simple calculation
+      out = results
+    }
+    return(out)
+}
+
+# return early to save time
+f <- function(args){
+    if(!x){
+    some simple calculation
+    out = results
+    return(out)
+    }
+    
+    some complex calculation
+    results
+}
+```
+
+
+**Tips:** Use comments to explain why.
+
+
+```{r}
+get_binomial_name <- function(v, 
+                              patterns = "^([^ ]+ [^ ]*) .*",
+                              repl = "\\1"
+                              ){
+  if(!is.character(v)){ # in case non-character input
+    stop("The input vector is not character.")
+  }
+  v2 = sub(pattern = patterns, replacement = repl, x = v)
+  return(v2)
+} 
+```
+
+**Tips:** `...`
+
+```{r}
+get_binomial_name <- function(v, 
+                              patterns = "^([^ ]+ [^ ]*) .*",
+                              repl = "\\1",
+                              ...
+                              ){
+  if(!is.character(v)){ # in case non-character input
+    stop("The input vector is not character.")
+  }
+  v2 = sub(pattern = patterns, replacement = repl, x = v, ...)
+  return(v2)
+} 
+head(get_binomial_name(data_bird$taxon_name, perl = TRUE), 50)
+```
+
+
+**Tips:** Document arguments! (use `{roxygen2}`)
+
+```{r}
+#' To extract binomial scientific names
+#' 
+#' Some description about the function.
+#'
+#' @param v Input vector, must be a character vector.
+#' @param patterns The Regex pattern to match, default will extract the first two words.
+#' @param repl The values to replace the pattern matched that was specified by `patterns`.
+#' @param ... Additional arguments to be passed to `[sub]` function.
+#' @return A character vector, with the binomial scientific names
+#' @examples get_binomial_name(c("Carex aquatilis Wahlenb.", "Boerhavia coulteri (Hook. f.) S. Watson"))
+#'
+get_binomial_name <- function(v, 
+                              patterns = "^([^ ]+ [^ ]*) .*",
+                              repl = "\\1",
+                              ...
+){
+  if(!is.character(v)){ # in case non-character input
+    stop("The input vector is not character.")
+  }
+  v2 = sub(pattern = patterns, replacement = repl, x = v, ...)
+  return(v2)
+} 
+sample(unique(get_binomial_name(data_fish$taxon_name)), 30)
+sample(unique(get_binomial_name(data_small_mammal$taxon_name)), 30)
+```
+
+**Note**: Avoid overriding existing functions and variables.
+
+
+
+
+
+
+
+
+
+
