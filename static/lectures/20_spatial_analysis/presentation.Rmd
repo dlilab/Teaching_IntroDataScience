@@ -2,10 +2,268 @@
 title: "Spatial analysis"
 author: "Daijiang Li"
 date: "11/08/2022"
-
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+This lecture will cover briefly about how to visualize, analyze, and model geographic data with open source software. We will focus on using the R ecosystem for spatial data analysis. Over the past decade, a wide range of packages based on the free and open source software for geospatial (FOSS4G) have been developed in R to support advanced geospatial statistics, visualization, and modeling. To learn more, one good free book is [Geocomputation with R](https://geocompr.robinlovelace.net).
+
+Two fundamental geographic data models exist: **vector** and **raster**.
+
+The vector data model represents the world using points, lines and polygons. For example, administrative boundary of counties across all states in the US. Such data usually have high level of precision and are mostly used to describe properties of units with discrete borders (e.g., human population density of different counties). The geographic vector data model is based on points located within a coordinate reference system (CRS); one common example is latitude/longitude coordinates. Lines and polygons are just collections of points. A key R package to work with geographic vector data is [`sf`](https://cran.r-project.org/web/packages/sf/index.html).
+
+The raster data model divides the surface up into cells of constant size. Raster datasets are the basis of web-mapping based on aerial photography and satellite-based remote sensing data. Rasters aggregate properties to a specific spatial resolution (e.g., 1 km by 1 km). Such data tends to dominate environmental sciences given their reliance on remote sensing data (e.g., average temperature over the past 20 years at the global scale at 50 km by 50 km resolution). Key R packages to work with rasters are [`raster`](https://cran.r-project.org/web/packages/raster/index.html) and its replacement [`terra`](https://cran.r-project.org/web/packages/terra/index.html).
+
+# Geographic and projected Coordinate Reference Systems (CRS)
+
+CRS, either geographic or projected, defines how the spatial elements of the data relate to the surface of the Earth. Geographic coordinate systems identify any location on the Earth’s surface using two values — longitude and latitude.  The surface of the Earth in geographic coordinate systems is represented by a spherical or ellipsoidal surface. 
+
+All projected CRSs are based on a geographic CRS and rely on map projections to convert the 3-d surface of the Earth into Easting and Northing (x and y) values in a projected CRS. Projected CRSs are based on Cartesian coordinates on an implicitly flat surface. They have an origin, x and y axes, and a linear unit of measurement such as meters.
+
+This transition cannot be done without adding some deformations. Therefore, some properties of the Earth’s surface are distorted in this process, such as area, direction, distance, and shape. A projected coordinate system can preserve only one or two of those properties. 
+
+A quick summary of different projections, their types, properties, and suitability can be found at https://www.geo-projections.com/.
+
+
+# `sf` and simple features for geographic vector data
+
+Simple Features is a hierarchical data model that represents a wide range of geometry types. Simple features is an open standard developed and endorsed by the Open Geospatial Consortium (OGC). 7 out of 18 geometry types are used in most of geographic research and are supported by the R package `sf` (`POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON` and `GEOMETRYCOLLECTION`).
+
+- `POINT`	zero-dimensional geometry containing a single point
+- `LINESTRING`	sequence of points connected by straight, non-self intersecting line pieces; one-dimensional geometry
+- `POLYGON`	geometry with a positive area (two-dimensional); sequence of points form a closed, non-self intersecting ring; the first ring denotes the exterior ring, zero or more subsequent rings denote holes in this exterior ring
+- `MULTIPOINT`	set of points; a MULTIPOINT is simple if no two Points in the MULTIPOINT are equal
+- `MULTILINESTRING`	set of linestrings
+- `MULTIPOLYGON`	set of polygons
+- `GEOMETRYCOLLECTION`	set of geometries of any type except GEOMETRYCOLLECTION
+
+![sf geometry types](sf-classes.png)
+
+
+`sf` includes functions from three previous widely used R package: `sp` for data classes, `rgdal` for data read and write via interfaces to GDAL and PROJ, and `rgeos` for spatial operation via an interface to GEOS. Therefore, I recommend you to learn `sf` instead. In fact, `rgdal` will be discontinued by the end of 2023. The best place to start is the [vignettes of the `sf` package](https://r-spatial.github.io/sf/index.html).
+
+Another neat feature of `sf` is that the simple feature objects are saved as data frames and work nicely with the `tidyverse` packages. Therefore, we can use the verbs from packages such as `dplyr` to filter, select, aggregate (group_by), summarize, etc. on the simple features, making working with geographic vector data in R enjoyable. 
+
+Almost all functions of `sf` start with `st_` (stands for **s**patial **t**ype).
+
+To install `sf`, follow the instruction from its [webpage](https://r-spatial.github.io/sf/index.html).
+
+```{r}
+if(!require("xfun")) install.packages("xfun")
+xfun::pkg_attach2(c("sf", "spData", "tidyverse"))
+nc <- st_read(system.file("shape/nc.shp", package="sf"))
+class(nc)
+nc
+```
+
+```{r eval=FALSE}
+print(nc[9:15], n = 3)
+```
+
+![](sf_xfig.png)
+
+
+
+```{r}
+world_tbl = read_sf(system.file("shapes/world.shp", package = "spData"))
+world_tbl
+# subsetting sf is just as subsetting data frames
+# note that the geometry column is sticky
+world_tbl[1:5, 1:3]
+world_tbl[3:6]
+filter(world_tbl, continent == "North America")
+dplyr::select(world_tbl, name_long, pop)
+
+# to get the geometry only
+world_tbl[0]
+st_geometry(world_tbl)
+
+# drop geometry
+st_drop_geometry(world_tbl)
+
+# aggregating (note the geometry is aggregated too)
+world_tbl |> 
+  group_by(continent) |> 
+  summarise(total_area = sum(area_km2, na.rm = TRUE)) |> 
+  arrange(desc(total_area))
+
+# join data frames / sf
+coffee_data
+world_coffee = left_join(world_tbl, coffee_data)
+world_coffee
+
+# making simple maps are easy
+plot(world_tbl)
+plot(world_tbl[c(3, 7:9)])
+plot(world_tbl["pop"])
+
+plot(world_coffee["coffee_production_2017"])
+
+world_asia = world[world$continent == "Asia", ]
+# almost all functions in sf start with st_
+asia = st_union(world_asia)
+
+plot(world_tbl["pop"], reset = FALSE)
+plot(asia, add = TRUE, col = "red")
+
+world_proj = st_transform(world, crs = "+proj=eck4")
+# crs = 4326 (lat/long)
+plot(world_proj["continent"], reset = FALSE, main = "", key.pos = NULL)
+g = st_graticule()
+g = st_transform(g, crs = "+proj=eck4")
+plot(g$geometry, add = TRUE, col = "lightgrey")
+
+# ggplot2
+ggplot(world_tbl) +
+  geom_sf(aes(fill = log10(pop))) 
+
+ggplot(world_proj) +
+  geom_sf(data = g, color = "lightgrey") +
+  geom_sf(aes(fill = continent)) 
+```
+
+## Spatial data operations
+
+Spatial subsetting is the process of taking a spatial object and returning a new object containing only features that relate in space to another object. 
+
+```{r}
+spData::nz
+spData::nz_height
+
+ggplot() +
+  geom_sf(data = nz) +
+  geom_sf(data = nz_height, alpha = 0.6, color = "blue")
+
+canterbury = filter(nz, Name == "Canterbury")
+canterbury
+canterbury_height = nz_height[canterbury, ]
+canterbury_height
+
+canterbury_height2 = st_filter(x = nz_height, y = canterbury, .predicate = st_intersects)
+canterbury_height2
+
+ggplot() +
+  geom_sf(data = nz) +
+  geom_sf(data = canterbury, fill = "orange") +
+  geom_sf(data = canterbury_height2, alpha = 0.6, color = "blue") 
+```
+
+**How to convert an existing data frame with latitude and longitude to a sf object?**
+
+```{r}
+set.seed(2018) # set seed for reproducibility
+(bb = st_bbox(world)) 
+random_df = data.frame(
+  x = runif(n = 10, min = bb[1], max = bb[3]),
+  y = runif(n = 10, min = bb[2], max = bb[4])
+)
+random_df
+random_points = random_df |> 
+  st_as_sf(coords = c("x", "y"), remove = FALSE) |> # set coordinates
+  st_set_crs("EPSG:4326") # set geographic CRS
+# https://epsg.io/4326 
+random_points
+```
+
+**How to find which country a point is within?**
+
+```{r}
+random_joined = st_join(random_points, world["name_long"])
+random_joined
+```
+
+
+
+### Other useful functions in `sf` (incomplete list)
+
+- `st_combine()` or `st_union()`: combine several feature geometries into one
+- `st_centroid()`: get the centroid of each feature; sometimes the geographic centroid falls outside the boundaries of their parent objects (think of a doughnut). In such cases `st_point_on_surface()` can be used to guarantee the point will be in the parent object
+- `st_crs()` to check which crs an object has
+- `st_set_crs()`: specify CRS
+- `st_proj_info(type = 'datum')` and `st_proj_info(type = 'proj')`: projection information
+- `st_area()`, `st_length()`, and `st_distance()`: calculate geometric measurements, e.g. `cn = st_area(world[world$name_long == 'China',])`. If CRS is set, the results comes with units; to convert units, try `units::set_units(cn, 'km^2')`
+- `st_intersects()`: tests whether two sf objects intersect, the opposite is `st_disjoint()`; other similar functions `st_within()`, `st_touches()`, `st_is_within_distance()`, `st_contains()`, etc.
+- `st_cast()`: convert different types of geometries
+- `st_buffer()`: create a buffer around, better to use it on projected crs
+
+
+
+# Raster data
+
+The spatial raster data model represents the world with equally spaced and consistent sized grid of cells (i.e. pixels). The raster data model usually consists of a raster header and a matrix (with rows and columns) representing values of equally spaced cells (only one value per cell). The header defines the coordinate reference system, the extent, and the origin. This matrix representation avoids storing explicitly the coordinates for the four corner points (in fact it only stores one coordinate, namely the origin) of each cell corner as would be the case for rectangular vector polygons. Therefore, raster can process data faster and more efficient than geographic vector data processing.
+
+![](raster-intro-plot2-1.png)
+
+```{r}
+library(terra)
+elev = rast(nrows = 6, ncols = 6, resolution = 0.5, 
+            xmin = -1.5, xmax = 1.5, ymin = -1.5, ymax = 1.5,
+            vals = 1:36)
+elev
+plot(elev)
+summary(elev)
+global(elev, sd) # global operation
+hist(elev)
+
+elev + elev
+elev ^ 2
+elev < 20
+plot(elev < 20)
+
+# extract values
+id = cellFromXY(elev, xy = matrix(c(0.1, 0.1), ncol = 2))
+elev[id]
+terra::extract(elev, matrix(c(0.1, 0.1), ncol = 2))
+
+rmask = elev
+values(rmask) = sample(c(NA, TRUE), 36, replace = TRUE)
+plot(rmask)
+plot(mask(elev, rmask))
+
+
+# multiple layers
+if(!require("spDataLarge")) 
+  install.packages("spDataLarge", 
+                   repos = "https://geocompr.r-universe.dev")
+multi_raster_file = system.file("raster/landsat.tif", package = "spDataLarge")
+multi_rast = rast(multi_raster_file)
+multi_rast
+nlyr(multi_rast)
+hist(multi_rast)
+multi_rast[[2]]
+plot(subset(multi_rast, 2))
+
+# focal operation 
+r_focal = focal(elev, w = matrix(1, nrow = 3, ncol = 3), fun = min)
+```
+
+![](04_focal_example.png)
+
+```{r}
+# zonal operations
+grain_order = c("clay", "silt", "sand")
+grain_char = sample(grain_order, 36, replace = TRUE)
+grain_fact = factor(grain_char, levels = grain_order)
+grain = rast(nrows = 6, ncols = 6, resolution = 0.5, 
+             xmin = -1.5, xmax = 1.5, ymin = -1.5, ymax = 1.5,
+             vals = grain_fact)
+plot(grain)
+
+z = zonal(elev, grain, fun = "mean")
+z
+
+# aggregate & disaggregate & resampling
+```
+
+![](aggregate-example-1.png)
+
+![](bilinear-1.png)
+
+
+
+# Reference
+
+Most text and code above came from [Geocomputation with R](https://geocompr.robinlovelace.net); credits for the authors.
 

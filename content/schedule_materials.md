@@ -52,8 +52,8 @@ td, th {
 | Oct 27  | Exploratory data analysis                               |    <a href="../lectures/17_EDA/presentation.html" target="_blank">📙</a>    |     |  <a href="https://r4ds.had.co.nz/exploratory-data-analysis.html" target="_blank">Hadley, Chapter 7</a>    |
 | Nov 1  | Regression methods                                      |  <a href="../lectures/18_regression/presentation.html" target="_blank">📙</a>   | <a href="../assignments/#homework-6" target="_blank">06</a>   |         |
 | Nov 3  | More on Regression methods                              |  <a href="../lectures/19_regression_2/presentation.html" target="_blank">📙</a>   |     |   <a href="https://bookdown.org/ekothe/navarro26/regression.html" target="_blank">Navarro, Chapter 15</a>   |
-| Nov 8 | Spatial data and analysis                    |   |     |    |
-| Nov 10 | Spatial data and analysis                    |   |     |    |
+| Nov 8 | Spatial data and analysis                    | <a href="../lectures/20_spatial_analysis/presentation.html" target="_blank">📙</a>  |     |  <a href="https://geocompr.robinlovelace.net/index.html" target="_blank">Geocomputation with R</a>  |
+| Nov 10 | Spatial data and analysis                    |  <a href="../lectures/20_spatial_analysis/presentation.html" target="_blank">📙</a> |     |    |
 | Nov 15 | Write your own functions                                |  <a href="../lectures/20_functions/presentation.html" target="_blank">📙</a>    |     |    <a href="https://r4ds.had.co.nz/functions.html" target="_blank">Hadley, Chapter 19</a>     |
 | Nov 17 | Write your own R package                                |   <a href="../lectures/21_R_pkg/presentation.html" target="_blank">📙</a> |   <a href="../assignments/#homework-7" target="_blank">07</a>  |    <a href="https://r-pkgs.org/whole-game.html" target="_blank">Hadley, Chapter 2</a>    |
 | Nov 22 | Open Science, Makefile, and Ethics in data science    |  <a href="../lectures/22_make/presentation.html" target="_blank">📙</a>  |     |         |
