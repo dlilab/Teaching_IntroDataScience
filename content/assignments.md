@@ -16,7 +16,7 @@ At this moment, you should have installed all required tools on your computer. Y
 
 After done, compile the `Rmd` file to `html` and `pdf`. Push all files (`Rmd`, `html`, and `pdf`) to your `BIOL7800` repository on GitHub. You need to add me as a collaborator for your repository. This repository is where you are going to submit all homework assignments and final reports. I will grade it by cloning it to my computer and recompile it. The last commit time will be used to check whether it is late or not. Remember, no late homework will be accepted. If the last commit time is after the deadline, I will use whatever commit that was before the deadline as your submission.
 
-This homework will be due at **September 22th, 1:30pm**.
+This homework will be due at **September 14th, 9am**.
 
 ## Homework 2
 
@@ -47,7 +47,7 @@ This homework will be due at **September 22th, 1:30pm**.
     | Intermediate_high | 21 <= mpg < 26 |
     | High              | 26 <= mpg      |
 
-This homework will be due at **October 6th, 1:30pm**. Please submit your homework as an Rmd file to GitHub. It is probably a good idea to create a `hw_02` subfolder within your `homework` folder and put the Rmd file there. Please also generate a PDF file there. You don't need to email me again about your homework. I have your GitHub repo link and will check out your homework there. This should apply to all homework assignments.
+This homework will be due at **September 28th, 9am**. Please submit your homework as an Rmd file to GitHub. It is probably a good idea to create a `hw_02` subfolder within your `homework` folder and put the Rmd file there. Please also generate a PDF file there. You don't need to email me again about your homework. I have your GitHub repo link and will check out your homework there. This should apply to all homework assignments.
 
 
 ## Homework 3
@@ -78,7 +78,7 @@ This homework will be due at **October 6th, 1:30pm**. Please submit your homewor
    ```
 5. (2 points) For the vector with length of 107 you got from question 4, remove all **trailing `.`**. (hint: `?sub`). Then convert it to a numeric vector and find out which numbers have duplications (i.e., a tie in ranking). Don't count by eyes, use R to find it out (hint: `table()`, `sort()`; or `duplicated()`, `which()`, `[` subsetting; there are more than one way to do so).
 
-This homework will be due at **October 18th, 9am**.
+This homework will be due at **October 12th, 9am**.
 
 ## Homework 4
 
@@ -89,7 +89,7 @@ This homework will be due at **October 18th, 9am**.
 
 I was thinking to have a homework to get all plant occurrence data within Baton Rouge from GBIF. But it will require you to register an account and have account name and password when you use the `rgbif` package. This may have the risk of get your password leaked (you can avoid this by reading the documentation of `rgbif`); so I decided not to do so. If you are interested, you may want to run some example codes from the [`rgbif` package's documentation](https://cran.r-project.org/web/packages/rgbif/rgbif.pdf).
 
-This homework will be due at **October 28th, 9am**.
+This homework will be due at **October 31th, 9am**.
 
 ## Homework 5
 
@@ -109,7 +109,7 @@ In the `neonDivData` data package, there is a data frame named as `data_plant`. 
 
    ![hw5](../images/hw5.png)
 
-This homework will be due at **November 4th, 9am**.
+This homework will be due at **November 2nd, 9am**.
 
 ## Homework 6
 
@@ -161,7 +161,7 @@ interpret what does it mean.</li>
    <p>Note: If you were to compute the correlation between <span class="math inline">\(\hat{y}\)</span> and the raw residuals, you would find this to be 0. If you compute the correlation between the observed <span class="math inline">\(y\)</span> and the raw residuals, you find that this is <span class="math inline">\(\sqrt{1-R^{2}}\)</span> where <span class="math inline">\(R^{2}=SSR/SST\)</span>. It is the absence of correlation in plot (d) — and also plot (c) — that is important. No computations of correlation are required in this problem, but you may give it a try in R.</p>
 
 
-This homework will be due at **November 15th, 9am**.
+This homework will be due at **November 16th, 9am**.
 
 ## Homework 7
 
@@ -193,4 +193,4 @@ This homework will be due at **November 15th, 9am**.
 
    Put the link to your R package Github repository in the `hw_07.md` file that will be found in your `BIOL7800/homework/hw_07` folder (so that I know where it is).
 
-This homework will be due at **November 23th, 9am**.
+This homework will be due at **November 30th, 9am**.

@@ -33,11 +33,10 @@ Email address: dli30@lsu.edu
 
 ## Meeting times & locations
 
-Tu/Th 1:30-2:50 PM  
-Class location: [225 Tureaud Hall](https://www.google.com/maps/place/Tureaud+Hall/@30.4094801,-91.1791112,15z/data=!4m5!3m4!1s0x0:0x92922201c8e77288!8m2!3d30.4094801!4d-91.1791112)    
-Zoom link: https://lsu.zoom.us/j/96140507560   
+Tu/Th 9:00 - 10:20 AM  
+Class location: [206 Tureaud Hall](https://www.google.com/maps/place/Tureaud+Hall/@30.4094801,-91.1791112,15z/data=!4m5!3m4!1s0x0:0x92922201c8e77288!8m2!3d30.4094801!4d-91.1791112)   
 Office room: LSB125  
-Office hours: Tuesday 12-1pm in LSB 125 or by appointment
+Office hours: Tuesday 12-1 pm in LSB 125 or by appointment
 
 ## Pre-requisites
 

@@ -13,9 +13,9 @@ title: Introduction to Data Science
 
 **Email**: dli30@lsu.edu
 
-**Class time**: Tu/Th 1:30-2:50 PM
+**Class time**: Tu/Th 9:00 - 10:20 AM
 
-**Classroom**: [225 Tureaud Hall](https://www.google.com/maps/place/Tureaud+Hall/@30.4094801,-91.1791112,15z/data=!4m5!3m4!1s0x0:0x92922201c8e77288!8m2!3d30.4094801!4d-91.1791112) 
+**Classroom**: [206 Tureaud Hall](https://www.google.com/maps/place/Tureaud+Hall/@30.4094801,-91.1791112,15z/data=!4m5!3m4!1s0x0:0x92922201c8e77288!8m2!3d30.4094801!4d-91.1791112) 
 
 **Office hours**: Tuesday 12-1pm in LSB 125 or by appointment
 
