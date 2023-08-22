@@ -59,7 +59,7 @@ All softwares used in this course are free and cross platforms (macOS, Linux, or
 
 ## Course Communications
 
-Important notes about updates to the syllabus, clarifications of assignments, or changes to the schedule will be communicated via LSU email. Please be sure to check your account regularly. If you have an email that you would like to send to the entire class, please communicate with the course instructor before doing so. Short questions should be addreessed to me via email _only_ after searching online and did not find an answer. I will try to respond to your email within 48 hours. More complicated questions should be addressed to me in person either after class or during office hours or appointment scheduled. In addition, we will use the **Issues** feature of **GitHub** to post questions and help each other. 
+Important notes about updates to the syllabus, clarifications of assignments, or changes to the schedule will be communicated via LSU email. Please be sure to check your account regularly. If you have an email that you would like to send to the entire class, please communicate with the course instructor before doing so. Short questions should be addressed to me via email _only_ after searching online and did not find an answer. I will try to respond to your email within 48 hours. More complicated questions should be addressed to me in person either after class or during office hours or appointment scheduled. In addition, we will use the **Issues** feature of **GitHub** to post questions and help each other. 
 
 ## Classroom conduct
 

@@ -3,7 +3,7 @@ title: "Course Overview"
 subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
 author: "Daijiang Li"
 institute: "LSU"
-date: "2022/08/30"
+date: "2023/08/21"
 output:
   xaringan::moon_reader:
     css: ["default", "default-fonts", "../style.css"]
@@ -63,7 +63,7 @@ class: center, middle, inverse
 # My role
 
 .font200[
-Second time teaching this course
+Third time teaching this course
 ]
 
 --

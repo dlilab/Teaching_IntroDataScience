@@ -19,7 +19,7 @@ The objective of the final project will be to build a fully reproducible project
 
 ## Final project topic selection
 
-Despite that we will have the whole semester to build the final project, we need to select project topics as soon as possible. A project proposal, with research questions and identified data sources, is due by ***September 30, 2022***. Therefore, students are encouraged to discuss potential ideas with me (and your advisor if needed) as soon as possible. The project proposal should include the following components:
+Despite that we will have the whole semester to build the final project, we need to select project topics as soon as possible. A project proposal, with research questions and identified data sources, is due by ***September 30, 2023***. Therefore, students are encouraged to discuss potential ideas with me (and your advisor if needed) as soon as possible. The project proposal should include the following components:
 
 - Title
 - Name(s)
