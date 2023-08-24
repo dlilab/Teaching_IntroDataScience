@@ -3,7 +3,7 @@ title: "Data science project cycle"
 subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
 author: "Daijiang Li"
 institute: "LSU"
-date: "2022/09/01"
+date: "2023/08/24"
 output:
   xaringan::moon_reader:
     css: ["default", "default-fonts", "../style.css"]
@@ -182,10 +182,10 @@ get_view = function(link){
 view_counts = data.frame(names = lec_names, views = NA_integer_)
 for(i in 1:length(lec_links_full)){
   cat(lec_links_full[i], "\t")
-  view_count = get_view(lec_links_full[i])
+  view_count = get_view(link = lec_links_full[i])
   # for some reason, sometimes it takes multiple tries
-  while(length(view_count) == 0)
-    view_count = get_view(lec_links_full[i])
+  # while(length(view_count) == 0)
+  #   view_count = get_view(lec_links_full[i])
   view_counts$views[i] = view_count
 }
 
