@@ -40,14 +40,26 @@ class: middle
 
 ---
 
-# Token
+# Connect local git repository with GitHub
 
-[Token required](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/) since August 12. 2021.
+1. Go to &lt;https://github.com&gt;, login, and create a repository named as 'planets', without adding README, .gitignore, and license
+2. Copy the code from the "... pushing an existing repository to Github through command line"
+3. Paste and run the code in the terminal; since you have not connected with GitHub yet, you may get an error about pushing your materials to GitHub.
+4. Download GitHub Command line tool at &lt;https://cli.github.com&gt;, [install it](https://github.com/cli/cli#installation). If you use Mac, install Homebrew and just type `brew install gh` in the terminal
+5. Once installed GitHub Cli, in terminal, type `gh auth login`
+6. Following the instruction in terminal and authorize GitHub through web browser
+7. You may need to close and reopen RStudio to see the color Pull/Push buttons (if you use RStudio)
+8. Then commit and push the materials to GitHub and we are good to go
 
-1. [Create personal access token on Github](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)
-2. [Caching your GitHub credentials in Git](https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git)
-    + Let's choose the [Github CLI](https://github.com/cli/cli#installation) option
-  
+
+&lt;!-- # Token --&gt;
+
+&lt;!-- [Token required](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/) since August 12. 2021. --&gt;
+
+&lt;!-- 1. [Create personal access token on Github](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) --&gt;
+&lt;!-- 2. [Caching your GitHub credentials in Git](https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git) --&gt;
+&lt;!--     + Let's choose the [Github CLI](https://github.com/cli/cli#installation) option --&gt;
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
