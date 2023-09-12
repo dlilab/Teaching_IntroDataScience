@@ -3,7 +3,7 @@ title: "R Basics"
 subtitle: "Introduction to Data Science (BIOL7800)\nhttps://introdatasci.dlilab.com/"
 author: "Daijiang Li"
 institute: "LSU"
-date: "2022/09/20"
+date: "2023/09/12"
 output:
   xaringan::moon_reader:
     css: ["default", "default-fonts", "../style.css"]
