@@ -37,6 +37,7 @@ class: middle
 7. You may need to close and reopen RStudio to see the color Pull/Push buttons (if you use RStudio)
 8. Then commit and push the materials to GitHub and we are good to go
 
+**Note: If you have already connected with GitHub from your computer previously, you can skip steps 4-6.**
 
 <!-- # Token -->
 
