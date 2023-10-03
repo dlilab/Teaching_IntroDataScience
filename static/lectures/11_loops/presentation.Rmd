@@ -248,7 +248,7 @@ for(i in 1:ncol(df)){
 str(df)
 
 # dplyr version to convert factors to characters back
-df = mutate(df, across(where(is.factor), as.character))
+df = mutate_if(.tbl = df, .predicate = is.factor, .funs = as.character)
 str(df)
 ```
 
