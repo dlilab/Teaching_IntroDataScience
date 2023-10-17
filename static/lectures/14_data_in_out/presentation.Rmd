@@ -1,7 +1,7 @@
 ---
 title: "Data input and output"
 author: "Daijiang Li"
-date: "10/11/2022"
+date: "10/17/2023"
 output: 
   html_document: 
     toc: yes
@@ -31,8 +31,11 @@ You can also use scan to paste in groups of numbers from the clipboard. In Excel
 **Demo**
 
 ```{r eval=FALSE}
-z <- scan("clipboard", what=numeric())
+# windows
+z <- scan("clipboard", what = numeric())
 # what=character(), sep=","
+# macOS
+z <- scan(pipe("pbpaste"), what = numeric())
 ```
 
 ## From external files
