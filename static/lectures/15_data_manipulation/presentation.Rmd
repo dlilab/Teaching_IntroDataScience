@@ -1,7 +1,7 @@
 ---
 title: "Data manipulation"
 author: "Daijiang Li"
-date: "10/18/2021"
+date: "10/19/2023"
 output: 
   html_document: 
     toc: yes
@@ -64,7 +64,10 @@ This data package has organismal data collected by [NEON](https://www.neonscienc
 
 ```{r}
 library(neonDivData)
-DT::datatable(head(neonDivData::data_bird, n = 100))
+data_bird = neonDivData::data_bird[, c("siteID", "plotID", "pointID", "observation_datetime",
+              "taxon_id", "taxon_name", "taxon_rank", "value", "unit", "variable_name",
+              "latitude", "longitude", "elevation")]
+DT::datatable(head(data_bird, n = 100))
 ```
 
 
@@ -91,7 +94,7 @@ This dataset is a data frame. So, we can always use the data frame subsetting co
 
 ```{r}
 data_bird[, c("siteID", "plotID", "pointID", "observation_datetime",
-              "taxon_id", "taxon_name", "taxon_rank",
+              "taxon_id", "taxon_name", "taxon_rank", 
               "latitude", "longitude", "elevation")]
 ```
 
@@ -113,9 +116,9 @@ select(data_bird, latitude, longitude, everything())
 select(data_bird, c(1, 3, 5)) # by location
 ```
 
-**Note** that sometimes the filter function will be covered by the `{raster::select}` function. If this is the case, try to be explicit and use `dplyr::select()`.
+**Note** that sometimes the select function will be covered by the `{raster::select}` function. If this is the case, try to be explicit and use `dplyr::select()`.
 
-## How to remove some specific rows? `filter()`
+## How to keep/remove some specific rows? `filter()`
 
 Again, base R functions to subset data frames work here. But we will focus on the `dplyr::filter()` function. **Note** that sometimes the filter function will be covered by the `{stats::filter}` function. If you are not sure, just call the function `filter` [without `()`] in R and it will let you know which package it is from.
 
@@ -146,8 +149,8 @@ mutate(data_bird,
        new_column = value * 10,
        newnew_col = new_column * 10
        )
-mutate(data_bird, lat_band = ifelse(latitude > 45, "high", "low")) %>% 
-  pull(lat_band) %>% 
+mutate(data_bird, lat_band = ifelse(latitude > 45, "high", "low")) |> 
+  pull(lat_band) |> 
   table()
 # recode is very useful to correct values
 mutate(data_bird, siteID = recode(siteID, "BART" = "BART2"))
@@ -158,25 +161,25 @@ mutate(data_bird, siteID = recode(siteID, "BART" = "BART2"))
 Suppose we want to calculate the number of species observed (species richness) at each site, how should we get such values? We can combine `summarise()` with `group_by()`.
 
 ```{r}
-data_bird %>% 
+data_bird |> 
   group_by(siteID)
 
-sp_rich_by_site <- data_bird %>% 
-  group_by(siteID) %>% 
+sp_rich_by_site <- data_bird |> 
+  group_by(siteID) |> 
   summarise(sp_richness = n_distinct(taxon_id))
 # same as length(unique(taxon_id))
 sp_rich_by_site
 
 # data can be grouped by multiple variables
-sp_rich_by_site_point <- data_bird %>% 
-  group_by(siteID, pointID) %>% 
+sp_rich_by_site_point <- data_bird |> 
+  group_by(siteID, pointID) |> 
   summarise(sp_richness = n_distinct(taxon_id),
             .groups = "drop")
 sp_rich_by_site_point
 
 # summarise() can have multiple calculations
-data_bird %>% 
-  group_by(siteID, pointID) %>% 
+data_bird |> 
+  group_by(siteID, pointID) |> 
   summarise(sp_richness = n_distinct(taxon_id),
             abundance = sum(value),
             n_obs = n(),
@@ -225,9 +228,9 @@ Or with the `drop_na()` function from `tidyr` package.
 tidyr::drop_na(data_bird, latitude)
 ```
 
-## How to combine multiple operations? `%>%`
+## How to combine multiple operations? `|>`
 
-So, each of the above verb can be useful. They do one thing and do that well. We can combine them with the pipe `%>%` together to do complex things at once. This would remove the need to name intermediate results. 
+So, each of the above verb can be useful. They do one thing and do that well. We can combine them with the pipe `|>` together to do complex things at once. This would remove the need to name intermediate results. 
 
 For example, if we want to 1) remove `NA` in latitude, then 2) select only key variables, and 3) focus on some specific sites, and 4) calculate species richness of each site. 
 
@@ -244,11 +247,11 @@ summarise(d3, sp_richness = n_distinct(taxon_id))
 With pipe, we don't need to save intermediate variables:
 
 ```{r}
-data_bird %>% 
-  tidyr::drop_na(latitude) %>% # d
-  select(siteID, taxon_id, value) %>% # d1
-  filter(siteID %in% c("BART", "HARV", "BLAN")) %>% # d2
-  group_by(siteID) %>% # d3
+data_bird |> 
+  tidyr::drop_na(latitude) |> # d
+  select(siteID, taxon_id, value) |> # d1
+  filter(siteID %in% c("BART", "HARV", "BLAN")) |> # d2
+  group_by(siteID) |> # d3
   summarise(sp_richness = n_distinct(taxon_id))
 ```
 
@@ -261,12 +264,12 @@ Some times we need to reshape the long data frame into a wide format: a site by 
 ```{r}
 library(tidyr)
 # let's select relevant columns first to make it simpler
-d = select(data_bird, siteID, plotID, taxon_id, value) %>% 
+d = select(data_bird, siteID, plotID, taxon_id, value) |> 
   distinct() # remove duplicated rows
 d
 # aggregate first
-d_long = d %>% 
-  group_by(siteID, plotID, taxon_id) %>% 
+d_long = d |> 
+  group_by(siteID, plotID, taxon_id) |> 
   summarise(abundance = sum(value, na.rm = TRUE), .groups = "drop")
 d_long
 d_wide = pivot_wider(d_long, 
@@ -277,10 +280,10 @@ d_wide = pivot_wider(d_long,
 d_wide
 
 # we can convert it back to long format
-d_wide %>% 
+d_wide |> 
   pivot_longer(cols = -c(siteID, plotID),
                names_to = "taxon_id",
-               values_to = "abundance") %>% 
+               values_to = "abundance") |> 
   filter(abundance > 0)
 ```
 
