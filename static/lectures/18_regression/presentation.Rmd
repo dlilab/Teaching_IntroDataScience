@@ -1,7 +1,7 @@
 ---
 title: "Regression"
 author: "Daijiang Li"
-date: "11/01/2022"
+date: "11/07/2023"
 
 ---
 
@@ -24,9 +24,9 @@ Regression is one of the most basic but fundamental statistical tools.
     + Confidence intervals
     + Prediction intervals
 - Simple linear regression $Y = \beta_0 + \beta_1X+\varepsilon$
-    + $Y$: response variable (or independent variable)
+    + $Y$: response variable (or dependent variable)
     + $X$: Predictor variable (or independent variable, explanatory variable, covariate).
-    + $\varepsilon$: Random error (or random disturbance).
+    + $\varepsilon$: Random error (or residuals).
     + $\beta_0$, $\beta_1$: Regression coefficients.
         + $\beta_0$: Intercept (expected value of Y when X = 0).
         + $\beta_1$: Slope (expected change in Y for unit increase in X).
@@ -181,7 +181,7 @@ Estimate (predict) Y at a given $X=x_{0}$ by $\hat{y_{0}}=\hat{\beta_{0}}+\hat{\
 *But the standard error of the prediction depends on the objective*.
 
 - $\hat{y_{0}}$ is a _predictor_ of a new/future observation at $x_{0}$ (prediction interval)
-- $\hat{y_{0}}$ is an estimator of the _expected_ value $y_{0}=E(Y|X=x_{0})=\beta_{0}+\beta_{1}x_{0}$ (confidence interval)
+- $\hat{y_{0}}$ is an estimator of the _expected_ value $y_{0}=E(Y|X=x_{0})=\beta_{0}+\beta_{1}x_{0}$ (confidence interval; denote $\hat{y_{0}}$ as $\hat{\mu_{0}}$)
 
 ```{r}
 predict(fit_d, newdata = data.frame(x = 18), interval = "prediction")
@@ -220,7 +220,7 @@ plot(fit_d)
 ```
 
 
-*Cook’s distance* measures the influence of the _i_th observation on all n fitted values. A practical rule: If Di > 1, investigate the _i_th observation as possibly influential.
+*Cook’s distance* measures the influence of the _i_ th observation on all n fitted values. A practical rule: If Di > 1, investigate the _i_ th observation as possibly influential.
 
 
 ### Transformation of data
