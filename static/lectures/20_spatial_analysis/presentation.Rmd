@@ -1,7 +1,7 @@
 ---
 title: "Spatial analysis"
 author: "Daijiang Li"
-date: "11/08/2022"
+date: "11/13/2023"
 ---
 
 ```{r setup, include=FALSE}
@@ -24,6 +24,8 @@ All projected CRSs are based on a geographic CRS and rely on map projections to 
 
 This transition cannot be done without adding some deformations. Therefore, some properties of the Earth’s surface are distorted in this process, such as area, direction, distance, and shape. A projected coordinate system can preserve only one or two of those properties. 
 
+![projection](proj.JPG)
+
 A quick summary of different projections, their types, properties, and suitability can be found at https://www.geo-projections.com/.
 
 
@@ -42,7 +44,7 @@ Simple Features is a hierarchical data model that represents a wide range of geo
 ![sf geometry types](sf-classes.png)
 
 
-`sf` includes functions from three previous widely used R package: `sp` for data classes, `rgdal` for data read and write via interfaces to GDAL and PROJ, and `rgeos` for spatial operation via an interface to GEOS. Therefore, I recommend you to learn `sf` instead. In fact, `rgdal` will be discontinued by the end of 2023. The best place to start is the [vignettes of the `sf` package](https://r-spatial.github.io/sf/index.html).
+`sf` includes functions from three previous widely used R package: `sp` for data classes, `rgdal` for data read and write via interfaces to GDAL and PROJ, and `rgeos` for spatial operation via an interface to GEOS. Therefore, I recommend you to learn `sf` instead. In fact, `rgdal` and `rgeos` will be discontinued by the end of 2023. The best place to start is the [vignettes of the `sf` package](https://r-spatial.github.io/sf/index.html).
 
 Another neat feature of `sf` is that the simple feature objects are saved as data frames and work nicely with the `tidyverse` packages. Therefore, we can use the verbs from packages such as `dplyr` to filter, select, aggregate (group_by), summarize, etc. on the simple features, making working with geographic vector data in R enjoyable. 
 
@@ -107,12 +109,15 @@ asia = st_union(world_asia)
 
 plot(world_tbl["pop"], reset = FALSE)
 plot(asia, add = TRUE, col = "red")
+```
 
+```{r}
 world_proj = st_transform(world, crs = "+proj=eck4")
 # crs = 4326 (lat/long)
-plot(world_proj["continent"], reset = FALSE, main = "", key.pos = NULL)
+plot(world_proj["continent"], reset = F, main = "", key.pos = NULL)
 g = st_graticule()
 g = st_transform(g, crs = "+proj=eck4")
+
 plot(g$geometry, add = TRUE, col = "lightgrey")
 
 # ggplot2
